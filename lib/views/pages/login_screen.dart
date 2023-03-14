@@ -1,0 +1,159 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/route_manager.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mspot/const/colors/colors.dart';
+import 'package:mspot/controllers/login/login_controllers.dart';
+import 'package:mspot/models/login_screen/validate_with_login_request/validate_with_login_request.dart';
+import 'package:mspot/services/login_screen_api/authentication_remote/implementation.dart';
+import 'package:mspot/services/urls/login_screen_url.dart';
+import 'package:mspot/views/pages/home_screen.dart';
+import 'package:mspot/views/wIdgets/dialogs/success_snackbar.dart';
+import 'package:mspot/views/wIdgets/login_screen/custom_button.dart';
+import 'package:mspot/views/wIdgets/login_screen/textformfield.dart';
+import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+TextEditingController usernameController = TextEditingController();
+TextEditingController passwordController = TextEditingController();
+String? sessionId;
+
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final formGlobalKey = GlobalKey<FormState>();
+    return LayoutBuilder(builder: (context, constraints) {
+      double maxHeight = constraints.maxHeight;
+      double maxWidth = constraints.maxWidth;
+      double h1p = maxHeight * 0.01;
+      double h10p = maxWidth * 0.1;
+      double w10p = maxWidth * 0.1;
+      double w1p = maxHeight * 0.01;
+      return SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Stack(
+            fit: StackFit.expand,
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/background_image/new.jpg"),
+                        fit: BoxFit.fill)),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    top: h10p * 4,
+                    bottom: h1p * 1.5,
+                    left: w1p * 5,
+                    right: w1p * 5),
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: formGlobalKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Login',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 40,
+                              fontFamily: 'Inter'),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        LoginTextFormField(
+                          type: Type.username,
+                          hinttext: 'username',
+                          iconName: 'assets/icons/user.svg',
+                          controller: usernameController,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        LoginTextFormField(
+                            controller: passwordController,
+                            type: Type.password,
+                            hinttext: 'password',
+                            iconName: 'assets/icons/lock.svg'),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: 40,
+                          width: 100,
+                          child: CustomButton(
+                            text: 'Login',
+                            onPressed: () async {
+                              if (formGlobalKey.currentState!.validate()) {
+                                sessionId =
+                                    await LoginControllers.loginButton();
+
+                                if (sessionId != null) {
+                                  Get.back(closeOverlays: true);
+                                  Get.to(() => HomeScreen(
+                                        sessionId: sessionId!,
+                                      ));
+                                  successSnackbar(
+                                      'Login Success!',
+                                      'you have successfully logged in...',
+                                      Icons.check_circle_outline_rounded);
+                                } else {
+                                  print('Sessionid is null');
+                                }
+                              }
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            const Text(
+                              'need an account?',
+                              style: TextStyle(color: WHITE_COLOR),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Link(
+                              uri: signUpUrl,
+                              builder: (context, followLink) => InkWell(
+                                  onTap: () {
+                                    _launchUrl();
+                                  },
+                                  child: const Text('Sign-up',
+                                      style: TextStyle(
+                                          color: WHITE_COLOR,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600))),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      );
+    });
+  }
+}
+
+Future<void> _launchUrl() async {
+  if (!await launchUrl(signUpUrl)) {
+    throw Exception('Could not launch $signUpUrl');
+  }
+}
