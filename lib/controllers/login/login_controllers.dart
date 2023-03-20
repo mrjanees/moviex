@@ -1,19 +1,11 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:mspot/const/colors/colors.dart';
 import 'package:mspot/models/login_screen/request_token_response/request_token_response.dart';
 import 'package:mspot/models/login_screen/session_id_request/session_id_request.dart';
 import 'package:mspot/models/login_screen/session_id_response/session_id_response.dart';
 import 'package:mspot/models/login_screen/validate_with_login_request/validate_with_login_request.dart';
-
 import 'package:mspot/services/login_screen_api/authentication_remote/implementation.dart';
-import 'package:dartz/dartz.dart';
 import 'package:mspot/utils/dioerror_message.dart';
-import 'package:mspot/views/pages/home_screen.dart';
-import 'package:mspot/views/wIdgets/dialogs/loding_circle.dart';
-import 'package:mspot/views/wIdgets/dialogs/success_snackbar.dart';
-
+import '../../views/dialogs/loding_circle.dart';
 import '../../views/pages/login_screen.dart';
 
 class LoginControllers {

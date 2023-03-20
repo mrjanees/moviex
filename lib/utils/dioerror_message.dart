@@ -1,10 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:mspot/const/colors/colors.dart';
 import 'package:mspot/controllers/login/login_controllers.dart';
-
-import '../views/wIdgets/dialogs/error_snackbar.dart';
+import '../views/dialogs/error_snackbar.dart';
 
 class DioErrorTypeMessage {
   static dynamic toShowErrorMessage(DioErrorType name) {

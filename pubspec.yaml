@@ -28,6 +28,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cached_network_image: ^3.2.3
+  carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
   custom_navigation_bar: null
   dartz: ^0.10.1
@@ -42,6 +44,7 @@ dependencies:
   json_annotation: ^4.8.0
   json_serializable: ^6.6.1
   lottie: ^2.2.0
+  smooth_page_indicator: ^1.0.1
   url_launcher: ^6.1.10
 
 dev_dependencies:
@@ -67,11 +70,15 @@ flutter:
   assets:
     - assets/Splash_Logo.png
     - assets/background_image/new.jpg
+    - assets/icons/App_Icon.png
     - assets/icons/home.svg
     - assets/icons/lock.svg
     - assets/icons/search.svg
     - assets/icons/tv.svg
     - assets/icons/user.svg
+    - assets/icons/menu.svg
+
+    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

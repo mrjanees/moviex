@@ -1,22 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/route_manager.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mspot/const/colors/colors.dart';
 import 'package:mspot/controllers/login/login_controllers.dart';
-import 'package:mspot/models/login_screen/validate_with_login_request/validate_with_login_request.dart';
-import 'package:mspot/services/login_screen_api/authentication_remote/implementation.dart';
 import 'package:mspot/services/urls/login_screen_url.dart';
+import 'package:mspot/views/pages/base_screen.dart';
 import 'package:mspot/views/pages/home_screen.dart';
-import 'package:mspot/views/wIdgets/dialogs/success_snackbar.dart';
 import 'package:mspot/views/wIdgets/login_screen/custom_button.dart';
 import 'package:mspot/views/wIdgets/login_screen/textformfield.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../dialogs/success_snackbar.dart';
 
 TextEditingController usernameController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
@@ -30,10 +23,13 @@ class LoginScreen extends StatelessWidget {
     final formGlobalKey = GlobalKey<FormState>();
     return LayoutBuilder(builder: (context, constraints) {
       double maxHeight = constraints.maxHeight;
+      print(maxHeight);
       double maxWidth = constraints.maxWidth;
+      print(maxWidth);
       double h1p = maxHeight * 0.01;
       double h10p = maxWidth * 0.1;
       double w10p = maxWidth * 0.1;
+
       double w1p = maxHeight * 0.01;
       return SafeArea(
         child: Scaffold(
@@ -99,9 +95,8 @@ class LoginScreen extends StatelessWidget {
 
                                 if (sessionId != null) {
                                   Get.back(closeOverlays: true);
-                                  Get.to(() => HomeScreen(
-                                        sessionId: sessionId!,
-                                      ));
+                                  Get.to(
+                                      () => BaseScreen(sessionId: sessionId!));
                                   successSnackbar(
                                       'Login Success!',
                                       'you have successfully logged in...',

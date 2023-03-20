@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:mspot/views/pages/home_screen.dart';
+
 import 'package:mspot/views/pages/login_screen.dart';
 
 final GoRouter router = GoRouter(

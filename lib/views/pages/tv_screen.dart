@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mspot/const/colors/colors.dart';
 
-class Tv_Screen extends StatelessWidget {
-  Tv_Screen({super.key});
+class TvScreen extends StatelessWidget {
+  TvScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -74,7 +74,7 @@ class LoginTextFormField extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15)),
                 filled: true,
                 fillColor: ELEMENT_COLOR,
-                errorStyle: const TextStyle(color: WHITE_COLOR),
+                errorStyle: const TextStyle(color: ROSE_COLOR),
                 hintText: hinttext,
                 hintStyle: const TextStyle(color: WHITE_COLOR)),
             validator: (value) {
