@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mspot/const/colors/colors.dart';
+import 'package:mspot/core/colors/app_color.dart';
 
 enum Type { username, password }
 

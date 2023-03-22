@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:mspot/const/colors/colors.dart';
+import 'package:mspot/core/colors/app_color.dart';
 import 'package:mspot/controllers/login/login_controllers.dart';
 import 'package:mspot/services/urls/login_screen_url.dart';
 import 'package:mspot/views/pages/base_screen.dart';
-import 'package:mspot/views/pages/home_screen.dart';
+import 'package:mspot/views/pages/home_screen/home_screen.dart';
 import 'package:mspot/views/wIdgets/login_screen/custom_button.dart';
 import 'package:mspot/views/wIdgets/login_screen/textformfield.dart';
 import 'package:url_launcher/link.dart';

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 
-import '../../../const/colors/colors.dart';
+import '../../core/colors/app_color.dart';
 
 void successSnackbar(String title, String content, IconData icon) {
   Get.snackbar(
@@ -14,7 +14,8 @@ void successSnackbar(String title, String content, IconData icon) {
       color: Colors.green,
     ),
     snackPosition: SnackPosition.TOP,
-    backgroundColor: BACKGROUND_COLOR,
+    shouldIconPulse: true,
+    backgroundColor: ELEMENT_COLOR,
     borderRadius: 20,
     margin: const EdgeInsets.all(15),
     colorText: Colors.green,

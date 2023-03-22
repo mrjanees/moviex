@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mspot/const/colors/colors.dart';
+import 'package:mspot/core/colors/app_color.dart';
 
 class ActorsScreen extends StatelessWidget {
   ActorsScreen({super.key});
