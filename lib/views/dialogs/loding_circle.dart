@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import '../../../const/colors/colors.dart';
+import '../../core/colors/app_color.dart';
 
 void loadingCircle() {
   Get.dialog(LayoutBuilder(

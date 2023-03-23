@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mspot/views/pages/pages.dart';
-import 'package:mspot/views/wIdgets/bottom_navigation.dart';
+import 'package:flutter/services.dart';
+import 'package:mspot/core/colors/app_color.dart';
+import 'package:mspot/views/pages/screens.dart';
+import 'package:mspot/views/wIdgets/common/bottom_navigation.dart';
 
 class BaseScreen extends StatelessWidget {
   String? sessionId;
@@ -13,7 +15,8 @@ class BaseScreen extends StatelessWidget {
       builder: (BuildContext context, pageindex, Widget? child) {
         return SafeArea(
           child: Scaffold(
-            body: pages[pageindex],
+            backgroundColor: BACKGROUND_COLOR,
+            body: screens[pageindex],
             bottomNavigationBar: const CustomBottomNavigationBar(),
           ),
         );

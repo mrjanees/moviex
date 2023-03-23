@@ -1,7 +1,6 @@
 import 'package:mspot/const/api_key.dart';
 
-final Uri signUpUrl =
-    Uri.parse('https://www.instagram.com/accounts/emailsignup/');
+final Uri signUpUrl = Uri.parse('https://www.themoviedb.org/signup');
 
 class AuthenticationUrls {
   static String requestToken =

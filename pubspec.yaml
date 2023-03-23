@@ -44,6 +44,7 @@ dependencies:
   json_annotation: ^4.8.0
   json_serializable: ^6.6.1
   lottie: ^2.2.0
+  percent_indicator: ^4.2.3
   smooth_page_indicator: ^1.0.1
   url_launcher: ^6.1.10
 
@@ -71,6 +72,7 @@ flutter:
     - assets/Splash_Logo.png
     - assets/background_image/new.jpg
     - assets/icons/App_Icon.png
+    - assets/icons/Typograohy.png
     - assets/icons/home.svg
     - assets/icons/lock.svg
     - assets/icons/search.svg
@@ -78,7 +80,6 @@ flutter:
     - assets/icons/user.svg
     - assets/icons/menu.svg
 
-    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../const/colors/colors.dart';
+import '../../../core/colors/app_color.dart';
 import '../../../core/internet_images.dart';
-import '../../pages/home_screen.dart';
+import '../../pages/home_screen/home_screen.dart';
 
 Widget buildIndicator() => Obx(() => AnimatedSmoothIndicator(
       onDotClicked: animateToSlide,

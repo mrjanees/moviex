@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-import '../../../const/colors/colors.dart';
+import '../../../core/colors/app_color.dart';
 import '../../../core/internet_images.dart';
-import '../../pages/home_screen.dart';
+import '../../pages/home_screen/home_screen.dart';
 
 class SliderImage extends StatelessWidget {
   double h1p;
@@ -41,7 +41,7 @@ class SliderImage extends StatelessWidget {
               height: 210,
               autoPlay: true,
               enableInfiniteScroll: true,
-              autoPlayAnimationDuration: const Duration(seconds: 5),
+              autoPlayAnimationDuration: const Duration(seconds: 4),
               enlargeCenterPage: true,
               onPageChanged: (index, reason) =>
                   homecontrollers.onPageChanged(index)));
@@ -75,14 +75,6 @@ buildImage(String poster, String title, String release, int index, double width,
                 )),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
-              // Positioned(
-              //     left: width * 3,
-              //     top: height * 3.2,
-              //     child: Container(
-              //       width: 200,
-              //       height: 100,
-              //       color: Colors.black38,
-              //     )),
               Positioned(
                 left: width * 3,
                 top: height * 3,

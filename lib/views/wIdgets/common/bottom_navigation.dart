@@ -2,7 +2,7 @@ import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mspot/const/colors/colors.dart';
+import 'package:mspot/core/colors/app_color.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 ValueNotifier<int> pageIndex = ValueNotifier(0);
