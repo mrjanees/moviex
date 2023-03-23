@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../common/card_template.dart';
+import '../common/movie_card_template.dart';
 
 class TopRatedTvTemplate extends StatelessWidget {
   const TopRatedTvTemplate({super.key});
@@ -17,7 +17,7 @@ class TopRatedTvTemplate extends StatelessWidget {
           mainAxisExtent: 250,
           mainAxisSpacing: 10),
       itemBuilder: (BuildContext context, int index) {
-        return CardTemplate(
+        return MovieCardTemplate(
           heading: 'The Godfather',
           image: 'https://img.fruugo.com/product/4/49/14441494_max.jpg',
         );

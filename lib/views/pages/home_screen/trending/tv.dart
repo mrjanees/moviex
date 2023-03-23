@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../wIdgets/common/card_template.dart';
+import '../../../wIdgets/common/movie_card_template.dart';
 
 class Tv extends StatelessWidget {
   const Tv({super.key});
@@ -17,7 +17,7 @@ class Tv extends StatelessWidget {
           mainAxisExtent: 250,
           mainAxisSpacing: 10),
       itemBuilder: (BuildContext context, int index) {
-        return CardTemplate(
+        return MovieCardTemplate(
           heading: 'The Last of Us',
           image:
               'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',

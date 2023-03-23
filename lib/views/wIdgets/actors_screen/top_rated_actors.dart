@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../common/movie_card_template.dart';
+import 'package:mspot/views/wIdgets/common/actor_card_template.dart';
 
-class TopRatedSearchTemplate extends StatelessWidget {
-  const TopRatedSearchTemplate({super.key});
+class TopRatedActorsTemplate extends StatelessWidget {
+  const TopRatedActorsTemplate({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,10 @@ class TopRatedSearchTemplate extends StatelessWidget {
           mainAxisExtent: 250,
           mainAxisSpacing: 10),
       itemBuilder: (BuildContext context, int index) {
-        return MovieCardTemplate(
-          heading: 'The Godfather',
-          image: 'https://img.fruugo.com/product/4/49/14441494_max.jpg',
+        return ActorCardTemplate(
+          avatar:
+              'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/4CR1D9VLWZcmGgh4b6kKuY2NOel.jpg',
+          name: 'Tom Hardy',
         );
       },
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../wIdgets/common/card_template.dart';
+import '../../../wIdgets/common/movie_card_template.dart';
 
 class Person extends StatelessWidget {
   const Person({super.key});
@@ -17,7 +17,7 @@ class Person extends StatelessWidget {
           mainAxisExtent: 250,
           mainAxisSpacing: 10),
       itemBuilder: (BuildContext context, int index) {
-        return CardTemplate(
+        return MovieCardTemplate(
           heading: 'Yua Mikami',
           image:
               'https://image.tmdb.org/t/p/original/vZ2FW6L8mErV81jO7DaeJ6blVTS.jpg',

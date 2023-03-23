@@ -5,10 +5,10 @@ import '../../../core/Font_style.dart';
 import '../../../core/colors/app_color.dart';
 import '../home_screen/percent_indicator.dart';
 
-class CardTemplate extends StatelessWidget {
+class MovieCardTemplate extends StatelessWidget {
   String heading;
   String image;
-  CardTemplate({super.key, required this.heading, required this.image});
+  MovieCardTemplate({super.key, required this.heading, required this.image});
 
   @override
   Widget build(BuildContext context) {
