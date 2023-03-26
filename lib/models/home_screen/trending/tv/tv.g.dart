@@ -9,7 +9,7 @@ part of 'tv.dart';
 Tv _$TvFromJson(Map<String, dynamic> json) => Tv(
       page: json['page'] as int?,
       results: (json['results'] as List<dynamic>?)
-          ?.map((e) => Result.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => TvResult.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

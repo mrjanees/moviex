@@ -1,14 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../../const/api_key.dart';
 import '../../../core/Font_style.dart';
 import '../../../core/colors/app_color.dart';
 import '../home_screen/percent_indicator.dart';
 
 class MovieCardTemplate extends StatelessWidget {
+  int movieId;
   String heading;
   String image;
-  MovieCardTemplate({super.key, required this.heading, required this.image});
+  String relDate;
+  double vote;
+  MovieCardTemplate(
+      {super.key,
+      required this.movieId,
+      required this.heading,
+      required this.image,
+      required this.relDate,
+      required this.vote});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +51,7 @@ class MovieCardTemplate extends StatelessWidget {
                             ),
                           ),
                         ),
-                        imageUrl: image,
+                        imageUrl: imageBase + image,
                         placeholder: (context, url) => const Center(
                             child: CircularProgressIndicator(
                           color: ROSE_COLOR,
@@ -56,7 +67,7 @@ class MovieCardTemplate extends StatelessWidget {
                   Positioned(
                     top: 150,
                     left: 110,
-                    child: PercentInticator(percent: 60),
+                    child: PercentInticator(percent: vote),
                   )
                 ],
               ),
@@ -73,9 +84,9 @@ class MovieCardTemplate extends StatelessWidget {
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.bold),
               ),
-              const Text(
-                '12 jan',
-                style: TextStyle(
+              Text(
+                relDate,
+                style: const TextStyle(
                     overflow: TextOverflow.clip,
                     color: WHITE_COLOR,
                     fontSize: 15,

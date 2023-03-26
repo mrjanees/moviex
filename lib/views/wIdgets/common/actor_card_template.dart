@@ -1,11 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mspot/const/api_key.dart';
 
 import '../../../core/colors/app_color.dart';
 
 class ActorCardTemplate extends StatelessWidget {
-  String avatar;
+  String? avatar;
   String name;
+
   ActorCardTemplate({super.key, required this.avatar, required this.name});
 
   @override
@@ -36,7 +38,7 @@ class ActorCardTemplate extends StatelessWidget {
                       ),
                     ),
                   ),
-                  imageUrl: avatar,
+                  imageUrl: profilePic(avatar),
                   placeholder: (context, url) => const Center(
                       child: CircularProgressIndicator(
                     color: ROSE_COLOR,
@@ -54,7 +56,7 @@ class ActorCardTemplate extends StatelessWidget {
             ),
             Text(
               name,
-              maxLines: 1,
+              maxLines: 2,
               style: const TextStyle(
                   overflow: TextOverflow.clip,
                   color: WHITE_COLOR,
@@ -66,5 +68,13 @@ class ActorCardTemplate extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+String profilePic(String? image) {
+  if (image == null) {
+    return 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/2018-01-11_Yasser_Hareb.jpg/1200px-2018-01-11_Yasser_Hareb.jpg';
+  } else {
+    return imageBase + image;
   }
 }

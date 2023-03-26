@@ -20,7 +20,7 @@ void loadingCircle() {
         ),
         child: Dialog(
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),

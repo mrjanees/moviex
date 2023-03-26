@@ -6,7 +6,7 @@ part of 'result.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Result _$ResultFromJson(Map<String, dynamic> json) => Result(
+TvResult _$TvResultFromJson(Map<String, dynamic> json) => TvResult(
       backdropPath: json['backdrop_path'] as String?,
       id: json['id'] as int?,
       name: json['name'] as String?,
@@ -20,7 +20,7 @@ Result _$ResultFromJson(Map<String, dynamic> json) => Result(
           .toList(),
     );
 
-Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
+Map<String, dynamic> _$TvResultToJson(TvResult instance) => <String, dynamic>{
       'backdrop_path': instance.backdropPath,
       'id': instance.id,
       'name': instance.name,

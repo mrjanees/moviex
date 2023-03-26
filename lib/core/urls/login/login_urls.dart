@@ -1,3 +1,4 @@
+
 import 'package:mspot/const/api_key.dart';
 
 final Uri signUpUrl = Uri.parse('https://www.themoviedb.org/signup');

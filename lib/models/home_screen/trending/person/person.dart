@@ -9,7 +9,7 @@ class Person {
   @JsonKey(name: 'page')
   int? page;
   @JsonKey(name: 'results')
-  List<Result>? results;
+  List<PersonResult>? results;
 
   Person({this.page, this.results});
 

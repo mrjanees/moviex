@@ -9,7 +9,7 @@ class Tv {
   @JsonKey(name: 'page')
   int? page;
   @JsonKey(name: 'results')
-  List<Result>? results;
+  List<TvResult>? results;
 
   Tv({this.page, this.results});
 

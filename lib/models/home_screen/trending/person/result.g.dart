@@ -6,7 +6,7 @@ part of 'result.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Result _$ResultFromJson(Map<String, dynamic> json) => Result(
+PersonResult _$PersonResultFromJson(Map<String, dynamic> json) => PersonResult(
       id: json['id'] as int?,
       name: json['name'] as String?,
       knownForDepartment: json['known_for_department'] as String?,
@@ -16,7 +16,8 @@ Result _$ResultFromJson(Map<String, dynamic> json) => Result(
           .toList(),
     );
 
-Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
+Map<String, dynamic> _$PersonResultToJson(PersonResult instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'known_for_department': instance.knownForDepartment,

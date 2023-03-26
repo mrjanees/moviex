@@ -9,7 +9,7 @@ class All {
   @JsonKey(name: 'page')
   int? page;
   @JsonKey(name: 'results')
-  List<Result>? results;
+  List<AllResult>? results;
   @JsonKey(name: 'total_pages')
   int? totalPages;
   @JsonKey(name: 'total_results')

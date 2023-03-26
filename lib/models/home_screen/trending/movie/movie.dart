@@ -9,7 +9,7 @@ class Movie {
   @JsonKey(name: 'page')
   int? page;
   @JsonKey(name: 'results')
-  List<Result>? results;
+  List<MovieResult>? results;
 
   Movie({this.page, this.results});
 

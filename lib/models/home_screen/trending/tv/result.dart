@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'result.g.dart';
 
 @JsonSerializable()
-class Result {
+class TvResult {
   @JsonKey(name: 'backdrop_path')
   String? backdropPath;
   @JsonKey(name: 'id')
@@ -21,7 +21,7 @@ class Result {
   @JsonKey(name: 'origin_country')
   List<String>? originCountry;
 
-  Result({
+  TvResult({
     this.backdropPath,
     this.id,
     this.name,
@@ -37,9 +37,9 @@ class Result {
     return 'Result(backdropPath: $backdropPath, id: $id, name: $name, posterPath: $posterPath, genreIds: $genreIds, firstAirDate: $firstAirDate, voteAverage: $voteAverage, originCountry: $originCountry)';
   }
 
-  factory Result.fromJson(Map<String, dynamic> json) {
-    return _$ResultFromJson(json);
+  factory TvResult.fromJson(Map<String, dynamic> json) {
+    return _$TvResultFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$ResultToJson(this);
+  Map<String, dynamic> toJson() => _$TvResultToJson(this);
 }

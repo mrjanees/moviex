@@ -5,7 +5,7 @@ import 'known_for.dart';
 part 'result.g.dart';
 
 @JsonSerializable()
-class Result {
+class PersonResult {
   @JsonKey(name: 'id')
   int? id;
   @JsonKey(name: 'name')
@@ -17,7 +17,7 @@ class Result {
   @JsonKey(name: 'known_for')
   List<KnownFor>? knownFor;
 
-  Result({
+  PersonResult({
     this.id,
     this.name,
     this.knownForDepartment,
@@ -30,9 +30,9 @@ class Result {
     return 'Result(id: $id, name: $name, knownForDepartment: $knownForDepartment, profilePath: $profilePath, knownFor: $knownFor)';
   }
 
-  factory Result.fromJson(Map<String, dynamic> json) {
-    return _$ResultFromJson(json);
+  factory PersonResult.fromJson(Map<String, dynamic> json) {
+    return _$PersonResultFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$ResultToJson(this);
+  Map<String, dynamic> toJson() => _$PersonResultToJson(this);
 }

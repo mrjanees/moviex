@@ -4,7 +4,7 @@ import 'package:mspot/core/Font_style.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class PercentInticator extends StatelessWidget {
-  int percent;
+  double percent;
 
   PercentInticator({super.key, required this.percent});
 
@@ -13,13 +13,13 @@ class PercentInticator extends StatelessWidget {
     return CircularPercentIndicator(
       radius: 22,
       lineWidth: 8,
-      percent: percent * 0.01,
+      percent: percent * 0.1,
       progressColor: PercentIndicatorController.percentColor(percent),
       backgroundColor: Colors.white54,
       circularStrokeCap: CircularStrokeCap.round,
       center: Center(
         child: Text(
-          '$percent%',
+          PercentIndicatorController.numberConversion(percent),
           style: MoviexFontStyle.percentIndicator(),
         ),
       ),

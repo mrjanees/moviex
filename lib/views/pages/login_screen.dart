@@ -1,35 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+
 import 'package:mspot/core/colors/app_color.dart';
 import 'package:mspot/controllers/login/login_controllers.dart';
-import 'package:mspot/services/urls/login_screen_url.dart';
+import 'package:mspot/core/urls/login/login_urls.dart';
 import 'package:mspot/views/pages/base_screen.dart';
-import 'package:mspot/views/pages/home_screen/home_screen.dart';
+import 'package:get/get.dart';
 import 'package:mspot/views/wIdgets/login_screen/custom_button.dart';
 import 'package:mspot/views/wIdgets/login_screen/textformfield.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../dialogs/success_snackbar.dart';
 
-TextEditingController usernameController = TextEditingController();
-TextEditingController passwordController = TextEditingController();
-String? sessionId;
-
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
-
+  LoginScreen({super.key});
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  String? sessionId;
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      Get.put(LoginControllers.getRequestToken());
+    });
     final formGlobalKey = GlobalKey<FormState>();
     return LayoutBuilder(builder: (context, constraints) {
       double maxHeight = constraints.maxHeight;
-      print(maxHeight);
       double maxWidth = constraints.maxWidth;
-      print(maxWidth);
       double h1p = maxHeight * 0.01;
       double h10p = maxWidth * 0.1;
-      double w10p = maxWidth * 0.1;
-
       double w1p = maxHeight * 0.01;
       return SafeArea(
         child: Scaffold(
@@ -90,13 +88,16 @@ class LoginScreen extends StatelessWidget {
                             text: 'Login',
                             onPressed: () async {
                               if (formGlobalKey.currentState!.validate()) {
-                                sessionId =
-                                    await LoginControllers.loginButton();
-
+                                final sessionId =
+                                    await LoginControllers.loginButton(
+                                        usernameController.text,
+                                        passwordController.text);
+                                usernameController.clear();
+                                passwordController.clear();
                                 if (sessionId != null) {
                                   Get.back(closeOverlays: true);
                                   Get.to(
-                                      () => BaseScreen(sessionId: sessionId!));
+                                      () => BaseScreen(sessionId: sessionId));
                                   successSnackbar(
                                       'Login Success!',
                                       'you have successfully logged in...',

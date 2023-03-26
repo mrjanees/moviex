@@ -9,7 +9,7 @@ part of 'movie.dart';
 Movie _$MovieFromJson(Map<String, dynamic> json) => Movie(
       page: json['page'] as int?,
       results: (json['results'] as List<dynamic>?)
-          ?.map((e) => Result.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => MovieResult.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
