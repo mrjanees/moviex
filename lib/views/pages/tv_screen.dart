@@ -52,7 +52,7 @@ class TvScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  const TopRatedTvTemplate()
+                  TopRatedTvTemplate()
                 ],
               ),
             ),

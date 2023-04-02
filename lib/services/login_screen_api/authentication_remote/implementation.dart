@@ -1,18 +1,15 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:mspot/core/urls/login/login_urls.dart';
+
 import 'package:mspot/models/login_screen/validate_with_login_request/validate_with_login_request.dart';
-import 'package:mspot/utils/dioerror_message.dart';
 
 import 'package:mspot/services/login_screen_api/authentication_remote/authentication_remote.dart';
-import 'package:mspot/services/urls/login_screen_url.dart';
 
+import '../../../core/urls/dio.dart';
 import '../../../models/login_screen/request_token_response/request_token_response.dart';
 import '../../../models/login_screen/session_id_request/session_id_request.dart';
 import '../../../models/login_screen/session_id_response/session_id_response.dart';
-
-final dio = Dio();
 
 class AuthRemoteImplement extends AuthenticationRemote {
   @override

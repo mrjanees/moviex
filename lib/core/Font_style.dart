@@ -19,9 +19,9 @@ class MoviexFontStyle {
         color: WHITE_COLOR);
   }
 
-  static TextStyle percentIndicator() {
-    return const TextStyle(
-      fontSize: 12,
+  static TextStyle percentIndicator(double size) {
+    return TextStyle(
+      fontSize: size,
       fontWeight: FontWeight.bold,
       color: WHITE_COLOR,
     );

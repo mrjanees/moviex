@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mspot/controllers/home/trending/trending.dart';
+import 'package:mspot/views/pages/home_screen/trending/all.dart';
 
 import '../../../wIdgets/common/movie_card_template.dart';
 
@@ -7,8 +10,11 @@ class Tv extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.put(TrendingController());
+    });
     return GridView.builder(
-      itemCount: 10,
+      itemCount: trendingController.tvList.length,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -17,10 +23,14 @@ class Tv extends StatelessWidget {
           mainAxisExtent: 250,
           mainAxisSpacing: 10),
       itemBuilder: (BuildContext context, int index) {
+        final data = trendingController.tvList[index];
+
         return MovieCardTemplate(
-          heading: 'The Last of Us',
-          image:
-              'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',
+          movieId: data.id!,
+          heading: data.name!,
+          image: data.posterPath!,
+          relDate: data.firstAirDate!,
+          vote: data.voteAverage!,
         );
       },
     );

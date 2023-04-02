@@ -52,7 +52,7 @@ class ActorsScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  const TopRatedActorsTemplate()
+                  TopRatedActorsTemplate()
                 ],
               ),
             ),

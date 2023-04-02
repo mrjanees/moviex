@@ -1,14 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
-import '../../../core/Font_style.dart';
+import 'package:intl/intl.dart';
+import '../../../const/api_key.dart';
 import '../../../core/colors/app_color.dart';
+import '../../../utils/dateFormater.dart';
 import '../home_screen/percent_indicator.dart';
 
 class MovieCardTemplate extends StatelessWidget {
+  int movieId;
   String heading;
-  String image;
-  MovieCardTemplate({super.key, required this.heading, required this.image});
+  String? image;
+  String? relDate;
+  double vote;
+  MovieCardTemplate(
+      {super.key,
+      required this.movieId,
+      required this.heading,
+      required this.image,
+      required this.relDate,
+      required this.vote});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +50,9 @@ class MovieCardTemplate extends StatelessWidget {
                             ),
                           ),
                         ),
-                        imageUrl: image,
+                        imageUrl: image == null
+                            ? 'https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg'
+                            : imageBase + image!,
                         placeholder: (context, url) => const Center(
                             child: CircularProgressIndicator(
                           color: ROSE_COLOR,
@@ -56,7 +68,11 @@ class MovieCardTemplate extends StatelessWidget {
                   Positioned(
                     top: 150,
                     left: 110,
-                    child: PercentInticator(percent: 60),
+                    child: PercentInticator(
+                      percent: vote,
+                      fontSIze: 12,
+                      radius: 22,
+                    ),
                   )
                 ],
               ),
@@ -67,18 +83,18 @@ class MovieCardTemplate extends StatelessWidget {
                 heading,
                 maxLines: 1,
                 style: const TextStyle(
-                    overflow: TextOverflow.clip,
+                    overflow: TextOverflow.ellipsis,
                     color: WHITE_COLOR,
-                    fontSize: 17,
+                    fontSize: 15,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.bold),
               ),
-              const Text(
-                '12 jan',
-                style: TextStyle(
+              Text(
+                relDate == null ? 'N/A' : dateFormater(relDate!),
+                style: const TextStyle(
                     overflow: TextOverflow.clip,
                     color: WHITE_COLOR,
-                    fontSize: 15,
+                    fontSize: 14,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w500),
               ),

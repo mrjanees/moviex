@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
-
-import '../../../wIdgets/common/movie_card_template.dart';
+import 'package:get/get.dart';
+import 'package:mspot/views/pages/home_screen/trending/all.dart';
+import 'package:mspot/views/wIdgets/common/actor_card_template.dart';
+import '../../../../controllers/home/trending/trending.dart';
 
 class Person extends StatelessWidget {
   const Person({super.key});
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.put(TrendingController());
+    });
     return GridView.builder(
-      itemCount: 10,
+      itemCount: trendingController.personList.length,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -17,11 +22,9 @@ class Person extends StatelessWidget {
           mainAxisExtent: 250,
           mainAxisSpacing: 10),
       itemBuilder: (BuildContext context, int index) {
-        return MovieCardTemplate(
-          heading: 'Yua Mikami',
-          image:
-              'https://image.tmdb.org/t/p/original/vZ2FW6L8mErV81jO7DaeJ6blVTS.jpg',
-        );
+        final data = trendingController.personList[index];
+
+        return ActorCardTemplate(avatar: data.profilePath, name: data.name!);
       },
     );
   }

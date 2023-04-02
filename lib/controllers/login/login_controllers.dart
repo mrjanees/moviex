@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:mspot/models/login_screen/request_token_response/request_token_response.dart';
 import 'package:mspot/models/login_screen/session_id_request/session_id_request.dart';
@@ -8,30 +9,32 @@ import 'package:mspot/utils/dioerror_message.dart';
 import '../../views/dialogs/loding_circle.dart';
 import '../../views/pages/login_screen.dart';
 
-class LoginControllers {
-  RequestTokenResponse? requestToken;
+class LoginControllers extends GetxController {
+  static RequestTokenResponse? requestToken;
   RequestTokenResponse? loginvalidation;
   SessionIdResponse? sessionId;
 
-  static Future<String?> loginButton() async {
+  static Future<String?> loginButton(
+      String contrUsername, String contrPassword) async {
     LoginControllers.showLoding();
-    final requestTocken = await LoginControllers().getRequestToken();
-    final username = usernameController.text;
-    final password = passwordController.text;
-    final tocken = requestTocken.requestToken;
-    usernameController.clear();
-    passwordController.clear();
-    final data = ValidateWithLoginRequest.create(
-        password: password, requestToken: tocken, username: username);
-    final varifiedTokens = await LoginControllers().validateWithLogin(data);
-    if (varifiedTokens.success != true) {}
-
-    if (varifiedTokens.success == true) {
-      final requesttoken =
-          SessionIdRequest.create(requestToken: varifiedTokens.requestToken);
-      final sessionId = await LoginControllers().createSessionId(requesttoken);
-      if (sessionId.success == true) {
-        return sessionId.sessionId;
+    await getRequestToken();
+    final token = requestToken!.requestToken;
+    final username = contrUsername;
+    final password = contrPassword;
+    if (token!.isNotEmpty && username.isNotEmpty && password.isNotEmpty) {
+      final data = ValidateWithLoginRequest.create(
+          password: password, requestToken: token, username: username);
+      final varifiedTokens = await LoginControllers().validateWithLogin(data);
+      if (varifiedTokens.success == true) {
+        final requesttoken =
+            SessionIdRequest.create(requestToken: varifiedTokens.requestToken);
+        final sessionId =
+            await LoginControllers().createSessionId(requesttoken);
+        if (sessionId.success == true) {
+          return sessionId.sessionId;
+        } else {
+          return null;
+        }
       } else {
         return null;
       }
@@ -40,14 +43,13 @@ class LoginControllers {
     }
   }
 
-  Future<RequestTokenResponse> getRequestToken() async {
+  static Future<void> getRequestToken() async {
     final response = await AuthRemoteImplement().requestToken();
     response.fold((l) {
       DioErrorTypeMessage.toShowErrorMessage(l);
     }, (r) {
       return requestToken = r;
     });
-    return requestToken!;
   }
 
   Future<RequestTokenResponse> validateWithLogin(

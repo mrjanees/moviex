@@ -41,6 +41,7 @@ dependencies:
   font_awesome_flutter: ^10.4.0
   get: ^4.6.5
   go_router: ^6.2.0
+  intl: ^0.18.0
   json_annotation: ^4.8.0
   json_serializable: ^6.6.1
   lottie: ^2.2.0
@@ -79,7 +80,7 @@ flutter:
     - assets/icons/tv.svg
     - assets/icons/user.svg
     - assets/icons/menu.svg
-
+    - assets/Image_placeholder.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

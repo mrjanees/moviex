@@ -1,27 +1,37 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:mspot/controllers/tv/tv_controllers.dart';
 
 import '../common/movie_card_template.dart';
 
 class TopRatedTvTemplate extends StatelessWidget {
-  const TopRatedTvTemplate({super.key});
+  final tvController = Get.put(TvControllers());
+  TopRatedTvTemplate({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      itemCount: 20,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          mainAxisExtent: 250,
-          mainAxisSpacing: 10),
-      itemBuilder: (BuildContext context, int index) {
-        return MovieCardTemplate(
-          heading: 'The Godfather',
-          image: 'https://img.fruugo.com/product/4/49/14441494_max.jpg',
-        );
-      },
-    );
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Get.put(TvControllers());
+    });
+    return Obx(() => GridView.builder(
+          itemCount: tvController.topRatedTvList.length,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisExtent: 250,
+              mainAxisSpacing: 10),
+          itemBuilder: (BuildContext context, int index) {
+            final data = tvController.topRatedTvList[index];
+            return MovieCardTemplate(
+              movieId: data.id!,
+              heading: data.name!,
+              image: data.posterPath,
+              relDate: data.firstAirDate,
+              vote: data.voteAverage!,
+            );
+          },
+        ));
   }
 }

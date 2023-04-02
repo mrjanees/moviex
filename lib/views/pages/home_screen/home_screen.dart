@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_widget_cache.dart';
 import 'package:mspot/controllers/home/home_controllers.dart';
+import 'package:mspot/controllers/home/trending/trending.dart';
 import 'package:mspot/core/Font_style.dart';
 import 'package:mspot/views/pages/home_screen/trending/trending_pages.dart';
 import 'package:mspot/views/wIdgets/home_screen/category_button.dart';
