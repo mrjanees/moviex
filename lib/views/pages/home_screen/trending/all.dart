@@ -22,7 +22,7 @@ class All extends StatelessWidget {
             crossAxisCount: 2,
             crossAxisSpacing: 10,
             mainAxisExtent: 250,
-            mainAxisSpacing: 10),
+            mainAxisSpacing: 5),
         itemBuilder: (BuildContext context, int index) {
           final data = trendingController.allList[index];
 

@@ -1,17 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 import '../../../const/api_key.dart';
-import '../../../core/Font_style.dart';
 import '../../../core/colors/app_color.dart';
+import '../../../utils/dateFormater.dart';
 import '../home_screen/percent_indicator.dart';
 
 class MovieCardTemplate extends StatelessWidget {
   int movieId;
   String heading;
-  String image;
-  String relDate;
+  String? image;
+  String? relDate;
   double vote;
   MovieCardTemplate(
       {super.key,
@@ -51,7 +50,9 @@ class MovieCardTemplate extends StatelessWidget {
                             ),
                           ),
                         ),
-                        imageUrl: imageBase + image,
+                        imageUrl: image == null
+                            ? 'https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg'
+                            : imageBase + image!,
                         placeholder: (context, url) => const Center(
                             child: CircularProgressIndicator(
                           color: ROSE_COLOR,
@@ -67,7 +68,11 @@ class MovieCardTemplate extends StatelessWidget {
                   Positioned(
                     top: 150,
                     left: 110,
-                    child: PercentInticator(percent: vote),
+                    child: PercentInticator(
+                      percent: vote,
+                      fontSIze: 12,
+                      radius: 22,
+                    ),
                   )
                 ],
               ),
@@ -78,18 +83,18 @@ class MovieCardTemplate extends StatelessWidget {
                 heading,
                 maxLines: 1,
                 style: const TextStyle(
-                    overflow: TextOverflow.clip,
+                    overflow: TextOverflow.ellipsis,
                     color: WHITE_COLOR,
-                    fontSize: 17,
+                    fontSize: 15,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                relDate,
+                relDate == null ? 'N/A' : dateFormater(relDate!),
                 style: const TextStyle(
                     overflow: TextOverflow.clip,
                     color: WHITE_COLOR,
-                    fontSize: 15,
+                    fontSize: 14,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w500),
               ),

@@ -5,13 +5,19 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class PercentInticator extends StatelessWidget {
   double percent;
+  double radius;
+  double fontSIze;
 
-  PercentInticator({super.key, required this.percent});
+  PercentInticator(
+      {super.key,
+      required this.percent,
+      required this.fontSIze,
+      required this.radius});
 
   @override
   Widget build(BuildContext context) {
     return CircularPercentIndicator(
-      radius: 22,
+      radius: radius,
       lineWidth: 8,
       percent: percent * 0.1,
       progressColor: PercentIndicatorController.percentColor(percent),
@@ -20,7 +26,7 @@ class PercentInticator extends StatelessWidget {
       center: Center(
         child: Text(
           PercentIndicatorController.numberConversion(percent),
-          style: MoviexFontStyle.percentIndicator(),
+          style: MoviexFontStyle.percentIndicator(fontSIze),
         ),
       ),
     );

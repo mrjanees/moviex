@@ -17,18 +17,24 @@ class LoginControllers extends GetxController {
   static Future<String?> loginButton(
       String contrUsername, String contrPassword) async {
     LoginControllers.showLoding();
+    await getRequestToken();
+    final token = requestToken!.requestToken;
     final username = contrUsername;
     final password = contrPassword;
-    final token = requestToken!.requestToken;
-    final data = ValidateWithLoginRequest.create(
-        password: password, requestToken: token, username: username);
-    final varifiedTokens = await LoginControllers().validateWithLogin(data);
-    if (varifiedTokens.success == true) {
-      final requesttoken =
-          SessionIdRequest.create(requestToken: varifiedTokens.requestToken);
-      final sessionId = await LoginControllers().createSessionId(requesttoken);
-      if (sessionId.success == true) {
-        return sessionId.sessionId;
+    if (token!.isNotEmpty && username.isNotEmpty && password.isNotEmpty) {
+      final data = ValidateWithLoginRequest.create(
+          password: password, requestToken: token, username: username);
+      final varifiedTokens = await LoginControllers().validateWithLogin(data);
+      if (varifiedTokens.success == true) {
+        final requesttoken =
+            SessionIdRequest.create(requestToken: varifiedTokens.requestToken);
+        final sessionId =
+            await LoginControllers().createSessionId(requesttoken);
+        if (sessionId.success == true) {
+          return sessionId.sessionId;
+        } else {
+          return null;
+        }
       } else {
         return null;
       }

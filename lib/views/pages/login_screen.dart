@@ -19,9 +19,6 @@ class LoginScreen extends StatelessWidget {
   String? sessionId;
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      Get.put(LoginControllers.getRequestToken());
-    });
     final formGlobalKey = GlobalKey<FormState>();
     return LayoutBuilder(builder: (context, constraints) {
       double maxHeight = constraints.maxHeight;

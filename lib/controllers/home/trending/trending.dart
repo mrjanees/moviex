@@ -67,7 +67,6 @@ class TrendingController extends GetxController {
         print('movie trendings is null');
       } else {
         personList.addAll(r);
-        print(personList.length);
       }
     });
   }

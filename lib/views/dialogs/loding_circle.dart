@@ -7,10 +7,8 @@ import '../../core/colors/app_color.dart';
 void loadingCircle() {
   Get.dialog(LayoutBuilder(
     builder: (context, constraints) {
-      double maxHeight = constraints.maxHeight;
       double maxWidth = constraints.maxWidth;
       double h10p = maxWidth * 0.1;
-      double w10p = maxWidth * 0.1;
       return Padding(
         padding: EdgeInsets.only(
           top: h10p * 6,
@@ -48,5 +46,5 @@ void loadingCircle() {
             )),
       );
     },
-  ));
+  ), barrierDismissible: false);
 }
