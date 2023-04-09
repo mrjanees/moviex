@@ -11,6 +11,30 @@ class MoviexFontStyle {
         color: WHITE_COLOR);
   }
 
+  static TextStyle heading2() {
+    return const TextStyle(
+        fontFamily: 'inter',
+        fontSize: 18,
+        fontWeight: FontWeight.w700,
+        color: WHITE_COLOR);
+  }
+
+  static TextStyle textUnderHeading1() {
+    return const TextStyle(
+        fontFamily: 'inter',
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: WHITE_COLOR);
+  }
+
+  static TextStyle textUnderHeading2() {
+    return const TextStyle(
+        fontFamily: 'inter',
+        fontSize: 14,
+        fontWeight: FontWeight.w300,
+        color: WHITE_COLOR);
+  }
+
   static TextStyle categoryStyle() {
     return const TextStyle(
         fontFamily: 'inter',
@@ -25,5 +49,13 @@ class MoviexFontStyle {
       fontWeight: FontWeight.bold,
       color: WHITE_COLOR,
     );
+  }
+
+  static TextStyle movieInfoFont() {
+    return const TextStyle(
+        fontFamily: 'inter',
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+        color: WHITE_COLOR);
   }
 }

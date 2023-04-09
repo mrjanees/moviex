@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:mspot/core/colors/app_color.dart';
 
 import '../../core/Font_style.dart';
@@ -24,7 +25,9 @@ class TvScreen extends StatelessWidget {
                   title: const AppbarTitle(),
                   actions: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed('/profile');
+                        },
                         icon: SvgPicture.asset(
                             height: 30,
                             width: 30,

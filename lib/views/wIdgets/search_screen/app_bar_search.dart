@@ -25,10 +25,10 @@ class AppbarSearch extends StatelessWidget {
     return TextField(
       controller: searchTextController,
       onSubmitted: (value) async {
-        loadingCircle();
-        await searchController.searchMovie(value);
+        searchController.serverPage.value = 1;
+        await searchController.searchMovie(
+            value, searchController.serverPage.value);
         if (searchController.searchResultList.isNotEmpty) {
-          Navigator.of(Get.overlayContext!).pop();
           print(searchController.searchResultList.length);
         }
       },

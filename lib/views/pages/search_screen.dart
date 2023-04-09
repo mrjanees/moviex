@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:mspot/controllers/search/search_controllers.dart';
 import 'package:mspot/core/Font_style.dart';
 import 'package:mspot/services/search_screen_api/search_movie/implementation.dart';
+import 'package:mspot/views/dialogs/error_snackbar.dart';
+import 'package:mspot/views/dialogs/loding_circle.dart';
 import 'package:mspot/views/pages/home_screen/home_screen.dart';
+import 'package:mspot/views/wIdgets/common/server_page_controller.dart';
 import 'package:mspot/views/wIdgets/search_screen/searched_items_temp.dart';
 import 'package:mspot/views/wIdgets/search_screen/toprated_search_temp.dart';
 import '../../core/colors/app_color.dart';
@@ -20,7 +24,8 @@ class SearchScreen extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         searchControllers.searchResultList.clear();
-        searchControllers.topRated();
+        searchControllers.onInit();
+        searchTextController.clear();
       },
     );
     return LayoutBuilder(
@@ -43,7 +48,9 @@ class SearchScreen extends StatelessWidget {
                     expandedHeight: 120,
                     actions: [
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed('/profile');
+                          },
                           icon: SvgPicture.asset(
                               height: 30,
                               width: 30,
@@ -70,11 +77,50 @@ class SearchScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        searchControllers.searchResultList.isEmpty
-                            ? 'Top Rated'
-                            : 'Results - ${searchControllers.totalresult}',
-                        style: MoviexFontStyle.heading1(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            searchControllers.searchPageTitle.value,
+                            style: MoviexFontStyle.heading1(),
+                          ),
+                          searchControllers.searchResultList.isNotEmpty
+                              ? ServerPageController(
+                                  width: w1p,
+                                  height: h1p,
+                                  page: searchControllers.serverPage.value,
+                                  pageDecrement: () {
+                                    if (searchControllers.serverPage.value >
+                                        1) {
+                                      final num = searchControllers
+                                          .serverPage.value -= 1;
+                                      searchControllers.searchMovie(
+                                          searchTextController.text, num);
+                                    } else {
+                                      errorSnackbar(
+                                          'No pages',
+                                          'There is no items',
+                                          Icons.cancel_outlined,
+                                          2);
+                                    }
+                                  },
+                                  pageIncrement: () {
+                                    if (searchControllers.serverPage.value <
+                                        searchControllers.totalpage.value) {
+                                      final num = searchControllers
+                                          .serverPage.value += 1;
+                                      searchControllers.searchMovie(
+                                          searchTextController.text, num);
+                                    } else {
+                                      errorSnackbar(
+                                          'No pages',
+                                          'There is no items',
+                                          Icons.cancel_outlined,
+                                          2);
+                                    }
+                                  })
+                              : const SizedBox()
+                        ],
                       ),
                       const SizedBox(
                         height: 10,

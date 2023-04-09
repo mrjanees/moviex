@@ -4,9 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_widget_cache.dart';
+import 'package:mspot/controllers/authentication/Auth_controller.dart';
 import 'package:mspot/controllers/home/home_controllers.dart';
 import 'package:mspot/controllers/home/trending/trending.dart';
 import 'package:mspot/core/Font_style.dart';
+import 'package:mspot/main.dart';
 import 'package:mspot/views/pages/home_screen/trending/trending_pages.dart';
 import 'package:mspot/views/wIdgets/home_screen/category_button.dart';
 import 'package:mspot/views/wIdgets/home_screen/slider_image.dart';
@@ -55,13 +57,18 @@ class HomeScreen extends StatelessWidget {
                       'assets/icons/App_Icon.png',
                       scale: 3.5,
                     ),
-                    SvgPicture.asset(
-                      'assets/icons/user.svg',
-                      height: 30,
-                      width: 30,
-                      colorFilter:
-                          const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                    )
+                    IconButton(
+                        onPressed: () {
+                          Get.toNamed('/profile');
+                          authController.logOut();
+                        },
+                        icon: SvgPicture.asset(
+                          'assets/icons/user.svg',
+                          height: 30,
+                          width: 30,
+                          colorFilter: const ColorFilter.mode(
+                              Colors.white, BlendMode.srcIn),
+                        ))
                   ],
                 ),
               ),

@@ -1,22 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:mspot/controllers/movie_info/movie_info_controller.dart';
-import 'package:mspot/views/pages/movie_info_screen.dart';
+
 import '../../../const/api_key.dart';
+import '../../../controllers/movie_info/movie_info_controller.dart';
 import '../../../core/colors/app_color.dart';
 import '../../../utils/dateFormater.dart';
 import '../home_screen/percent_indicator.dart';
 
-class MovieCardTemplate extends StatelessWidget {
+class ProfileCard extends StatelessWidget {
   int movieId;
   String heading;
   String? image;
   String? relDate;
   double vote;
-  MovieCardTemplate(
+  ProfileCard(
       {super.key,
       required this.movieId,
       required this.heading,
@@ -28,25 +26,24 @@ class MovieCardTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () async {
-          await Get.put(MovieInfoController.instance.movieInfo(movieId));
-          Get.toNamed('/MovieInfo');
+          print(movieId);
         },
         child: SizedBox(
-          height: 250,
-          width: 160,
+          height: 150,
+          width: 130,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
                 children: [
                   Container(
-                    height: 200,
-                    width: 160,
+                    height: 150,
+                    width: 130,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(15),
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(15),
                       child: CachedNetworkImage(
                         imageBuilder: (context, imageProvider) => Container(
                           decoration: BoxDecoration(
@@ -72,15 +69,6 @@ class MovieCardTemplate extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Positioned(
-                    top: 150,
-                    left: 110,
-                    child: PercentInticator(
-                      percent: vote,
-                      fontSIze: 12,
-                      radius: 22,
-                    ),
-                  )
                 ],
               ),
               const SizedBox(
@@ -88,11 +76,11 @@ class MovieCardTemplate extends StatelessWidget {
               ),
               Text(
                 heading,
-                maxLines: 1,
+                maxLines: 2,
                 style: const TextStyle(
                     overflow: TextOverflow.ellipsis,
                     color: WHITE_COLOR,
-                    fontSize: 15,
+                    fontSize: 14,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.bold),
               ),
@@ -101,9 +89,9 @@ class MovieCardTemplate extends StatelessWidget {
                 style: const TextStyle(
                     overflow: TextOverflow.clip,
                     color: WHITE_COLOR,
-                    fontSize: 14,
+                    fontSize: 13,
                     fontFamily: 'Inter',
-                    fontWeight: FontWeight.w300),
+                    fontWeight: FontWeight.w500),
               ),
             ],
           ),

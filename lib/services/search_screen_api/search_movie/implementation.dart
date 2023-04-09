@@ -11,15 +11,18 @@ import '../../../core/urls/dio.dart';
 class SearchMovieImple extends SearchMovieRemote {
   @override
   Future<Either<DioErrorType, List<SearchResult>?>> searchMovie(
-      String query) async {
+      String query, int page) async {
     try {
       final response = await dio.get(SearchUrls.searchMovie,
-          queryParameters: {'query': query, 'page': 1});
+          queryParameters: {'query': query, 'page': page});
       if (response.statusCode == 200 || response.data != null) {
         final dataAsjson = response.data;
         final data = Search.fromJson(dataAsjson);
+
         final result = data.results;
-        searchControllers.totalresult.value = data.totalResults!;
+        searchControllers.totalpage.value = data.totalPages!;
+        searchControllers.searchPageTitle.value =
+            'Results - ${data.totalResults}';
         return Right(result!);
       } else {
         return const Right(null);

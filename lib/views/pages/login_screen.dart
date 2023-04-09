@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mspot/controllers/authentication/Auth_controller.dart';
 
 import 'package:mspot/core/colors/app_color.dart';
 import 'package:mspot/controllers/login/login_controllers.dart';
@@ -16,6 +17,7 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
   String? sessionId;
   @override
   Widget build(BuildContext context) {
@@ -92,9 +94,8 @@ class LoginScreen extends StatelessWidget {
                                 usernameController.clear();
                                 passwordController.clear();
                                 if (sessionId != null) {
-                                  Get.back(closeOverlays: true);
-                                  Get.to(
-                                      () => BaseScreen(sessionId: sessionId));
+                                  AuthController().login();
+                                  Get.offAllNamed('/');
                                   successSnackbar(
                                       'Login Success!',
                                       'you have successfully logged in...',

@@ -22,6 +22,7 @@ class TopRatedSearchTemplate extends StatelessWidget {
               itemBuilder: ((context, index) {
                 final data = searchControllers.topRatedList[index];
                 return SearchCard(
+                  id: data.id!,
                   image: data.backdropPath!,
                   releasDate: data.releaseDate!,
                   title: data.title!,

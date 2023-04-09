@@ -46,8 +46,10 @@ dependencies:
   json_serializable: ^6.6.1
   lottie: ^2.2.0
   percent_indicator: ^4.2.3
+  shared_preferences: ^2.1.0
   smooth_page_indicator: ^1.0.1
   url_launcher: ^6.1.10
+  youtube_player_flutter: ^8.1.2
 
 dev_dependencies:
   build_runner: ^2.3.3
@@ -81,6 +83,9 @@ flutter:
     - assets/icons/user.svg
     - assets/icons/menu.svg
     - assets/Image_placeholder.jpg
+    - assets/icons/heart.svg
+    - assets/icons/bookmark.svg
+    - assets/background_image/profile.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
