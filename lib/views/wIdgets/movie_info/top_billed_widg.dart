@@ -53,7 +53,7 @@ class CastCardWidget extends StatelessWidget {
               width: 200,
               height: 240,
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                       colors: [ROSE_COLOR, ELEMENT_COLOR, BACKGROUND_COLOR],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight),

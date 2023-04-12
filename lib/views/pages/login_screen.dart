@@ -94,12 +94,15 @@ class LoginScreen extends StatelessWidget {
                                 usernameController.clear();
                                 passwordController.clear();
                                 if (sessionId != null) {
+                                  print(sessionId);
                                   AuthController().login();
                                   Get.offAllNamed('/');
                                   successSnackbar(
                                       'Login Success!',
                                       'you have successfully logged in...',
-                                      Icons.check_circle_outline_rounded);
+                                      Icons.check_circle_outline_rounded,
+                                      Colors.green,
+                                      Colors.white);
                                 } else {
                                   print('Sessionid is null');
                                 }

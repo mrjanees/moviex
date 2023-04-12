@@ -1,19 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_svg/svg.dart';
-import 'package:mspot/controllers/movie_info/trailer_controller.dart';
+import 'package:get/get.dart';
+
 import 'package:mspot/core/Font_style.dart';
 import 'package:mspot/core/colors/app_color.dart';
+import 'package:mspot/models/movie_info_screen/favorite_request/favorite_request.dart';
+import 'package:mspot/models/movie_info_screen/watch_list_request/watch_list_request.dart';
+import 'package:mspot/views/pages/movie_info_screen.dart';
+import 'package:mspot/views/pages/profile_screen.dart';
 import 'package:mspot/views/wIdgets/home_screen/percent_indicator.dart';
 import 'package:mspot/views/wIdgets/movie_info/trailer_video_widg.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../const/api_key.dart';
-import '../../pages/home_screen/home_screen.dart';
+import '../../../controllers/account/controller.dart';
 
 class MainCard extends StatelessWidget {
+  String genres;
+  int movieId;
   String moviekey;
   double vote;
   int duration;
@@ -24,6 +30,8 @@ class MainCard extends StatelessWidget {
   double h10p;
   MainCard(
       {super.key,
+      required this.genres,
+      required this.movieId,
       required this.moviekey,
       required this.vote,
       required this.h10p,
@@ -110,7 +118,7 @@ class MainCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Science Fiction, Adventure, Action',
+                        genres,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: MoviexFontStyle.textUnderHeading2(),
@@ -187,37 +195,47 @@ class MainCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       RawMaterialButton(
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        constraints: const BoxConstraints(),
-                        onPressed: () {},
-                        elevation: 2.0,
-                        fillColor: ELEMENT_COLOR,
-                        padding: const EdgeInsets.all(8),
-                        shape: const CircleBorder(),
-                        child: SvgPicture.asset(
-                          'assets/icons/heart.svg',
-                          height: 26,
-                          width: 26,
-                          colorFilter: const ColorFilter.mode(
-                              WHITE_COLOR, BlendMode.srcIn),
-                        ),
-                      ),
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          constraints: const BoxConstraints(),
+                          onPressed: () async {
+                            final data = FavoriteRequest.create(
+                                favorite: true,
+                                mediaId: movieId,
+                                mediaType: 'movie');
+                            movieInfoController.addFavorite(data);
+                          },
+                          elevation: 2.0,
+                          fillColor: ELEMENT_COLOR,
+                          padding: const EdgeInsets.all(8),
+                          shape: const CircleBorder(),
+                          child: Obx(() => Icon(
+                                movieInfoController.isFavorite(movieId) == true
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: WHITE_COLOR,
+                              ))),
                       RawMaterialButton(
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        constraints: const BoxConstraints(),
-                        onPressed: () {},
-                        elevation: 2.0,
-                        fillColor: ELEMENT_COLOR,
-                        padding: const EdgeInsets.all(8),
-                        shape: const CircleBorder(),
-                        child: SvgPicture.asset(
-                          'assets/icons/bookmark.svg',
-                          height: 26,
-                          width: 26,
-                          colorFilter: const ColorFilter.mode(
-                              WHITE_COLOR, BlendMode.srcIn),
-                        ),
-                      ),
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          constraints: const BoxConstraints(),
+                          onPressed: () {
+                            final data = WatchListRequest.create(
+                                watchlist: true,
+                                mediaId: movieId,
+                                mediaType: 'movie');
+                            movieInfoController.addWatchList(data);
+                          },
+                          elevation: 2.0,
+                          fillColor: ELEMENT_COLOR,
+                          padding: const EdgeInsets.all(8),
+                          shape: const CircleBorder(),
+                          child: Obx(() => Icon(
+                                movieInfoController.isWatchlist(movieId)
+                                    ? Icons.bookmark
+                                    : Icons.bookmark_outline,
+                                color: WHITE_COLOR,
+                              ))),
                     ],
                   ),
                 ),

@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:mspot/controllers/account/controller.dart';
 import 'package:mspot/core/Font_style.dart';
 import 'package:mspot/core/colors/app_color.dart';
 import 'package:mspot/views/wIdgets/profile/favorite_movie.dart';
 import 'package:mspot/views/wIdgets/profile/wacth_list_movie.dart';
+import 'package:get/get.dart';
+
+final accountController = Get.put(AccountController.instance);
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+        (timeStamp) => Get.put(AccountController.instance.getFavoriteMovie()));
     return LayoutBuilder(builder: (context, constraints) {
       double h10p = constraints.maxHeight * 0.1;
       double w10p = constraints.maxWidth * 0.1;

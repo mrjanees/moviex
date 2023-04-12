@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mspot/controllers/movie_info/movie_info_controller.dart';
 import 'package:mspot/core/Font_style.dart';
+import 'package:mspot/models/movie_info_screen/movie_crew/movie_crew.dart';
 import 'package:mspot/models/movie_info_screen/movie_info/movie_info.dart';
 
 import 'package:mspot/views/wIdgets/movie_info/collection_widg.dart';
@@ -10,6 +11,7 @@ import 'package:mspot/views/wIdgets/movie_info/content_widg.dart';
 import 'package:mspot/views/wIdgets/movie_info/main_card_widg.dart';
 import 'package:mspot/views/wIdgets/movie_info/top_billed_widg.dart';
 
+import '../../controllers/account/controller.dart';
 import '../../core/colors/app_color.dart';
 
 final movieInfoController = Get.put(MovieInfoController.instance);
@@ -17,6 +19,8 @@ final movieInfoController = Get.put(MovieInfoController.instance);
 class MovieInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+        (timeStamp) => Get.put(AccountController.instance.getFavoriteMovie()));
     return LayoutBuilder(
       builder: (context, constraints) {
         double maxWidth = constraints.maxWidth;
@@ -55,12 +59,17 @@ class MovieInfoScreen extends StatelessWidget {
             body: SingleChildScrollView(
               child: Obx(() {
                 final movie = movieInfoController.movieInfoData.value;
+                print(movie.id);
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                         child: MainCard(
+                          genres: movie.genres!
+                              .map((genres) => genres.name)
+                              .join(', '),
+                          movieId: movie.id!,
                           moviekey: movie.key!,
                           h10p: h10p,
                           w10p: w10p,
@@ -95,11 +104,13 @@ class MovieInfoScreen extends StatelessWidget {
                                   width: w10p * 0.3,
                                 );
                               },
-                              itemCount: movieInfoController.creators.length,
+                              itemCount:
+                                  movieInfoController.movieCrewList.length,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
-                                final creator =
-                                    movieInfoController.creators[index];
+                                final movieCrew =
+                                    movieInfoController.movieCrewList[index];
+
                                 return Container(
                                   width: w10p * 5,
                                   decoration: BoxDecoration(
@@ -121,15 +132,15 @@ class MovieInfoScreen extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            creator.name!,
-                                            style: TextStyle(
+                                            movieCrew.name!,
+                                            style: const TextStyle(
                                                 color: WHITE_COLOR,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Text(
-                                            creator.job!,
-                                            style: TextStyle(
+                                            movieCrew.job!,
+                                            style: const TextStyle(
                                                 color: WHITE_COLOR,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w400),
@@ -146,8 +157,18 @@ class MovieInfoScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: CollectionWidg(
-                          h10p: h10p, w10p: w10p, maxWidth: maxWidth),
+                      child: Visibility(
+                        visible:
+                            movie.belongsToCollection == null ? false : true,
+                        child: CollectionWidg(
+                          h10p: h10p,
+                          w10p: w10p,
+                          maxWidth: maxWidth,
+                          collection: movie.belongsToCollection,
+                          movieCollectionNames:
+                              movieInfoController.movieCollectionName.value,
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: h10p * .3,
@@ -163,7 +184,7 @@ class MovieInfoScreen extends StatelessWidget {
                       height: h10p * .1,
                     ),
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: TopBilled(),
                     )
                   ],

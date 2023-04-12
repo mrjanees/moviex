@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mspot/views/pages/profile_screen.dart';
 import 'package:mspot/views/wIdgets/common/movie_card_template.dart';
 import 'package:mspot/views/wIdgets/profile/profile_card.dart';
 
@@ -14,19 +15,20 @@ class WatchlistMovie extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           itemBuilder: ((context, index) {
+            final watchList = accountController.watchMovieList[index];
             return ProfileCard(
-                movieId: 502356,
-                heading: 'The Super Mario Bros. Movie',
-                image: '/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg',
-                relDate: '2023-04-05',
-                vote: 7.8);
+                movieId: watchList.id!,
+                heading: watchList.title!,
+                image: watchList.posterPath,
+                relDate: watchList.releaseDate,
+                vote: watchList.voteAverage!);
           }),
           separatorBuilder: ((context, index) {
             return const SizedBox(
               width: 10,
             );
           }),
-          itemCount: 10),
+          itemCount: accountController.watchMovieList.length),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:mspot/controllers/home/trending/trending.dart';
 
 import 'package:mspot/core/colors/app_color.dart';
 import 'package:mspot/views/pages/base_screen.dart';
+import 'package:mspot/views/pages/collection_screen.dart';
 import 'package:mspot/views/pages/login_screen.dart';
 import 'package:mspot/views/pages/movie_info_screen.dart';
 import 'package:mspot/views/pages/profile_screen.dart';
@@ -16,7 +17,6 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: BACKGROUND_COLOR));
-  Intl.defaultLocale = 'en_US';
   Get.put(AuthController());
   runApp(MyApp());
 }
@@ -45,6 +45,8 @@ class MyApp extends StatelessWidget {
               GetPage(name: '/login', page: () => LoginScreen()),
               GetPage(name: '/MovieInfo', page: () => MovieInfoScreen()),
               GetPage(name: '/profile', page: () => const ProfileScreen()),
+              GetPage(
+                  name: '/collection', page: () => const CollectionScreen()),
             ],
           ),
         ));

@@ -1,14 +1,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mspot/const/api_key.dart';
 import 'package:mspot/core/Font_style.dart';
 import 'package:mspot/core/colors/app_color.dart';
+import 'package:mspot/models/movie_info_screen/movie_info/belongs_to_collection.dart';
 
 class CollectionWidg extends StatelessWidget {
+  String movieCollectionNames;
+  BelongsToCollection? collection;
   double maxWidth;
   double h10p;
   double w10p;
+
   CollectionWidg(
       {super.key,
+      required this.movieCollectionNames,
+      this.collection,
       required this.h10p,
       required this.w10p,
       required this.maxWidth});
@@ -37,8 +45,7 @@ class CollectionWidg extends StatelessWidget {
                         ),
                       ),
                     ),
-                imageUrl:
-                    'https://e0.pxfuel.com/wallpapers/527/137/desktop-wallpaper-avatar-2-in-avatar-movie-sequel.jpg',
+                imageUrl: imageBase + collection!.backdropPath!,
                 placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(
                       color: ROSE_COLOR,
@@ -52,18 +59,20 @@ class CollectionWidg extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Part of the Avatar Collection',
+                  'Part of the ${collection!.name}',
                   style: MoviexFontStyle.heading2(),
                 ),
                 SizedBox(
                   height: h10p * .1,
                 ),
-                Container(
+                SizedBox(
                   width: w10p * 7.7,
                   height: h10p * 1,
-                  child: const Text(
-                    'Includes Avatar, Avatar: The Way of Water, Avatar 3, Avatar 4, and Avatar 5',
-                    style: TextStyle(color: WHITE_COLOR, fontSize: 15),
+                  child: Text(
+                    movieCollectionNames,
+                    style: const TextStyle(
+                        color: Color.fromARGB(219, 255, 255, 255),
+                        fontSize: 15),
                   ),
                 ),
                 TextButton(
@@ -76,7 +85,9 @@ class CollectionWidg extends StatelessWidget {
                         backgroundColor: ROSE_COLOR, // <-- Button color
                         foregroundColor: Colors.black54 // <-- Splash color
                         ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed('/collection');
+                    },
                     child: const Text(
                       'VIEW THE COLLECTIONS',
                       style: TextStyle(
