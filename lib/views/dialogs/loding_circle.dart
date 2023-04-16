@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -5,6 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../core/colors/app_color.dart';
 
 void loadingCircle() {
+  log('loading started    ');
   Get.dialog(LayoutBuilder(
     builder: (context, constraints) {
       double maxWidth = constraints.maxWidth;

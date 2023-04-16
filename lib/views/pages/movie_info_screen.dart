@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -55,6 +57,11 @@ class MovieInfoScreen extends StatelessWidget {
             body: SingleChildScrollView(
               child: Obx(() {
                 final movie = movieInfoController.movieInfoData.value;
+
+                if (movie.title == null) {
+                  return const SizedBox();
+                }
+
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

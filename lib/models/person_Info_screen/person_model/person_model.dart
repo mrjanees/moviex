@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'person_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PersonInfoModel {
   bool? adult;
   @JsonKey(name: 'also_known_as')

@@ -50,3 +50,13 @@ class MyApp extends StatelessWidget {
         ));
   }
 }
+
+// final navigakey = GlobalKey<NavigatorState>();
+// navi.cuj
+
+// var mama = MaterialApp(
+//   navigatorKey: navigakey,
+// );
+
+// foor() {
+// }

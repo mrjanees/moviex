@@ -5,7 +5,6 @@ import 'package:mspot/models/movie_info_screen/favorite_request/favorite_request
 import 'package:mspot/models/movie_info_screen/movie_collections/movie_collections.dart';
 import 'package:mspot/models/movie_info_screen/movie_crew/crew.dart';
 import 'package:mspot/models/movie_info_screen/watch_list_request/watch_list_request.dart';
-import 'package:mspot/views/dialogs/loding_circle.dart';
 import '../../models/movie_info_screen/movie_info/movie_info.dart';
 import '../../models/movie_info_screen/top_billed/cast.dart';
 import '../../services/movie_info_api/implementation.dart';
@@ -13,6 +12,7 @@ import '../../utils/dioerror_message.dart';
 import '../../views/dialogs/success_snackbar.dart';
 import '../../views/pages/profile_screen.dart';
 import '../account/controller.dart';
+import 'dart:developer';
 
 class MovieInfoController extends GetxController {
   // Singleton
@@ -39,21 +39,26 @@ class MovieInfoController extends GetxController {
     final response = await MoveInfoImple().movieinfo(id);
     response.fold((l) {
       DioErrorTypeMessage.toShowErrorMessage(l);
+      log(l.toString());
     }, (r) {
       if (r == null) {
+        print('movieInfo data is null');
       } else {
         movieInfoData.value = r;
+        log(movieInfoData.toString());
+        Get.back();
+        log('loding stop  ');
       }
     });
 
     if (movieInfoData.value.belongsToCollection != null) {
       movieCollection(movieInfoData.value.belongsToCollection!.id!);
     }
-    Get.back();
   }
 
   //fetching topBilled cast
   Future<void> topBilled(int id) async {
+    log('top topBilled');
     await movieCrew(id);
     topBilledList.clear();
     final response = await MoveInfoImple().topBilled(id);
@@ -74,6 +79,7 @@ class MovieInfoController extends GetxController {
 
   // Fetching movie crew details
   Future<void> movieCrew(int id) async {
+    log('movieCrew');
     movieCrewList.clear();
     final response = await MoveInfoImple().movieCrew(id);
     response.fold((l) {

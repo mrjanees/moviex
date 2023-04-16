@@ -41,7 +41,6 @@ class MoveInfoImple extends MovieInfoRemote {
           movieInfodata.key = null;
           print('result is empty');
         }
-        print(movieInfodata);
         return Right(movieInfodata);
       } else {
         return const Right(null);
