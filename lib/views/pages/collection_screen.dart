@@ -62,6 +62,7 @@ class CollectionScreen extends StatelessWidget {
                               padding:
                                   const EdgeInsets.only(left: 8.0, right: 8.0),
                               child: CollectionMainCard(
+                                backgroundImg: mainMovie.backdropPath,
                                 movieId: mainMovie.id!,
                                 h10p: h10p,
                                 w10p: w10p,
@@ -71,8 +72,8 @@ class CollectionScreen extends StatelessWidget {
                               )),
                           const SizedBox(height: 5),
                           const Divider(
-                            color: WHITE_COLOR,
-                            thickness: 1.5,
+                            color: Color.fromARGB(255, 58, 38, 139),
+                            thickness: 1,
                             indent: 10,
                             endIndent: 10,
                           ),

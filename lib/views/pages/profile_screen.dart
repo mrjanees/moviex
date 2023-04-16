@@ -13,8 +13,10 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback(
-        (timeStamp) => Get.put(AccountController.instance.getFavoriteMovie()));
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await Get.put(AccountController.instance.getFavoriteMovie());
+      Get.put(AccountController.instance.getMovieWatchList());
+    });
     return LayoutBuilder(builder: (context, constraints) {
       double h10p = constraints.maxHeight * 0.1;
       double w10p = constraints.maxWidth * 0.1;

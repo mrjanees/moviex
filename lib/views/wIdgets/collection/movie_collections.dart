@@ -15,6 +15,7 @@ import '../../../const/api_key.dart';
 import '../../../controllers/movie_info/movie_info_controller.dart';
 import '../../../core/Font_style.dart';
 import '../../../utils/genres_id_converter.dart';
+import '../../dialogs/loding_circle.dart';
 import '../movie_info/main_card_widg.dart';
 
 final searchControllers = Get.put(SearchControllers());
@@ -77,8 +78,10 @@ class CollectionsCard extends StatelessWidget {
 
       return GestureDetector(
         onTap: () async {
+          loadingCircle();
           await Get.put(MovieInfoController.instance.movieInfo(id));
-          Get.toNamed('/MovieInfo');
+          Navigator.of(Get.overlayContext!).pop();
+          Get.off(MovieInfoScreen());
         },
         child: Container(
           height: 150,

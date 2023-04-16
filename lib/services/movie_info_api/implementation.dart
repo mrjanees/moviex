@@ -6,11 +6,12 @@ import 'package:mspot/models/movie_info_screen/movie_crew/crew.dart';
 import 'package:mspot/models/movie_info_screen/movie_crew/movie_crew.dart';
 import 'package:mspot/models/movie_info_screen/movie_info/movie_info.dart';
 import 'package:dartz/dartz.dart';
+import 'package:mspot/models/movie_info_screen/trailer_video/result.dart';
+import 'package:mspot/models/movie_info_screen/trailer_video/trailer_video.dart';
 import 'package:mspot/models/movie_info_screen/watch_list_request/watch_list_request.dart';
 import '../../core/urls/dio.dart';
 import '../../models/favorite_response/favorite_response.dart';
 import '../../models/movie_info_screen/favorite_request/favorite_request.dart';
-import '../../models/movie_info_screen/movie_collections/part.dart';
 import '../../models/movie_info_screen/top_billed/cast.dart';
 import '../../models/movie_info_screen/top_billed/top_billed.dart';
 import 'movie_info_remote.dart';
@@ -24,11 +25,24 @@ class MoveInfoImple extends MovieInfoRemote {
       );
       if (response.statusCode == 200 || response.data != null) {
         final dataAsjson = response.data;
-        MovieInfo data = MovieInfo.fromJson(dataAsjson);
-        final videoId = await dio.get(
+        MovieInfo movieInfodata = MovieInfo.fromJson(dataAsjson);
+        final videoResponse = await dio.get(
             'https://api.themoviedb.org/3/movie/$id/videos?api_key=$apiKey');
-        data.key = videoId.data['results'][0]['key'];
-        return Right(data);
+        final results = TrailerVideo.fromJson(videoResponse.data);
+        if (results.results.isNotEmpty) {
+          final data = results.results;
+          for (var result in data) {
+            if (result.type == 'Trailer') {
+              movieInfodata.key = result.key;
+            }
+          }
+          print('result is not empty');
+        } else {
+          movieInfodata.key = null;
+          print('result is empty');
+        }
+        print(movieInfodata);
+        return Right(movieInfodata);
       } else {
         return const Right(null);
       }

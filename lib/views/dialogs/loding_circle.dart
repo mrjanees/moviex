@@ -48,3 +48,7 @@ void loadingCircle() {
     },
   ), barrierDismissible: false);
 }
+
+hideLoading() {
+  if (Get.isDialogOpen!) Get.back(closeOverlays: true);
+}

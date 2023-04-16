@@ -1,13 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:mspot/controllers/movie_info/movie_info_controller.dart';
-import 'package:mspot/views/pages/movie_info_screen.dart';
 import '../../../const/api_key.dart';
 import '../../../core/colors/app_color.dart';
 import '../../../utils/dateFormater.dart';
+import '../../dialogs/loding_circle.dart';
 import '../home_screen/percent_indicator.dart';
 
 class MovieCardTemplate extends StatelessWidget {
@@ -28,6 +26,7 @@ class MovieCardTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () async {
+          loadingCircle();
           await Get.put(MovieInfoController.instance.movieInfo(movieId));
           Get.toNamed('/MovieInfo');
         },

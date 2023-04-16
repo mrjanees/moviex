@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:mspot/controllers/home/trending/trending.dart';
-
 import 'package:mspot/core/colors/app_color.dart';
 import 'package:mspot/views/pages/base_screen.dart';
 import 'package:mspot/views/pages/collection_screen.dart';
 import 'package:mspot/views/pages/login_screen.dart';
 import 'package:mspot/views/pages/movie_info_screen.dart';
+import 'package:mspot/views/pages/person_info_screen.dart';
 import 'package:mspot/views/pages/profile_screen.dart';
+import 'controllers/authentication/auth_controller.dart';
 
-import 'controllers/authentication/Auth_controller.dart';
-
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: BACKGROUND_COLOR));
-  Get.put(AuthController());
+  await Get.put(AuthController.instance.isLloggedIn());
   runApp(MyApp());
 }
 
-final authController = Get.put(AuthController());
+final authController = Get.put(AuthController.instance);
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
@@ -38,8 +35,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               scaffoldBackgroundColor: BACKGROUND_COLOR,
             ),
-            initialRoute:
-                authController.isloggedIn.value == false ? '/login' : '/',
+            initialRoute: authController.isLoggedIn == false ? '/login' : '/',
             getPages: [
               GetPage(name: '/', page: () => BaseScreen()),
               GetPage(name: '/login', page: () => LoginScreen()),
@@ -47,6 +43,8 @@ class MyApp extends StatelessWidget {
               GetPage(name: '/profile', page: () => const ProfileScreen()),
               GetPage(
                   name: '/collection', page: () => const CollectionScreen()),
+              GetPage(
+                  name: '/personInfo', page: () => const PersonInfoScreen()),
             ],
           ),
         ));

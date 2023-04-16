@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mspot/controllers/person_info/person_info_controller.dart';
+import 'package:mspot/views/dialogs/loding_circle.dart';
 import 'package:mspot/views/pages/movie_info_screen.dart';
 import '../../../const/api_key.dart';
 import '../../../controllers/movie_info/movie_info_controller.dart';
@@ -21,6 +23,7 @@ class TopBilled extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         final cast = movieInfoController.topBilledList[index];
         return CastCardWidget(
+          id: cast.id!,
           avatar: cast.profilePath,
           name: cast.name!,
           character: cast.character!,
@@ -31,12 +34,14 @@ class TopBilled extends StatelessWidget {
 }
 
 class CastCardWidget extends StatelessWidget {
+  int id;
   String? avatar;
   String name;
   String character;
 
   CastCardWidget(
       {super.key,
+      required this.id,
       required this.avatar,
       required this.name,
       required this.character});
@@ -44,7 +49,11 @@ class CastCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print('clicked'),
+      onTap: () async {
+        
+        await Get.put(PersonInfoController.instance.personInfo(id));
+        Get.toNamed('/personInfo');
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

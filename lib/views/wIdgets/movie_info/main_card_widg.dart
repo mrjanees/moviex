@@ -20,7 +20,7 @@ import '../../../controllers/account/controller.dart';
 class MainCard extends StatelessWidget {
   String genres;
   int movieId;
-  String moviekey;
+  String? moviekey;
   double vote;
   int duration;
   String releasedDate;
@@ -138,7 +138,9 @@ class MainCard extends StatelessWidget {
                         style: MoviexFontStyle.textUnderHeading2(),
                       ),
                       const SizedBox(height: 8),
-                      Container(
+                      Visibility(
+                        visible: moviekey == null ? false : true,
+                        child: Container(
                           height: 40,
                           width: 110,
                           decoration: BoxDecoration(
@@ -155,7 +157,7 @@ class MainCard extends StatelessWidget {
                                   YoutubePlayerController(
                                       initialVideoId:
                                           YoutubePlayer.convertUrlToId(
-                                              moviekey)!);
+                                              moviekey!)!);
                               videoTrailer(controller);
                             },
                             child: Row(
@@ -172,7 +174,9 @@ class MainCard extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          ))
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 )

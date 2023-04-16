@@ -6,7 +6,6 @@ import 'package:mspot/models/movie_info_screen/movie_collections/movie_collectio
 import 'package:mspot/models/movie_info_screen/movie_crew/crew.dart';
 import 'package:mspot/models/movie_info_screen/watch_list_request/watch_list_request.dart';
 import 'package:mspot/views/dialogs/loding_circle.dart';
-import 'package:mspot/views/wIdgets/profile/wacth_list_movie.dart';
 import '../../models/movie_info_screen/movie_info/movie_info.dart';
 import '../../models/movie_info_screen/top_billed/cast.dart';
 import '../../services/movie_info_api/implementation.dart';
@@ -16,12 +15,14 @@ import '../../views/pages/profile_screen.dart';
 import '../account/controller.dart';
 
 class MovieInfoController extends GetxController {
+  // Singleton
   MovieInfoController.internal();
   static MovieInfoController instance = MovieInfoController.internal();
   MovieInfoController factory() {
     return instance;
   }
 
+  // variables
   var movieInfoData = MovieInfo().obs;
   final _favIcon = false.obs;
   bool get favIcon => _favIcon.value;
@@ -31,25 +32,24 @@ class MovieInfoController extends GetxController {
   List<Crew> movieCrewList = <Crew>[].obs;
   var movieCollectionName = ''.obs;
   var movieCollections = MovieCollections().obs;
+
   // fetching movie information
   Future<void> movieInfo(int id) async {
-    loadingCircle();
     await topBilled(id);
     final response = await MoveInfoImple().movieinfo(id);
     response.fold((l) {
       DioErrorTypeMessage.toShowErrorMessage(l);
     }, (r) {
       if (r == null) {
-        print('Movie Info is null');
-        Navigator.of(Get.overlayContext!).pop();
       } else {
         movieInfoData.value = r;
-        Navigator.of(Get.overlayContext!).pop();
       }
     });
+
     if (movieInfoData.value.belongsToCollection != null) {
       movieCollection(movieInfoData.value.belongsToCollection!.id!);
     }
+    Get.back();
   }
 
   //fetching topBilled cast

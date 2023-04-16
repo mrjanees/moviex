@@ -1,18 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:mspot/core/Font_style.dart';
 import 'package:mspot/core/colors/app_color.dart';
-import 'package:mspot/models/movie_info_screen/favorite_request/favorite_request.dart';
-import 'package:mspot/models/movie_info_screen/watch_list_request/watch_list_request.dart';
-import 'package:mspot/views/pages/movie_info_screen.dart';
-import 'package:mspot/views/wIdgets/home_screen/percent_indicator.dart';
-import 'package:mspot/views/wIdgets/movie_info/trailer_video_widg.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
 import '../../../const/api_key.dart';
 
 class CollectionMainCard extends StatelessWidget {
+  String? backgroundImg;
   int movieId;
   String title;
   String overview;
@@ -21,6 +14,7 @@ class CollectionMainCard extends StatelessWidget {
   double h10p;
   CollectionMainCard({
     super.key,
+    required this.backgroundImg,
     required this.overview,
     required this.movieId,
     required this.h10p,
@@ -44,9 +38,9 @@ class CollectionMainCard extends StatelessWidget {
                 image: DecorationImage(
                     opacity: 0.2,
                     fit: BoxFit.fitWidth,
-                    image: NetworkImage(image == null
-                        ? 'https://mir-s3-cdn-cf.behance.net/projects/808/446036167599083.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg'
-                        : imageBase + image!)),
+                    image: NetworkImage(backgroundImg == null
+                        ? imageBase + image!
+                        : imageBase + backgroundImg!)),
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.black),
             child: Row(
@@ -56,7 +50,7 @@ class CollectionMainCard extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                Container(
+                SizedBox(
                   height: h10p * 3.2,
                   width: w10p * 4,
                   child: ClipRRect(
@@ -118,17 +112,6 @@ class CollectionMainCard extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  SizedBox Dot() {
-    return SizedBox(
-      child: Container(
-        width: 5,
-        height: 5,
-        decoration: BoxDecoration(
-            color: WHITE_COLOR, borderRadius: BorderRadius.circular(10)),
       ),
     );
   }

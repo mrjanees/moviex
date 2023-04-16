@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mspot/controllers/authentication/Auth_controller.dart';
+import 'package:mspot/controllers/authentication/auth_controller.dart';
 
 import 'package:mspot/core/colors/app_color.dart';
 import 'package:mspot/controllers/login/login_controllers.dart';
@@ -94,8 +94,7 @@ class LoginScreen extends StatelessWidget {
                                 usernameController.clear();
                                 passwordController.clear();
                                 if (sessionId != null) {
-                                  print(sessionId);
-                                  AuthController().login();
+                                  Get.put(AuthController.instance.login());
                                   Get.offAllNamed('/');
                                   successSnackbar(
                                       'Login Success!',

@@ -14,7 +14,7 @@ class MoviexFontStyle {
   static TextStyle heading2() {
     return const TextStyle(
         fontFamily: 'inter',
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: FontWeight.w700,
         color: WHITE_COLOR);
   }

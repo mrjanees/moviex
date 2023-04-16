@@ -3,14 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mspot/controllers/movie_info/movie_info_controller.dart';
 import 'package:mspot/core/Font_style.dart';
-import 'package:mspot/models/movie_info_screen/movie_crew/movie_crew.dart';
-import 'package:mspot/models/movie_info_screen/movie_info/movie_info.dart';
-
 import 'package:mspot/views/wIdgets/movie_info/collection_widg.dart';
 import 'package:mspot/views/wIdgets/movie_info/content_widg.dart';
 import 'package:mspot/views/wIdgets/movie_info/main_card_widg.dart';
 import 'package:mspot/views/wIdgets/movie_info/top_billed_widg.dart';
-
 import '../../controllers/account/controller.dart';
 import '../../core/colors/app_color.dart';
 
@@ -59,7 +55,6 @@ class MovieInfoScreen extends StatelessWidget {
             body: SingleChildScrollView(
               child: Obx(() {
                 final movie = movieInfoController.movieInfoData.value;
-                print(movie.id);
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -70,7 +65,7 @@ class MovieInfoScreen extends StatelessWidget {
                               .map((genres) => genres.name)
                               .join(', '),
                           movieId: movie.id!,
-                          moviekey: movie.key!,
+                          moviekey: movie.key,
                           h10p: h10p,
                           w10p: w10p,
                           duration: movie.runtime!,

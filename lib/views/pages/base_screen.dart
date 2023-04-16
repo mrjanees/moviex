@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'package:mspot/controllers/authentication/Auth_controller.dart';
+import 'package:mspot/controllers/authentication/auth_controller.dart';
 import 'package:mspot/core/Font_style.dart';
 import 'package:mspot/views/pages/login_screen.dart';
 import 'package:mspot/views/pages/screens.dart';
@@ -12,7 +12,6 @@ import '../../core/colors/app_color.dart';
 import '../wIdgets/common/bottom_navigation.dart';
 
 class BaseScreen extends StatelessWidget {
-  final authController = Get.put(AuthController());
   String? sessionId;
   BaseScreen({super.key, this.sessionId});
 
@@ -20,7 +19,6 @@ class BaseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () async {
-          //  Close the app when the user presses the back button
           return await showDialog(
             context: context,
             builder: (context) => AlertDialog(
