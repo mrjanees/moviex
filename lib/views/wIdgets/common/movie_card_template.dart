@@ -1,7 +1,11 @@
+import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mspot/controllers/movie_info/movie_info_controller.dart';
+import 'package:mspot/controllers/tv_info/tv_info_controller.dart';
+import 'package:mspot/services/tv_info_screen_api/implementation.dart';
+import 'package:mspot/views/pages/movie_info_screen.dart';
 import '../../../const/api_key.dart';
 import '../../../core/colors/app_color.dart';
 import '../../../utils/dateFormater.dart';
@@ -9,14 +13,16 @@ import '../../dialogs/loding_circle.dart';
 import '../home_screen/percent_indicator.dart';
 
 class MovieCardTemplate extends StatelessWidget {
-  int movieId;
+  String? mediaType;
+  int id;
   String heading;
   String? image;
   String? relDate;
   double vote;
   MovieCardTemplate(
       {super.key,
-      required this.movieId,
+      this.mediaType,
+      required this.id,
       required this.heading,
       required this.image,
       required this.relDate,
@@ -25,10 +31,15 @@ class MovieCardTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () async {
-          loadingCircle();
-          await Get.put(MovieInfoController.instance.movieInfo(movieId));
-          Get.toNamed('/MovieInfo');
+        onTap: () {
+          if (mediaType == 'movie') {
+            print(id);
+            loadingCircle();
+            Get.put(MovieInfoController.instance.movieInfo(id));
+          } else if (mediaType == 'tv') {
+            loadingCircle();
+            Get.put(TvInfoController.instance.tvInfo(id));
+          }
         },
         child: SizedBox(
           height: 250,

@@ -26,9 +26,11 @@ class PersonInfoController extends GetxController {
         print('Person Info is null');
       } else {
         personInfoData.value = r;
+        Get.back();
       }
     });
-    Get.back();
+    
+    Get.toNamed('/personInfo');
   }
 
   Future<void> personMovieInfo(int id) async {

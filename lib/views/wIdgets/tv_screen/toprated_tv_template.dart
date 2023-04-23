@@ -25,7 +25,7 @@ class TopRatedTvTemplate extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             final data = tvController.topRatedTvList[index];
             return MovieCardTemplate(
-              movieId: data.id!,
+              id: data.id!,
               heading: data.name!,
               image: data.posterPath,
               relDate: data.firstAirDate,

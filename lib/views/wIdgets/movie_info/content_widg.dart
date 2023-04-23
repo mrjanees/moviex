@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:mspot/core/Font_style.dart';
 import 'package:mspot/core/colors/app_color.dart';
+import 'package:mspot/utils/get_language_name_by_Id.dart';
+
+enum Mediatype { movie, tv }
 
 class ContentTemp extends StatelessWidget {
+  Mediatype mediatype;
   String? revenue;
   String? orginalLanguage;
   String? status;
@@ -19,6 +21,7 @@ class ContentTemp extends StatelessWidget {
     this.overview,
     this.revenue,
     this.status,
+    required this.mediatype,
     required this.h10p,
     required this.w10p,
   });
@@ -47,39 +50,76 @@ class ContentTemp extends StatelessWidget {
             height: 10,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                 height: h10p * 0.6,
-                width: w10p * 4,
+                width: status!.length > 9 ? w10p * 5 : w10p * 4,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.lightGreenAccent[400]!)),
+                    border: Border.all(
+                        color: mediatype == Mediatype.movie
+                            ? status == 'Released'
+                                ? Colors.lightGreenAccent[400]!
+                                : Colors.red
+                            : status == 'Ended'
+                                ? Colors.red
+                                : Colors.lightGreenAccent[400]!)),
                 child: Center(
-                  child: Text(
-                    status == null ? 'Status : N/A' : 'Status : $status',
-                    style: const TextStyle(
-                        fontSize: 14,
-                        color: WHITE_COLOR,
-                        fontWeight: FontWeight.w500),
+                  child: RichText(
+                    text: TextSpan(
+                        text: 'Status : ',
+                        style: const TextStyle(
+                            fontSize: 14,
+                            color: WHITE_COLOR,
+                            fontWeight: FontWeight.w300),
+                        children: [
+                          TextSpan(
+                              text: status ?? '',
+                              style: const TextStyle(
+                                  fontSize: 14,
+                                  color: WHITE_COLOR,
+                                  fontWeight: FontWeight.bold))
+                        ]),
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),
-              SizedBox(
-                width: w10p * 0.2,
-              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
               Container(
                 height: h10p * 0.6,
-                width: w10p * 5,
+                width: budget!.length >= 6 ? w10p * 5.2 : w10p * 3.5,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(width: 2, color: ELEMENT_COLOR)),
                 child: Center(
-                  child: Text(
-                    budget == null ? 'Budget : N/A' : 'Budget : $budget',
-                    style: const TextStyle(
-                        fontSize: 14,
-                        color: WHITE_COLOR,
-                        fontWeight: FontWeight.w500),
+                  child: RichText(
+                    text: TextSpan(
+                        text: mediatype == Mediatype.movie
+                            ? 'Budget : '
+                            : 'Network : ',
+                        style: const TextStyle(
+                            fontSize: 14,
+                            color: WHITE_COLOR,
+                            fontWeight: FontWeight.w300),
+                        children: [
+                          TextSpan(
+                              text: budget ?? '',
+                              style: const TextStyle(
+                                  fontSize: 14,
+                                  color: WHITE_COLOR,
+                                  fontWeight: FontWeight.bold))
+                        ]),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               )
@@ -87,43 +127,71 @@ class ContentTemp extends StatelessWidget {
           ),
           SizedBox(height: h10p * 0.2),
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                 height: h10p * 0.6,
-                width: w10p * 5,
+                width: revenue!.length >= 9 ? w10p * 5 : w10p * 3.5,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(width: 2, color: ELEMENT_COLOR)),
                 child: Center(
-                  child: Text(
-                    revenue == null ? 'Revenue : N/A' : 'Revenue : $revenue',
-                    style: const TextStyle(
-                        fontSize: 14,
-                        color: WHITE_COLOR,
-                        fontWeight: FontWeight.w500),
+                  child: RichText(
+                    text: TextSpan(
+                        text: mediatype == Mediatype.movie
+                            ? 'Revenue : '
+                            : 'Type : ',
+                        style: const TextStyle(
+                            fontSize: 14,
+                            color: WHITE_COLOR,
+                            fontWeight: FontWeight.w300),
+                        children: [
+                          TextSpan(
+                              text: revenue ?? '',
+                              style: const TextStyle(
+                                  fontSize: 14,
+                                  color: WHITE_COLOR,
+                                  fontWeight: FontWeight.bold))
+                        ]),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),
             ],
           ),
           SizedBox(height: h10p * 0.2),
-          Container(
-            height: h10p * 0.6,
-            width: w10p * 5,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(width: 2, color: ELEMENT_COLOR)),
-            child: Center(
-              child: Text(
-                orginalLanguage == null
-                    ? 'Orginal Language : N/A'
-                    : 'Orginal Language : $orginalLanguage',
-                style: const TextStyle(
-                    fontSize: 14,
-                    color: WHITE_COLOR,
-                    fontWeight: FontWeight.w500),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                height: h10p * 0.6,
+                width: orginalLanguage!.length > 7 ? w10p * 8.5 : w10p * 6,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(width: 2, color: ELEMENT_COLOR)),
+                child: Center(
+                  child: RichText(
+                    text: TextSpan(
+                        text: 'Orginal Langauge : ',
+                        style: const TextStyle(
+                            fontSize: 14,
+                            color: WHITE_COLOR,
+                            fontWeight: FontWeight.w300),
+                        children: [
+                          TextSpan(
+                              text: getLanguageName(orginalLanguage!),
+                              style: const TextStyle(
+                                  fontSize: 14,
+                                  color: WHITE_COLOR,
+                                  fontWeight: FontWeight.bold))
+                        ]),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),

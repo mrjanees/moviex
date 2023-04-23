@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:mspot/views/wIdgets/collection/collection_main_card.dart';
-import 'package:mspot/views/wIdgets/collection/movie_collections.dart';
+import 'package:mspot/views/wIdgets/collections/collection_main_card.dart';
+import 'package:mspot/views/wIdgets/collections/movie_collections.dart';
 
 import '../../core/Font_style.dart';
 import '../../core/colors/app_color.dart';

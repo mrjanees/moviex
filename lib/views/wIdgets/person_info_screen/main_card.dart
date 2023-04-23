@@ -88,49 +88,77 @@ class PersonInfoMainCard extends StatelessWidget {
                     const SizedBox(height: 8),
                     RichText(
                       text: TextSpan(
-                          text: 'Also Known',
+                          text: 'Also Known - ',
                           style: const TextStyle(
                               fontSize: 14,
                               color: WHITE_COLOR,
-                              fontWeight: FontWeight.w500),
-                          children: [TextSpan(text: alsoKnownAs)]),
+                              fontWeight: FontWeight.w300),
+                          children: [
+                            TextSpan(
+                                text: alsoKnownAs,
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    color: WHITE_COLOR,
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 8),
+                    RichText(
+                      text: TextSpan(
+                          text: 'Know For - ',
+                          style: const TextStyle(
+                              fontSize: 14,
+                              color: WHITE_COLOR,
+                              fontWeight: FontWeight.w300),
+                          children: [
+                            TextSpan(
+                                text: knownFor,
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    color: WHITE_COLOR,
+                                    fontWeight: FontWeight.bold))
+                          ]),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 8),
                     RichText(
                       text: TextSpan(
-                          text: 'Know For',
+                          text: 'Birth day - ',
                           style: const TextStyle(
                               fontSize: 14,
                               color: WHITE_COLOR,
-                              fontWeight: FontWeight.w500),
-                          children: [TextSpan(text: knownFor)]),
+                              fontWeight: FontWeight.w300),
+                          children: [
+                            TextSpan(
+                                text: birthDate,
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    color: WHITE_COLOR,
+                                    fontWeight: FontWeight.bold))
+                          ]),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 8),
                     RichText(
                       text: TextSpan(
-                          text: 'Birth day',
+                          text: 'Birth place - ',
                           style: const TextStyle(
                               fontSize: 14,
                               color: WHITE_COLOR,
-                              fontWeight: FontWeight.w500),
-                          children: [TextSpan(text: birthDate)]),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 8),
-                    RichText(
-                      text: TextSpan(
-                          text: 'Birth place',
-                          style: const TextStyle(
-                              fontSize: 14,
-                              color: WHITE_COLOR,
-                              fontWeight: FontWeight.w500),
-                          children: [TextSpan(text: birthPlace)]),
-                      maxLines: 2,
+                              fontWeight: FontWeight.w300),
+                          children: [
+                            TextSpan(
+                                text: birthPlace,
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    color: WHITE_COLOR,
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                      maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],

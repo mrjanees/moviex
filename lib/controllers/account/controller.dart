@@ -11,6 +11,13 @@ class AccountController extends GetxController {
     return instance;
   }
 
+  @override
+  void onInit() {
+    super.onInit();
+    getFavoriteMovie();
+    getMovieWatchList();
+  }
+
   var favoriteMovieList = <Result>[].obs;
   var watchMovieList = <Result>[].obs;
 

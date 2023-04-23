@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'result.g.dart';
@@ -20,8 +22,11 @@ class MovieResult {
   String? releaseDate;
   @JsonKey(name: 'vote_average')
   double? voteAverage;
+  @JsonKey(name: 'media_type')
+  String? mediaType;
 
   MovieResult({
+    this.mediaType,
     this.backdropPath,
     this.id,
     this.title,

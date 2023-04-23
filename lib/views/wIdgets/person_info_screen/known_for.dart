@@ -8,7 +8,7 @@ class KnownFor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 280,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         separatorBuilder: (context, index) => const SizedBox(
@@ -18,7 +18,7 @@ class KnownFor extends StatelessWidget {
           final credits = personInfoController.personMovieCredits[index];
           return KnownForCard(
             id: credits.id!,
-            image: credits.backdropPath,
+            image: credits.posterPath,
             title: credits.title!,
           );
         },

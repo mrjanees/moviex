@@ -26,7 +26,8 @@ class Movie extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             final data = trendingController.movieList[index];
             return MovieCardTemplate(
-              movieId: data.id!,
+              mediaType: data.mediaType,
+              id: data.id!,
               heading: data.title!,
               image: data.posterPath!,
               relDate: data.releaseDate!,

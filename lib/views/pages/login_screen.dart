@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mspot/controllers/authentication/auth_controller.dart';
-
 import 'package:mspot/core/colors/app_color.dart';
 import 'package:mspot/controllers/login/login_controllers.dart';
 import 'package:mspot/core/urls/login/login_urls.dart';
-import 'package:mspot/views/pages/base_screen.dart';
 import 'package:get/get.dart';
 import 'package:mspot/views/wIdgets/login_screen/custom_button.dart';
 import 'package:mspot/views/wIdgets/login_screen/textformfield.dart';

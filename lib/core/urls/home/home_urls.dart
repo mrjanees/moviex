@@ -10,3 +10,8 @@ class TrendingUrls {
   static String person =
       'https://api.themoviedb.org/3/trending/person/day?api_key=$apiKey';
 }
+
+class UpcomingUrl {
+  static String upcoming =
+      'https://api.themoviedb.org/3/movie/upcoming?api_key=$apiKey&language=en-US&page=1';
+}

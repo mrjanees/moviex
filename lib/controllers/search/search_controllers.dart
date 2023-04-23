@@ -39,7 +39,6 @@ class SearchControllers extends GetxController {
   }
 
   Future<void> searchMovie(String query, int page) async {
-    print(page);
     loadingCircle();
     searchResultList.clear();
     topRatedList.clear();

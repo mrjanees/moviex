@@ -7,7 +7,7 @@ import 'package:mspot/services/search_screen_api/top_rated/top_rated_remote.dart
 import 'package:mspot/views/wIdgets/actors_screen/top_rated_actors.dart';
 
 import '../../../core/urls/dio.dart';
-import '../../../core/urls/home/trending_url.dart';
+import '../../../core/urls/home/home_urls.dart';
 
 class TopRatedImplemantation extends TopRatedRemote {
   @override

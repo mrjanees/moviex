@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mspot/views/pages/profile_screen.dart';
 import 'package:mspot/views/wIdgets/common/movie_card_template.dart';
 import 'package:mspot/views/wIdgets/profile/profile_card.dart';
@@ -8,10 +9,9 @@ class WatchlistMovie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {});
     return SizedBox(
       height: 210,
-      child: ListView.separated(
+      child: Obx(() => ListView.separated(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           itemBuilder: ((context, index) {
@@ -28,7 +28,7 @@ class WatchlistMovie extends StatelessWidget {
               width: 10,
             );
           }),
-          itemCount: accountController.watchMovieList.length),
+          itemCount: accountController.watchMovieList.length)),
     );
   }
 }

@@ -11,6 +11,7 @@ import 'package:mspot/models/movie_info_screen/watch_list_request/watch_list_req
 import 'package:mspot/views/pages/movie_info_screen.dart';
 import 'package:mspot/views/pages/profile_screen.dart';
 import 'package:mspot/views/wIdgets/home_screen/percent_indicator.dart';
+import 'package:mspot/views/wIdgets/movie_info/content_widg.dart';
 import 'package:mspot/views/wIdgets/movie_info/trailer_video_widg.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -18,11 +19,16 @@ import '../../../const/api_key.dart';
 import '../../../controllers/account/controller.dart';
 
 class MainCard extends StatelessWidget {
+  double maxHeight;
+  double maxwidth;
+  Mediatype mediatype;
+  String? tagline;
   String genres;
   int movieId;
   String? moviekey;
   double vote;
-  int duration;
+  int? duration;
+  String? lastAirDate;
   String releasedDate;
   String title;
   String? image;
@@ -30,6 +36,11 @@ class MainCard extends StatelessWidget {
   double h10p;
   MainCard(
       {super.key,
+      this.lastAirDate,
+      this.tagline,
+      required this.maxHeight,
+      required this.maxwidth,
+      required this.mediatype,
       required this.genres,
       required this.movieId,
       required this.moviekey,
@@ -43,8 +54,8 @@ class MainCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 345,
-      height: 295,
+      width: maxwidth - 16,
+      height: maxHeight / 2.2,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,45 +114,62 @@ class MainCard extends StatelessWidget {
                 ),
                 SizedBox(
                   width: 180,
-                  height: 200,
+                  height: 220,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(
-                        height: 5,
+                        height: 20,
                       ),
                       Text(
                         title,
                         maxLines: 2,
                         style: MoviexFontStyle.heading2(),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 5),
                       Text(
                         genres,
-                        maxLines: 2,
+                        maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         style: MoviexFontStyle.textUnderHeading2(),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 5),
                       Text(
                         releasedDate,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: MoviexFontStyle.textUnderHeading2(),
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        durationToString(duration),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: MoviexFontStyle.textUnderHeading2(),
+                      Visibility(
+                          visible: mediatype == Mediatype.movie ? true : false,
+                          child: const SizedBox(height: 5)),
+                      Visibility(
+                        visible: mediatype == Mediatype.movie ? true : false,
+                        child: Text(
+                          duration == null ? '' : durationToString(duration!),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: MoviexFontStyle.textUnderHeading2(),
+                        ),
                       ),
-                      const SizedBox(height: 8),
+                      Visibility(
+                          visible: mediatype == Mediatype.movie ? false : true,
+                          child: const SizedBox(height: 5)),
+                      Visibility(
+                        visible: mediatype == Mediatype.movie ? false : true,
+                        child: Text(
+                          tagline ?? '',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: MoviexFontStyle.textUnderHeading2(),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
                       Visibility(
                         visible: moviekey == null ? false : true,
                         child: Container(
-                          height: 40,
+                          height: 35,
                           width: 110,
                           decoration: BoxDecoration(
                               color: ELEMENT_COLOR,
@@ -182,9 +210,6 @@ class MainCard extends StatelessWidget {
                 )
               ],
             ),
-          ),
-          SizedBox(
-            height: h10p * 0.1,
           ),
           SizedBox(
             height: h10p * 1,

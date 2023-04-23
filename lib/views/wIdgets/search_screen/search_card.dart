@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mspot/core/colors/app_color.dart';
 import 'package:mspot/utils/dateFormater.dart';
+import 'package:mspot/views/dialogs/loding_circle.dart';
 import 'package:mspot/views/wIdgets/home_screen/percent_indicator.dart';
 import '../../../const/api_key.dart';
 import '../../../controllers/movie_info/movie_info_controller.dart';
@@ -30,8 +31,8 @@ class SearchCard extends StatelessWidget {
 
       return GestureDetector(
         onTap: () async {
+          loadingCircle();
           await Get.put(MovieInfoController.instance.movieInfo(id));
-          Get.toNamed('/MovieInfo');
         },
         child: Container(
           width: maxWidth - 60,

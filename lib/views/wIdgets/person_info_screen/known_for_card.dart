@@ -21,21 +21,20 @@ class KnownForCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {
+      onTap: () {
+        Get.close(2);
         loadingCircle();
-        await Get.put(MovieInfoController.instance.movieInfo(id));
-        Navigator.of(Get.overlayContext!).pop();
-        Get.off(MovieInfoScreen());
+        Get.put(MovieInfoController.instance.movieInfo(id));
       },
       child: SizedBox(
-        height: 150,
-        width: 200,
+        height: 180,
+        width: 150,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: 200,
-              height: 150,
+              width: 150,
+              height: 200,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: CachedNetworkImage(
@@ -68,6 +67,7 @@ class KnownForCard extends StatelessWidget {
             ),
             Text(
               title,
+              maxLines: 3,
               style: const TextStyle(
                   color: WHITE_COLOR,
                   fontSize: 16,

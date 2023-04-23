@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,7 +13,7 @@ import 'package:mspot/views/wIdgets/home_screen/slider_image.dart';
 import '../../wIdgets/home_screen/page_Indicator.dart';
 
 final controller = CarouselController();
-final HomeControllers homecontrollers = Get.put(HomeControllers());
+final homecontrollers = Get.put(HomeControllers());
 
 class HomeScreen extends StatelessWidget {
   String? sessionId;
@@ -19,6 +21,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return LayoutBuilder(builder: (context, constraints) {
       final maxHeight = constraints.maxHeight;
       final maxWidth = constraints.maxWidth;
@@ -56,7 +59,6 @@ class HomeScreen extends StatelessWidget {
                     IconButton(
                         onPressed: () {
                           Get.toNamed('/profile');
-                          authController.logOut();
                         },
                         icon: SvgPicture.asset(
                           'assets/icons/user.svg',
@@ -85,6 +87,7 @@ class HomeScreen extends StatelessWidget {
                     height: 10,
                   ),
                   SliderImage(
+                    maxWidth: maxWidth,
                     h10p: h10p,
                     h1p: h1p,
                     w10p: w10p,
@@ -92,7 +95,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Padding(
-                    padding: EdgeInsets.only(left: w10p * 3.6),
+                    padding: EdgeInsets.only(left: maxWidth / 4),
                     child: buildIndicator(),
                   ),
                 ],

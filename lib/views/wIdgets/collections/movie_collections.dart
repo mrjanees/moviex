@@ -79,9 +79,7 @@ class CollectionsCard extends StatelessWidget {
       return GestureDetector(
         onTap: () async {
           loadingCircle();
-          await Get.put(MovieInfoController.instance.movieInfo(id));
-          Navigator.of(Get.overlayContext!).pop();
-          Get.off(MovieInfoScreen());
+          Get.put(MovieInfoController.instance.movieInfo(id));
         },
         child: Container(
           height: 150,

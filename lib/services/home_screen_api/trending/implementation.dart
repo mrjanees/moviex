@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:mspot/core/urls/home/trending_url.dart';
+import 'package:mspot/core/urls/home/home_urls.dart';
 import 'package:mspot/models/home_screen/trending/all/result.dart';
 import 'package:mspot/models/home_screen/trending/movie/result.dart';
 import 'package:mspot/models/home_screen/trending/tv/result.dart';

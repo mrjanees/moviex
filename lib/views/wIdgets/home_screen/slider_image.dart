@@ -1,20 +1,26 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-
+import 'package:get/get.dart';
+import 'package:mspot/core/internet_images.dart';
+import '../../../const/api_key.dart';
+import '../../../controllers/home/home_controllers.dart';
+import '../../../controllers/movie_info/movie_info_controller.dart';
 import '../../../core/colors/app_color.dart';
-import '../../../core/internet_images.dart';
+import '../../dialogs/loding_circle.dart';
 import '../../pages/home_screen/home_screen.dart';
 
 class SliderImage extends StatelessWidget {
+  double maxWidth;
   double h1p;
   double h10p;
   double w1p;
   double w10p;
   SliderImage(
       {super.key,
+      required this.maxWidth,
       required this.h1p,
       required this.h10p,
       required this.w1p,
@@ -22,20 +28,27 @@ class SliderImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Get.put(HomeControllers());
+    });
     return LayoutBuilder(builder: (context, constraints) {
       return CarouselSlider.builder(
           carouselController: controller,
           itemCount: MoviexImage.upComoingMovieImage.length,
           itemBuilder: (context, index, realIndex) {
-            final image = MoviexImage.upComoingMovieImage[index];
-            return buildImage(
-              image['poster']!,
-              image['title']!,
-              image['release']!,
-              index,
-              w1p,
-              h10p,
-            );
+            final upcomingData = MoviexImage.upComoingMovieImage[index];
+            if (homecontrollers.upcomingList.isEmpty) {
+              return const SizedBox();
+            } else {
+              return buildImage(
+                  id: upcomingData['id'],
+                  poster: upcomingData['poster'],
+                  title: upcomingData['title'] ?? '',
+                  release: upcomingData['release'],
+                  width: w1p,
+                  height: h10p,
+                  maxWidth: maxWidth);
+            }
           },
           options: CarouselOptions(
               height: 210,
@@ -49,67 +62,81 @@ class SliderImage extends StatelessWidget {
   }
 }
 
-buildImage(String poster, String title, String release, int index, double width,
-        double height) =>
-    ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: SizedBox(
-          width: 280,
-          child: Stack(
-            children: [
-              CachedNetworkImage(
-                imageBuilder: (context, imageProvider) => Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      scale: 1,
-                      image: imageProvider,
-                      fit: BoxFit.cover,
+Widget buildImage(
+        {String? poster,
+        required int id,
+        required String title,
+        required String release,
+        required double width,
+        required double height,
+        required double maxWidth}) =>
+    GestureDetector(
+      onTap: () {
+        log('kk');
+        loadingCircle();
+        Get.put(MovieInfoController.instance.movieInfo(id));
+      },
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: SizedBox(
+            width: maxWidth - 40,
+            child: Stack(
+              children: [
+                CachedNetworkImage(
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        scale: 1,
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
+                  imageUrl: poster ??
+                      'https://mir-s3-cdn-cf.behance.net/project_modules/fs/7f1f35167599083.642bf13a1def6.jpg',
+                  placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(
+                    color: ROSE_COLOR,
+                    backgroundColor: ELEMENT_COLOR,
+                  )),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
-                imageUrl: poster,
-                placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(
-                  color: ROSE_COLOR,
-                  backgroundColor: ELEMENT_COLOR,
-                )),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-              ),
-              Positioned(
-                left: width * 3,
-                top: height * 3,
-                child: Container(
-                  decoration: const BoxDecoration(boxShadow: [
-                    BoxShadow(
-                        blurRadius: 30,
-                        color: Colors.black,
-                        offset: Offset(10, 10))
-                  ]),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: const TextStyle(
-                            fontFamily: 'Inter',
-                            fontSize: 15,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w900,
-                            color: WHITE_COLOR),
-                      ),
-                      Text(
-                        release,
-                        style: const TextStyle(
-                            fontFamily: 'Inter',
-                            fontSize: 14,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w600,
-                            color: WHITE_COLOR),
-                      ),
-                    ],
+                Positioned(
+                  left: width * 3,
+                  top: height * 3,
+                  child: Container(
+                    decoration: const BoxDecoration(boxShadow: [
+                      BoxShadow(
+                          blurRadius: 30,
+                          color: Colors.black,
+                          offset: Offset(10, 10))
+                    ]),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: const TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 15,
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w900,
+                              color: WHITE_COLOR),
+                        ),
+                        Text(
+                          release,
+                          style: const TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 14,
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w600,
+                              color: WHITE_COLOR),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
-          ),
-        ));
+                )
+              ],
+            ),
+          )),
+    );

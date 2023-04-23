@@ -14,8 +14,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await Get.put(AccountController.instance.getFavoriteMovie());
-      Get.put(AccountController.instance.getMovieWatchList());
+      Get.put(AccountController.instance);
     });
     return LayoutBuilder(builder: (context, constraints) {
       double h10p = constraints.maxHeight * 0.1;
@@ -95,7 +94,15 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                const WatchlistMovie()
+                const WatchlistMovie(),
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    'Favorite Tv',
+                    style: MoviexFontStyle.heading1(),
+                  ),
+                ),
               ]),
         ),
       );

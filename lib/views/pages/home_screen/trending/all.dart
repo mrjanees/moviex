@@ -10,7 +10,7 @@ class All extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_)  {
       Get.put(TrendingController());
     });
     return Obx(
@@ -27,7 +27,8 @@ class All extends StatelessWidget {
           final data = trendingController.allList[index];
 
           return MovieCardTemplate(
-            movieId: data.id!,
+            mediaType: data.mediaType,
+            id: data.id!,
             heading: data.title ?? data.name!,
             image: data.posterPath!,
             relDate: data.releaseDate ?? data.firstAirDate!,

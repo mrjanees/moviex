@@ -26,7 +26,8 @@ class Tv extends StatelessWidget {
         final data = trendingController.tvList[index];
 
         return MovieCardTemplate(
-          movieId: data.id!,
+          mediaType: data.mediaType,
+          id: data.id!,
           heading: data.name!,
           image: data.posterPath!,
           relDate: data.firstAirDate!,

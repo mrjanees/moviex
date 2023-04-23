@@ -20,6 +20,8 @@ class TvResult {
   double? voteAverage;
   @JsonKey(name: 'origin_country')
   List<String>? originCountry;
+  @JsonKey(name: 'media_type')
+  String? mediaType;
 
   TvResult({
     this.backdropPath,

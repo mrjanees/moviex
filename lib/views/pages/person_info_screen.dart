@@ -68,8 +68,8 @@ class PersonInfoScreen extends StatelessWidget {
                         child: PersonInfoMainCard(
                           h10p: h10p,
                           w10p: w10p,
-                          alsoKnownAs: personInfodata.alsoKnownAs.toString(),
-                          birthDate: personInfodata.birthday!,
+                          alsoKnownAs: personInfodata.alsoKnownAs!.join(', '),
+                          birthDate: personInfodata.birthday,
                           birthPlace: personInfodata.placeOfBirth!,
                           image: personInfodata.profilePath,
                           knownFor: personInfodata.knownForDepartment!,
@@ -87,7 +87,9 @@ class PersonInfoScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        personInfodata.biography!,
+                        personInfodata.biography!.isEmpty
+                            ? 'Sorry, No Biography Available'
+                            : personInfodata.biography!,
                         style:
                             const TextStyle(color: WHITE_COLOR, fontSize: 15),
                       ),

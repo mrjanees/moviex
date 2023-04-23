@@ -18,7 +18,7 @@ TvResult _$TvResultFromJson(Map<String, dynamic> json) => TvResult(
       originCountry: (json['origin_country'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-    );
+    )..mediaType = json['media_type'] as String?;
 
 Map<String, dynamic> _$TvResultToJson(TvResult instance) => <String, dynamic>{
       'backdrop_path': instance.backdropPath,
@@ -29,4 +29,5 @@ Map<String, dynamic> _$TvResultToJson(TvResult instance) => <String, dynamic>{
       'first_air_date': instance.firstAirDate,
       'vote_average': instance.voteAverage,
       'origin_country': instance.originCountry,
+      'media_type': instance.mediaType,
     };

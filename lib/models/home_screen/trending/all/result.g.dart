@@ -18,6 +18,7 @@ AllResult _$AllResultFromJson(Map<String, dynamic> json) => AllResult(
           (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
       releaseDate: json['release_date'] as String?,
       voteAverage: (json['vote_average'] as num?)?.toDouble(),
+      mediaType: json['media_type'] as String?,
     );
 
 Map<String, dynamic> _$AllResultToJson(AllResult instance) => <String, dynamic>{
@@ -31,4 +32,5 @@ Map<String, dynamic> _$AllResultToJson(AllResult instance) => <String, dynamic>{
       'release_date': instance.releaseDate,
       'first_air_date': instance.firstAirDate,
       'vote_average': instance.voteAverage,
+      'media_type': instance.mediaType,
     };

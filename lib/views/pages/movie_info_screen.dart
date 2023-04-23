@@ -21,6 +21,7 @@ class MovieInfoScreen extends StatelessWidget {
         (timeStamp) => Get.put(AccountController.instance.getFavoriteMovie()));
     return LayoutBuilder(
       builder: (context, constraints) {
+        double maxHeight = constraints.maxHeight;
         double maxWidth = constraints.maxWidth;
         double w1p = constraints.maxWidth * 0.01;
         double h1p = constraints.maxHeight * 0.01;
@@ -57,17 +58,15 @@ class MovieInfoScreen extends StatelessWidget {
             body: SingleChildScrollView(
               child: Obx(() {
                 final movie = movieInfoController.movieInfoData.value;
-
-                if (movie.title == null) {
-                  return const SizedBox();
-                }
-
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                         child: MainCard(
+                          maxHeight:maxHeight ,
+                          mediatype: Mediatype.movie,
+                          maxwidth: maxWidth,
                           genres: movie.genres!
                               .map((genres) => genres.name)
                               .join(', '),
@@ -85,6 +84,7 @@ class MovieInfoScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 8, right: 8),
                       child: ContentTemp(
+                        mediatype: Mediatype.movie,
                         h10p: h10p,
                         w10p: w10p,
                         overview: movie.overview,
@@ -93,6 +93,13 @@ class MovieInfoScreen extends StatelessWidget {
                         status: movie.status,
                         orginalLanguage: movie.originalLanguage,
                       ),
+                    ),
+                    SizedBox(
+                      height: h10p * .3,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Crew', style: MoviexFontStyle.heading1()),
                     ),
                     SizedBox(
                       height: h10p * .3,

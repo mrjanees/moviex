@@ -35,6 +35,7 @@ class MovieInfoController extends GetxController {
 
   // fetching movie information
   Future<void> movieInfo(int id) async {
+    print(id);
     await topBilled(id);
     final response = await MoveInfoImple().movieinfo(id);
     response.fold((l) {
@@ -47,13 +48,13 @@ class MovieInfoController extends GetxController {
         movieInfoData.value = r;
         log(movieInfoData.toString());
         Get.back();
-        log('loding stop  ');
       }
     });
 
     if (movieInfoData.value.belongsToCollection != null) {
       movieCollection(movieInfoData.value.belongsToCollection!.id!);
     }
+    Get.toNamed('/MovieInfo');
   }
 
   //fetching topBilled cast

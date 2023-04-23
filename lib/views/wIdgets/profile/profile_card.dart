@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mspot/views/dialogs/loding_circle.dart';
 import '../../../const/api_key.dart';
 import '../../../controllers/movie_info/movie_info_controller.dart';
 import '../../../core/colors/app_color.dart';
@@ -24,8 +25,8 @@ class ProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () async {
+          loadingCircle();
           await Get.put(MovieInfoController.instance.movieInfo(movieId));
-          Get.toNamed('/MovieInfo');
         },
         child: SizedBox(
           height: 150,

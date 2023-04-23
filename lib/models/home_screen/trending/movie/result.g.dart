@@ -7,6 +7,7 @@ part of 'result.dart';
 // **************************************************************************
 
 MovieResult _$MovieResultFromJson(Map<String, dynamic> json) => MovieResult(
+      mediaType: json['media_type'] as String?,
       backdropPath: json['backdrop_path'] as String?,
       id: json['id'] as int?,
       title: json['title'] as String?,
@@ -28,4 +29,5 @@ Map<String, dynamic> _$MovieResultToJson(MovieResult instance) =>
       'genre_ids': instance.genreIds,
       'release_date': instance.releaseDate,
       'vote_average': instance.voteAverage,
+      'media_type': instance.mediaType,
     };
