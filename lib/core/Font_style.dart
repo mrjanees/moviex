@@ -19,6 +19,14 @@ class MoviexFontStyle {
         color: WHITE_COLOR);
   }
 
+  static TextStyle personInfoName() {
+    return const TextStyle(
+        fontFamily: 'inter',
+        fontSize: 18,
+        fontWeight: FontWeight.w700,
+        color: WHITE_COLOR);
+  }
+
   static TextStyle textUnderHeading1() {
     return const TextStyle(
         fontFamily: 'inter',
@@ -56,6 +64,22 @@ class MoviexFontStyle {
         fontFamily: 'inter',
         fontSize: 28,
         fontWeight: FontWeight.bold,
+        color: WHITE_COLOR);
+  }
+
+  static TextStyle homeScreenAnimH1() {
+    return const TextStyle(
+        fontFamily: 'inter',
+        fontSize: 30,
+        fontWeight: FontWeight.bold,
+        color: WHITE_COLOR);
+  }
+
+  static TextStyle homeScreenAnimH2() {
+    return const TextStyle(
+        fontFamily: 'inter',
+        fontSize: 23,
+        fontWeight: FontWeight.w200,
         color: WHITE_COLOR);
   }
 }

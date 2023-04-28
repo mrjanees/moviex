@@ -30,6 +30,7 @@ class LoginTextFormField extends StatelessWidget {
         valueListenable: visibleNotifier,
         builder: (context, _visible, child) {
           return TextFormField(
+            enableInteractiveSelection: type == Type.password ? false : true,
             controller: controller,
             obscureText: type == Type.password
                 ? _visible

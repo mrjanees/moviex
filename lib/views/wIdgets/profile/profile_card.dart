@@ -1,11 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mspot/views/dialogs/loding_circle.dart';
 import '../../../const/api_key.dart';
 import '../../../controllers/movie_info/movie_info_controller.dart';
+import '../../../controllers/network/network_connectivity.dart';
 import '../../../core/colors/app_color.dart';
 import '../../../utils/dateFormater.dart';
+import '../../../utils/dioerror_message.dart';
+import '../../pages/base_screen.dart';
 
 class ProfileCard extends StatelessWidget {
   int movieId;
@@ -25,8 +29,12 @@ class ProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () async {
-          loadingCircle();
-          await Get.put(MovieInfoController.instance.movieInfo(movieId));
+          if (network == 'Online') {
+            loadingCircle();
+            await Get.put(MovieInfoController.instance.movieInfo(movieId));
+          } else {
+            DioErrorTypeMessage.toShowErrorMessage(DioErrorType.unknown);
+          }
         },
         child: SizedBox(
           height: 150,

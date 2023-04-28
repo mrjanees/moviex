@@ -10,17 +10,19 @@ class AllSeasons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {});
+    final id = Get.arguments;
     return Obx(() => ListView.separated(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: ((context, index) {
           final seasons = tvInfoController.tvInfoData.value.seasons![index];
           return SeasonCard(
-            id: seasons.id!,
+            id: id,
             image: seasons.posterPath,
             releasDate: seasons.airDate,
             title: seasons.name!,
             episodeCount: seasons.episodeCount ?? 0,
+            seasonNumber: seasons.seasonNumber!,
           );
         }),
         separatorBuilder: ((context, index) {

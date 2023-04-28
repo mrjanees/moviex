@@ -32,10 +32,10 @@ class MovieInfoController extends GetxController {
   List<Crew> movieCrewList = <Crew>[].obs;
   var movieCollectionName = ''.obs;
   var movieCollections = MovieCollections().obs;
+  var trailerVideoWidth = 0.0.obs;
 
   // fetching movie information
   Future<void> movieInfo(int id) async {
-    print(id);
     await topBilled(id);
     final response = await MoveInfoImple().movieinfo(id);
     response.fold((l) {
@@ -46,7 +46,7 @@ class MovieInfoController extends GetxController {
         print('movieInfo data is null');
       } else {
         movieInfoData.value = r;
-        log(movieInfoData.toString());
+
         Get.back();
       }
     });
@@ -59,7 +59,6 @@ class MovieInfoController extends GetxController {
 
   //fetching topBilled cast
   Future<void> topBilled(int id) async {
-    log('top topBilled');
     await movieCrew(id);
     topBilledList.clear();
     final response = await MoveInfoImple().topBilled(id);
@@ -80,7 +79,6 @@ class MovieInfoController extends GetxController {
 
   // Fetching movie crew details
   Future<void> movieCrew(int id) async {
-    log('movieCrew');
     movieCrewList.clear();
     final response = await MoveInfoImple().movieCrew(id);
     response.fold((l) {
@@ -130,7 +128,7 @@ class MovieInfoController extends GetxController {
         DioErrorTypeMessage.toShowErrorMessage(l);
       }, (r) {
         if (r!.success == true) {
-          successSnackbar('Added Successfully ', 'Movie added to Favorite List',
+          successSnackbar('Added ', 'Movie added to Favorite List',
               Icons.favorite, Colors.red, WHITE_COLOR);
         }
       });
@@ -140,12 +138,8 @@ class MovieInfoController extends GetxController {
         DioErrorTypeMessage.toShowErrorMessage(l);
       }, (r) {
         if (r!.success == true) {
-          successSnackbar(
-              'Deleted Successfully ',
-              'Movie Deleted From Favorite List',
-              Icons.favorite_border,
-              Colors.red,
-              WHITE_COLOR);
+          successSnackbar('Deleted ', 'Movie Deleted From Favorite List',
+              Icons.favorite_border, Colors.red, WHITE_COLOR);
         }
       });
     }
@@ -164,7 +158,7 @@ class MovieInfoController extends GetxController {
   }
 
   bool isWatchlist(int id) {
-    final data = accountController.watchMovieList;
+    final data = accountController.movieWatchList;
     var contain = data.where((element) => element.id == id);
     if (contain.isEmpty) {
       _watchListIcon.value = false;
@@ -175,7 +169,7 @@ class MovieInfoController extends GetxController {
   }
 
   Future<void> addWatchList(WatchListRequest value) async {
-    final data = accountController.watchMovieList;
+    final data = accountController.movieWatchList;
     var contains = data.where((movie) => movie.id == value.mediaId);
     if (contains.isEmpty) {
       final response = await MoveInfoImple().addWatchList(value);

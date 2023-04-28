@@ -45,7 +45,9 @@ class CollectionWidg extends StatelessWidget {
                         ),
                       ),
                     ),
-                imageUrl: imageBase + collection!.backdropPath!,
+                imageUrl: collection!.backdropPath == null
+                    ? 'https://mir-s3-cdn-cf.behance.net/projects/808/446036167599083.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg'
+                    : imageBase + collection!.backdropPath!,
                 placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(
                       color: ROSE_COLOR,

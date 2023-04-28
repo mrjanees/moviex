@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mspot/controllers/network/network_connectivity.dart';
 
 import 'package:mspot/controllers/search/search_controllers.dart';
 
 import 'package:mspot/views/wIdgets/search_screen/search_card.dart';
 
-final searchControllers = Get.put(SearchControllers());
+final searchControllers = Get.put(SearchControllers.instance);
 
 class TopRatedSearchTemplate extends StatelessWidget {
   const TopRatedSearchTemplate({super.key});
@@ -13,9 +14,18 @@ class TopRatedSearchTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      Get.put(SearchControllers());
+      Get.put(SearchControllers.instance);
     });
-    return Obx(() => Expanded(
+    return Obx(() {
+      if(searchControllers.topRatedList.isEmpty){
+        return  Center(
+            child: Text(
+          network=='Offline'?'No Internet':'',
+          style:const  TextStyle(color: Colors.grey),
+        ));
+      }
+      else{
+        return Expanded(
           child: ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -35,6 +45,8 @@ class TopRatedSearchTemplate extends StatelessWidget {
                 );
               }),
               itemCount: searchControllers.topRatedList.length),
-        ));
+        );
+      }
+    });
   }
 }

@@ -40,96 +40,99 @@ class SearchScreen extends StatelessWidget {
           () => Scaffold(
             body: GestureDetector(
               onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-              child: NestedScrollView(
-                headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                  SliverAppBar(
-                    titleSpacing: w1p * 3,
-                    title: const AppbarTitle(),
-                    expandedHeight: 120,
-                    actions: [
-                      IconButton(
-                          onPressed: () {
-                            Get.toNamed('/profile');
-                          },
-                          icon: SvgPicture.asset(
-                              height: 30,
-                              width: 30,
-                              colorFilter: const ColorFilter.mode(
-                                  Colors.white, BlendMode.srcIn),
-                              'assets/icons/user.svg'))
-                    ],
-                    automaticallyImplyLeading: false,
-                    backgroundColor: BACKGROUND_COLOR,
-                    floating: true,
-                    snap: true,
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: Padding(
-                        padding: EdgeInsets.only(
-                            top: 60, right: w1p * 3, left: w1p * 3),
-                        child: SizedBox(width: 100, child: AppbarSearch()),
+              child: RefreshIndicator(
+                onRefresh: () async{ SearchControllers.instance.onInit(); },
+                child: NestedScrollView(
+                  headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                    SliverAppBar(
+                      titleSpacing: w1p * 3,
+                      title: const AppbarTitle(),
+                      expandedHeight: 120,
+                      actions: [
+                        IconButton(
+                            onPressed: () {
+                              Get.toNamed('/profile');
+                            },
+                            icon: SvgPicture.asset(
+                                height: 30,
+                                width: 30,
+                                colorFilter: const ColorFilter.mode(
+                                    Colors.white, BlendMode.srcIn),
+                                'assets/icons/user.svg'))
+                      ],
+                      automaticallyImplyLeading: false,
+                      backgroundColor: BACKGROUND_COLOR,
+                      floating: true,
+                      snap: true,
+                      flexibleSpace: FlexibleSpaceBar(
+                        background: Padding(
+                          padding: EdgeInsets.only(
+                              top: 60, right: w1p * 3, left: w1p * 3),
+                          child: SizedBox(width: 100, child: AppbarSearch()),
+                        ),
                       ),
+                    )
+                  ],
+                  body: Padding(
+                    padding: EdgeInsets.only(
+                        left: w1p * 3, right: w1p * 3, top: h1p * 2),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              searchControllers.searchPageTitle.value,
+                              style: MoviexFontStyle.heading1(),
+                            ),
+                            searchControllers.searchResultList.isNotEmpty
+                                ? ServerPageController(
+                                    width: w1p,
+                                    height: h1p,
+                                    page: searchControllers.serverPage.value,
+                                    pageDecrement: () {
+                                      if (searchControllers.serverPage.value >
+                                          1) {
+                                        final num = searchControllers
+                                            .serverPage.value -= 1;
+                                        searchControllers.searchMovie(
+                                            searchTextController.text, num);
+                                      } else {
+                                        errorSnackbar(
+                                            'No pages',
+                                            'There is no items',
+                                            Icons.cancel_outlined,
+                                            2);
+                                      }
+                                    },
+                                    pageIncrement: () {
+                                      if (searchControllers.serverPage.value <
+                                          searchControllers.totalpage.value) {
+                                        final num = searchControllers
+                                            .serverPage.value += 1;
+                                        searchControllers.searchMovie(
+                                            searchTextController.text, num);
+                                      } else {
+                                        errorSnackbar(
+                                            'No pages',
+                                            'There is no items',
+                                            Icons.cancel_outlined,
+                                            2);
+                                      }
+                                    })
+                                : const SizedBox()
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        if (searchControllers.searchResultList.isEmpty)
+                          const TopRatedSearchTemplate()
+                        else
+                          SearchedItemTemplate()
+                      ],
                     ),
-                  )
-                ],
-                body: Padding(
-                  padding: EdgeInsets.only(
-                      left: w1p * 3, right: w1p * 3, top: h1p * 2),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            searchControllers.searchPageTitle.value,
-                            style: MoviexFontStyle.heading1(),
-                          ),
-                          searchControllers.searchResultList.isNotEmpty
-                              ? ServerPageController(
-                                  width: w1p,
-                                  height: h1p,
-                                  page: searchControllers.serverPage.value,
-                                  pageDecrement: () {
-                                    if (searchControllers.serverPage.value >
-                                        1) {
-                                      final num = searchControllers
-                                          .serverPage.value -= 1;
-                                      searchControllers.searchMovie(
-                                          searchTextController.text, num);
-                                    } else {
-                                      errorSnackbar(
-                                          'No pages',
-                                          'There is no items',
-                                          Icons.cancel_outlined,
-                                          2);
-                                    }
-                                  },
-                                  pageIncrement: () {
-                                    if (searchControllers.serverPage.value <
-                                        searchControllers.totalpage.value) {
-                                      final num = searchControllers
-                                          .serverPage.value += 1;
-                                      searchControllers.searchMovie(
-                                          searchTextController.text, num);
-                                    } else {
-                                      errorSnackbar(
-                                          'No pages',
-                                          'There is no items',
-                                          Icons.cancel_outlined,
-                                          2);
-                                    }
-                                  })
-                              : const SizedBox()
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      if (searchControllers.searchResultList.isEmpty)
-                        const TopRatedSearchTemplate()
-                      else
-                        SearchedItemTemplate()
-                    ],
                   ),
                 ),
               ),

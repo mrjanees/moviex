@@ -8,6 +8,7 @@ import 'package:mspot/views/pages/login_screen.dart';
 import 'package:mspot/views/pages/movie_info_screen.dart';
 import 'package:mspot/views/pages/person_info_screen.dart';
 import 'package:mspot/views/pages/profile_screen.dart';
+import 'package:mspot/views/pages/season_info_screen.dart';
 import 'package:mspot/views/pages/seasons_screen.dart';
 import 'package:mspot/views/pages/tv_info_screen.dart';
 import 'controllers/authentication/auth_controller.dart';
@@ -17,6 +18,9 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: BACKGROUND_COLOR));
   await Get.put(AuthController.instance.isLloggedIn());
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
   runApp(MyApp());
 }
 
@@ -47,11 +51,12 @@ class MyApp extends StatelessWidget {
                   name: '/collection', page: () => const CollectionScreen()),
               GetPage(
                   name: '/personInfo', page: () => const PersonInfoScreen()),
-                  GetPage(
-                  name: '/TvInfoScreen', page: () => const TvInfoScreen()),
-                  GetPage(
-                  name: '/SesonsScreen', page: () => const SeasonsScreen()),
-
+              GetPage(name: '/TvInfoScreen', page: () => const TvInfoScreen()),
+              GetPage(
+                  name: '/SeasonsScreen', page: () => const SeasonsScreen()),
+              GetPage(
+                  name: '/SeasonInfoScreen',
+                  page: () => const SeasonInfoScreen())
             ],
           ),
         ));

@@ -1,38 +1,54 @@
+
+
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:mspot/models/home_screen/trending/all/result.dart';
 import 'package:mspot/models/home_screen/trending/movie/result.dart';
 import 'package:mspot/models/home_screen/trending/person/result.dart';
 import 'package:mspot/models/home_screen/trending/tv/result.dart';
-import 'package:mspot/models/home_screen/trending/tv/tv.dart';
 import 'package:mspot/services/home_screen_api/trending/implementation.dart';
-import 'package:mspot/services/home_screen_api/trending/trending_remote.dart';
-
 import '../../../utils/dioerror_message.dart';
 
 class TrendingController extends GetxController {
+  
+   TrendingController.internal();
+  static TrendingController instance = TrendingController.internal();
+  TrendingController factory() {
+    return instance;
+  }
+
   List<AllResult> allList = <AllResult>[].obs;
   List<MovieResult> movieList = <MovieResult>[].obs;
   List<TvResult> tvList = <TvResult>[].obs;
   List<PersonResult> personList = <PersonResult>[].obs;
+  bool _network = false;
+  bool get network => _network;
 
   @override
-  void onInit() {
-    all();
-    movie();
-    tv();
-    person();
+  void onInit() async {
+    log('initcalled');
+    await all();
+    if (network == true) {
+      movie();
+      tv();
+      person();
+    }
 
     super.onInit();
   }
 
   Future<void> all() async {
+    print('network$network');
     final response = await TrendingImplement().allTrending();
     response.fold((l) {
+      _network = false;
       DioErrorTypeMessage.toShowErrorMessage(l);
     }, (r) {
       if (r == null) {
         print('All trendings is null');
       } else {
+        _network = true;
         allList.addAll(r);
       }
     });

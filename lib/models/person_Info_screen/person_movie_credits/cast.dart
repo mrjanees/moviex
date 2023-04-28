@@ -8,6 +8,8 @@ class Cast {
   String? backdropPath;
   @JsonKey(name: 'id')
   int? id;
+   @JsonKey(name: 'release_date')
+  String? releaseDate;
   @JsonKey(name: 'poster_path')
   String? posterPath;
   @JsonKey(name: 'title')
@@ -17,7 +19,9 @@ class Cast {
   @JsonKey(name: 'credit_id')
   String? creditId;
 
+
   Cast({
+    this.releaseDate,
     this.backdropPath,
     this.id,
     this.posterPath,

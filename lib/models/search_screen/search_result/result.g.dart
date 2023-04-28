@@ -7,6 +7,10 @@ part of 'result.dart';
 // **************************************************************************
 
 SearchResult _$SearchResultFromJson(Map<String, dynamic> json) => SearchResult(
+      name: json['name'] as String?,
+      firstAirDate: json['first_air_date'] as String?,
+      knownfordepartment: json['known_for_department'] as String?,
+      profilePath: json['profile_path'] as String?,
       adult: json['adult'] as bool?,
       backdropPath: json['backdrop_path'] as String?,
       genreIds:
@@ -22,6 +26,10 @@ Map<String, dynamic> _$SearchResultToJson(SearchResult instance) =>
     <String, dynamic>{
       'adult': instance.adult,
       'backdrop_path': instance.backdropPath,
+      'name': instance.name,
+      'known_for_department': instance.knownfordepartment,
+      'profile_path': instance.profilePath,
+      'first_air_date': instance.firstAirDate,
       'genre_ids': instance.genreIds,
       'id': instance.id,
       'original_language': instance.originalLanguage,

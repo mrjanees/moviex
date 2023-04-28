@@ -95,7 +95,7 @@ class ViewAllSeasons extends StatelessWidget {
                         foregroundColor: Colors.black54 // <-- Splash color
                         ),
                     onPressed: () {
-                      Get.toNamed('/SesonsScreen');
+                      Get.toNamed('/SeasonsScreen',arguments: id);
                     },
                     child: const Text(
                       'VIEW ALL SEASONS',

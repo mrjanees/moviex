@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,10 @@ import 'package:mspot/views/wIdgets/movie_info/content_widg.dart';
 import 'package:mspot/views/wIdgets/movie_info/main_card_widg.dart';
 import 'package:mspot/views/wIdgets/movie_info/top_billed_widg.dart';
 import '../../controllers/account/controller.dart';
+import '../../controllers/network/network_connectivity.dart';
+import '../../controllers/person_info/person_info_controller.dart';
 import '../../core/colors/app_color.dart';
+import '../../utils/dioerror_message.dart';
 
 final movieInfoController = Get.put(MovieInfoController.instance);
 
@@ -120,44 +124,53 @@ class MovieInfoScreen extends StatelessWidget {
                                 final movieCrew =
                                     movieInfoController.movieCrewList[index];
 
-                                return Container(
-                                  width: w10p * 5,
-                                  decoration: BoxDecoration(
-                                      color: ELEMENT_COLOR,
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: Center(
-                                      child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width: w10p * 0.5,
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            movieCrew.name!,
-                                            style: const TextStyle(
-                                                color: WHITE_COLOR,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            movieCrew.job!,
-                                            style: const TextStyle(
-                                                color: WHITE_COLOR,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w400),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  )),
+                                return GestureDetector(
+                                  onTap: () {
+                                     if (network == 'Online') {
+          Get.put(PersonInfoController.instance.personInfo(movieCrew.id!));
+        } else {
+          DioErrorTypeMessage.toShowErrorMessage(DioErrorType.unknown);
+        }
+                                  },
+                                  child: Container(
+                                    width: w10p * 5,
+                                    decoration: BoxDecoration(
+                                        color: ELEMENT_COLOR,
+                                        borderRadius: BorderRadius.circular(20)),
+                                    child: Center(
+                                        child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          width: w10p * 0.5,
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              movieCrew.name!,
+                                              style: const TextStyle(
+                                                  color: WHITE_COLOR,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text(
+                                              movieCrew.job!,
+                                              style: const TextStyle(
+                                                  color: WHITE_COLOR,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w400),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    )),
+                                  ),
                                 );
                               }),
                         )),

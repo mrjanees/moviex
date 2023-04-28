@@ -68,7 +68,7 @@ class MainCard extends StatelessWidget {
                     opacity: 0.2,
                     fit: BoxFit.fitWidth,
                     image: NetworkImage(image == null
-                        ? 'https://mir-s3-cdn-cf.behance.net/projects/808/446036167599083.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg'
+                        ? 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/79aca3169296177.644a1ddc03704.jpg'
                         : imageBase + image!)),
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.black),
@@ -95,7 +95,7 @@ class MainCard extends StatelessWidget {
                         ),
                       ),
                       imageUrl: image == null
-                          ? 'https://mir-s3-cdn-cf.behance.net/projects/808/446036167599083.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg'
+                          ? 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/79aca3169296177.644a1ddc03704.jpg'
                           : orgImage + image!,
                       placeholder: (context, url) => const Center(
                           child: CircularProgressIndicator(
@@ -186,7 +186,8 @@ class MainCard extends StatelessWidget {
                                       initialVideoId:
                                           YoutubePlayer.convertUrlToId(
                                               moviekey!)!);
-                              videoTrailer(controller);
+                              videoTrailer(
+                                  controller: controller, maxwidth: maxwidth);
                             },
                             child: Row(
                               children: const [

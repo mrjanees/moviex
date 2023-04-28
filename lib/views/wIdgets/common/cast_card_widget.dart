@@ -1,10 +1,16 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../const/api_key.dart';
+import '../../../controllers/network/network_connectivity.dart';
 import '../../../controllers/person_info/person_info_controller.dart';
 import '../../../core/colors/app_color.dart';
+import '../../../utils/dioerror_message.dart';
+import '../../pages/base_screen.dart';
 
 class CastCardWidget extends StatelessWidget {
   int id;
@@ -23,7 +29,12 @@ class CastCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.put(PersonInfoController.instance.personInfo(id));
+        if (network == 'Online') {
+          pagesCloseNumber.value = 2;
+          Get.put(PersonInfoController.instance.personInfo(id));
+        } else {
+          DioErrorTypeMessage.toShowErrorMessage(DioErrorType.unknown);
+        }
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

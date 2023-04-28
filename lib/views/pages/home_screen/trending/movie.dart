@@ -12,9 +12,20 @@ class Movie extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      Get.put(TrendingController());
+      Get.put(TrendingController.instance);
     });
-    return Obx(() => GridView.builder(
+    return Obx(() {
+      if (trendingController.movieList.isEmpty) {
+        return const SizedBox(
+          height: 100,
+          child: Center(
+              child: Text(
+            'No Internet',
+            style: TextStyle(color: Colors.grey),
+          )),
+        );
+      } else {
+        return GridView.builder(
           itemCount: trendingController.movieList.length,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -34,6 +45,8 @@ class Movie extends StatelessWidget {
               vote: data.voteAverage!,
             );
           },
-        ));
+        );
+      }
+    });
   }
 }

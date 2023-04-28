@@ -7,24 +7,20 @@ class AppbarTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-                height: 35,
-                width: 55,
-                child: Image.asset('assets/icons/App_Icon.png')),
-            const SizedBox(
-              width: 10,
-            ),
-            SizedBox(
-                width: 106,
-                height: 26,
-                child: Image.asset('assets/icons/Typograohy.png')),
-          ],
+        SizedBox(
+            height: 35,
+            width: 55,
+            child: Image.asset('assets/icons/App_Icon.png')),
+        const SizedBox(
+          width: 10,
         ),
+        SizedBox(
+            width: 106,
+            height: 26,
+            child: Image.asset('assets/icons/Typograohy.png')),
       ],
     );
   }

@@ -1,19 +1,34 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mspot/const/api_key.dart';
+import 'package:mspot/views/pages/base_screen.dart';
 
+import '../../../controllers/network/network_connectivity.dart';
+import '../../../controllers/person_info/person_info_controller.dart';
 import '../../../core/colors/app_color.dart';
+import '../../../utils/dioerror_message.dart';
 
 class ActorCardTemplate extends StatelessWidget {
   String? avatar;
   String name;
+  int id;
 
-  ActorCardTemplate({super.key, required this.avatar, required this.name});
+  ActorCardTemplate(
+      {super.key, required this.avatar, required this.name, required this.id});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print('clicked'),
+      onTap: () {
+        if (network == 'Online') {
+          pagesCloseNumber.value = 1;
+          Get.put(PersonInfoController.instance.personInfo(id));
+        } else {
+          DioErrorTypeMessage.toShowErrorMessage(DioErrorType.unknown);
+        }
+      },
       child: SizedBox(
         height: 250,
         width: 160,

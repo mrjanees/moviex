@@ -7,6 +7,7 @@ part of 'crew.dart';
 // **************************************************************************
 
 Crew _$CrewFromJson(Map<String, dynamic> json) => Crew(
+      id: json['id'] as int?,
       name: json['name'] as String?,
       originalName: json['original_name'] as String?,
       popularity: (json['popularity'] as num?)?.toDouble(),
@@ -19,6 +20,7 @@ Crew _$CrewFromJson(Map<String, dynamic> json) => Crew(
 Map<String, dynamic> _$CrewToJson(Crew instance) => <String, dynamic>{
       'name': instance.name,
       'original_name': instance.originalName,
+      'id': instance.id,
       'popularity': instance.popularity,
       'profile_path': instance.profilePath,
       'credit_id': instance.creditId,

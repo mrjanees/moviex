@@ -1,12 +1,16 @@
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mspot/controllers/movie_info/movie_info_controller.dart';
 import 'package:mspot/controllers/tv_info/tv_info_controller.dart';
 import 'package:mspot/services/tv_info_screen_api/implementation.dart';
+import 'package:mspot/utils/dioerror_message.dart';
+import 'package:mspot/views/pages/base_screen.dart';
 import 'package:mspot/views/pages/movie_info_screen.dart';
 import '../../../const/api_key.dart';
+import '../../../controllers/network/network_connectivity.dart';
 import '../../../core/colors/app_color.dart';
 import '../../../utils/dateFormater.dart';
 import '../../dialogs/loding_circle.dart';
@@ -32,13 +36,16 @@ class MovieCardTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          if (mediaType == 'movie') {
-            print(id);
-            loadingCircle();
-            Get.put(MovieInfoController.instance.movieInfo(id));
-          } else if (mediaType == 'tv') {
-            loadingCircle();
-            Get.put(TvInfoController.instance.tvInfo(id));
+          if (network == 'Online') {
+            if (mediaType == 'movie') {
+              loadingCircle();
+              Get.put(MovieInfoController.instance.movieInfo(id));
+            } else if (mediaType == 'tv') {
+              loadingCircle();
+              Get.put(TvInfoController.instance.tvInfo(id));
+            }
+          } else {
+            DioErrorTypeMessage.toShowErrorMessage(DioErrorType.unknown);
           }
         },
         child: SizedBox(
@@ -68,7 +75,7 @@ class MovieCardTemplate extends StatelessWidget {
                           ),
                         ),
                         imageUrl: image == null
-                            ? 'https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg'
+                            ? 'https://mir-s3-cdn-cf.behance.net/projects/808/446036167599083.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg'
                             : imageBase + image!,
                         placeholder: (context, url) => const Center(
                             child: CircularProgressIndicator(

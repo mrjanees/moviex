@@ -25,6 +25,7 @@ class TopRatedActorsTemplate extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             final data = actorControllers.topRatedPeopleList[index];
             return ActorCardTemplate(
+              id: data.id!,
               avatar: data.profilePath,
               name: data.name!,
             );

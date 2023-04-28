@@ -11,29 +11,39 @@ class Tv extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.put(TrendingController());
+      Get.put(TrendingController.instance);
     });
-    return GridView.builder(
-      itemCount: trendingController.tvList.length,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          mainAxisExtent: 250,
-          mainAxisSpacing: 10),
-      itemBuilder: (BuildContext context, int index) {
-        final data = trendingController.tvList[index];
-
-        return MovieCardTemplate(
-          mediaType: data.mediaType,
-          id: data.id!,
-          heading: data.name!,
-          image: data.posterPath!,
-          relDate: data.firstAirDate!,
-          vote: data.voteAverage!,
-        );
-      },
-    );
+    if (trendingController.tvList.isEmpty) {
+      return const SizedBox(
+        height: 100,
+        child: Center(
+            child: Text(
+          'No Internet',
+          style: TextStyle(color: Colors.grey),
+        )),
+      );
+    } else {
+      return GridView.builder(
+        itemCount: trendingController.tvList.length,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 10,
+            mainAxisExtent: 250,
+            mainAxisSpacing: 10),
+        itemBuilder: (BuildContext context, int index) {
+          final data = trendingController.tvList[index];
+          return MovieCardTemplate(
+            mediaType: data.mediaType,
+            id: data.id!,
+            heading: data.name!,
+            image: data.posterPath!,
+            relDate: data.firstAirDate!,
+            vote: data.voteAverage!,
+          );
+        },
+      );
+    }
   }
 }

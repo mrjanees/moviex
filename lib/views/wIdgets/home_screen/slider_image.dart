@@ -2,14 +2,18 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mspot/core/internet_images.dart';
 import '../../../const/api_key.dart';
 import '../../../controllers/home/home_controllers.dart';
 import '../../../controllers/movie_info/movie_info_controller.dart';
+import '../../../controllers/network/network_connectivity.dart';
 import '../../../core/colors/app_color.dart';
+import '../../../utils/dioerror_message.dart';
 import '../../dialogs/loding_circle.dart';
+import '../../pages/base_screen.dart';
 import '../../pages/home_screen/home_screen.dart';
 
 class SliderImage extends StatelessWidget {
@@ -37,18 +41,14 @@ class SliderImage extends StatelessWidget {
           itemCount: MoviexImage.upComoingMovieImage.length,
           itemBuilder: (context, index, realIndex) {
             final upcomingData = MoviexImage.upComoingMovieImage[index];
-            if (homecontrollers.upcomingList.isEmpty) {
-              return const SizedBox();
-            } else {
-              return buildImage(
-                  id: upcomingData['id'],
-                  poster: upcomingData['poster'],
-                  title: upcomingData['title'] ?? '',
-                  release: upcomingData['release'],
-                  width: w1p,
-                  height: h10p,
-                  maxWidth: maxWidth);
-            }
+            return buildImage(
+                id: upcomingData['id'],
+                poster: upcomingData['poster'],
+                title: upcomingData['title'] ?? '',
+                release: upcomingData['release'],
+                width: w1p,
+                height: h10p,
+                maxWidth: maxWidth);
           },
           options: CarouselOptions(
               height: 210,
@@ -72,9 +72,13 @@ Widget buildImage(
         required double maxWidth}) =>
     GestureDetector(
       onTap: () {
-        log('kk');
-        loadingCircle();
-        Get.put(MovieInfoController.instance.movieInfo(id));
+        if (network == 'Online') {
+          loadingCircle();
+          Get.put(MovieInfoController.instance.movieInfo(id));
+        } else {
+          DioErrorTypeMessage.toShowErrorMessage(DioErrorType.unknown);
+        }
+        
       },
       child: ClipRRect(
           borderRadius: BorderRadius.circular(20),

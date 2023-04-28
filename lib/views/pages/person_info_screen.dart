@@ -3,8 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mspot/controllers/person_info/person_info_controller.dart';
 import 'package:mspot/core/colors/app_color.dart';
-import 'package:mspot/views/wIdgets/person_info_screen/known_for.dart';
-import 'package:mspot/views/wIdgets/person_info_screen/known_for_card.dart';
+import 'package:mspot/views/wIdgets/person_info_screen/deaprtments/acting/acting_departments.dart';
+import 'package:mspot/views/wIdgets/person_info_screen/department.dart';
+import 'package:mspot/views/wIdgets/person_info_screen/department_button.dart';
+import 'package:mspot/views/wIdgets/person_info_screen/known_for/known_for.dart';
+import 'package:mspot/views/wIdgets/person_info_screen/known_for/known_for_card.dart';
 import 'package:mspot/views/wIdgets/person_info_screen/main_card.dart';
 import '../../core/Font_style.dart';
 
@@ -16,6 +19,11 @@ class PersonInfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        personInfoController.departmentCategoryIndex.value = 0;
+      },
+    );
     return SafeArea(
         child: Scaffold(
       body: Container(
@@ -68,9 +76,11 @@ class PersonInfoScreen extends StatelessWidget {
                         child: PersonInfoMainCard(
                           h10p: h10p,
                           w10p: w10p,
-                          alsoKnownAs: personInfodata.alsoKnownAs!.join(', '),
-                          birthDate: personInfodata.birthday,
-                          birthPlace: personInfodata.placeOfBirth!,
+                          alsoKnownAs: personInfodata.alsoKnownAs == null
+                              ? ''
+                              : personInfodata.alsoKnownAs!.join(', '),
+                          birthDate: personInfodata.birthday ?? '',
+                          birthPlace: personInfodata.placeOfBirth ?? '',
                           image: personInfodata.profilePath,
                           knownFor: personInfodata.knownForDepartment!,
                           name: personInfodata.name!,
@@ -103,7 +113,10 @@ class PersonInfoScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 15),
-                    const KnownFor()
+                    const KnownFor(),
+                    const DepartmentCategoryButton(),
+                    const SizedBox(height: 10),
+                    const Departments()
                   ],
                 ),
               ),

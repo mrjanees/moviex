@@ -19,11 +19,13 @@ class SearchedItemTemplate extends StatelessWidget {
               itemBuilder: ((context, index) {
                 final data = searchControllers.searchResultList[index];
                 return SearchCard(
+                  knownOfDepart: data.knownfordepartment,
                   id: data.id!,
-                  image: data.backdropPath,
-                  releasDate: data.releaseDate,
-                  title: data.title!,
-                  vote: data.voteAverage!,
+                  image: data.backdropPath ?? data.profilePath,
+                  releasDate:
+                      data.releaseDate ?? data.firstAirDate ,
+                  title: data.title ?? data.name!,
+                  vote: data.voteAverage ?? 0.0,
                 );
               }),
               separatorBuilder: ((context, index) {

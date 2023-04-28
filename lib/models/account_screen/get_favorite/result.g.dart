@@ -7,6 +7,7 @@ part of 'result.dart';
 // **************************************************************************
 
 Result _$ResultFromJson(Map<String, dynamic> json) => Result(
+      name: json['name'] as String?,
       id: json['id'] as int?,
       originalTitle: json['original_title'] as String?,
       posterPath: json['poster_path'] as String?,
@@ -21,5 +22,6 @@ Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
       'poster_path': instance.posterPath,
       'release_date': instance.releaseDate,
       'title': instance.title,
+      'name': instance.name,
       'vote_average': instance.voteAverage,
     };

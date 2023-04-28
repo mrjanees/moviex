@@ -13,7 +13,8 @@ class SearchMovieImple extends SearchMovieRemote {
   Future<Either<DioErrorType, List<SearchResult>?>> searchMovie(
       String query, int page) async {
     try {
-      final response = await dio.get(SearchUrls.searchMovie,
+      final response = await dio.get(
+          SearchUrls.search[searchControllers.dropDownvalue.value],
           queryParameters: {'query': query, 'page': page});
       if (response.statusCode == 200 || response.data != null) {
         final dataAsjson = response.data;
@@ -28,6 +29,7 @@ class SearchMovieImple extends SearchMovieRemote {
         return const Right(null);
       }
     } on DioError catch (e) {
+      print(e);
       return Left(e.type);
     }
   }

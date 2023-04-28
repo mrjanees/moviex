@@ -7,9 +7,7 @@ import 'package:mspot/views/pages/movie_info_screen.dart';
 import 'package:mspot/views/wIdgets/search_screen/search_card.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
-
 import 'package:mspot/core/colors/app_color.dart';
-import 'package:mspot/utils/dateFormater.dart';
 import 'package:mspot/views/wIdgets/home_screen/percent_indicator.dart';
 import '../../../const/api_key.dart';
 import '../../../controllers/movie_info/movie_info_controller.dart';
@@ -18,7 +16,7 @@ import '../../../utils/genres_id_converter.dart';
 import '../../dialogs/loding_circle.dart';
 import '../movie_info/main_card_widg.dart';
 
-final searchControllers = Get.put(SearchControllers());
+final searchControllers = Get.put(SearchControllers.instance);
 
 class MovieCollextions extends StatelessWidget {
   const MovieCollextions({super.key});

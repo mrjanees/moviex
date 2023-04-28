@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mspot/controllers/tv/tv_controllers.dart';
+import 'package:mspot/views/wIdgets/movie_info/content_widg.dart';
 
 import '../common/movie_card_template.dart';
 
@@ -25,6 +26,7 @@ class TopRatedTvTemplate extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             final data = tvController.topRatedTvList[index];
             return MovieCardTemplate(
+              mediaType: 'tv',
               id: data.id!,
               heading: data.name!,
               image: data.posterPath,

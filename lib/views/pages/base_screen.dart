@@ -1,15 +1,12 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
-import 'package:mspot/controllers/authentication/auth_controller.dart';
-import 'package:mspot/core/Font_style.dart';
-import 'package:mspot/views/pages/login_screen.dart';
 import 'package:mspot/views/pages/screens.dart';
-
+import '../../controllers/network/network_connectivity.dart';
+import '../../controllers/routing/page_closing_controller.dart';
 import '../../core/colors/app_color.dart';
 import '../wIdgets/common/bottom_navigation.dart';
+
+final pagesCloseNumber = Get.put(PageClosingController().pagesCloseNumber);
 
 class BaseScreen extends StatelessWidget {
   String? sessionId;
@@ -17,6 +14,12 @@ class BaseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        Get.put(PageClosingController().pagesCloseNumber);
+        NetworkConnectivity.instance.connectionListener();
+      },
+    );
     return WillPopScope(
         onWillPop: () async {
           return await showDialog(

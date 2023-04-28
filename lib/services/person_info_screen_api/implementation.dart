@@ -45,4 +45,23 @@ class PersonInfoApiImple extends PersonInfoApiRemote {
       return Left(e.type);
     }
   }
+  
+  @override
+  Future<Either<DioErrorType, PersonMovieCredits?>> departments(int id) async{
+     try {
+      final response = await dio.get(
+        'https://api.themoviedb.org/3/person/$id/movie_credits?api_key=$apiKey',
+      );
+      if (response.statusCode == 200 && response.data != null) {
+        final dataAsjson = response.data;
+        final data = PersonMovieCredits.fromJson(dataAsjson);
+        return Right(data);
+      } else {
+        return const Right(null);
+      }
+    } on DioError catch (e) {
+      print(e);
+      return Left(e.type);
+    }
+  }
 }

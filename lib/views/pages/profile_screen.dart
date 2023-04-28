@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_profile_picture/flutter_profile_picture.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mspot/controllers/account/controller.dart';
 import 'package:mspot/core/Font_style.dart';
 import 'package:mspot/core/colors/app_color.dart';
+import 'package:mspot/main.dart';
 import 'package:mspot/views/wIdgets/profile/favorite_movie.dart';
+import 'package:mspot/views/wIdgets/profile/favorite_tv.dart';
 import 'package:mspot/views/wIdgets/profile/wacth_list_movie.dart';
 import 'package:get/get.dart';
+import 'package:mspot/views/wIdgets/profile/watch_list_tv.dart';
+import 'package:mspot/views/wIdgets/search_screen/appbar_title.dart';
 
 final accountController = Get.put(AccountController.instance);
 
@@ -51,12 +57,72 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        top: 200,
-                        child: CircleAvatar(
-                          radius: h10p,
-                          backgroundColor: ROSE_COLOR,
-                        ),
-                      )
+                          top: 30,
+                          left: 20,
+                          right: 20,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const AppbarTitle(),
+                              IconButton(
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        backgroundColor: ELEMENT_COLOR,
+                                        title: const Text(
+                                          'Log out?',
+                                          style: TextStyle(
+                                              color: WHITE_COLOR,
+                                              fontFamily: 'Inter'),
+                                        ),
+                                        content: const Text(
+                                          'Are you Sure want to Log out ?',
+                                          style: TextStyle(
+                                              color: WHITE_COLOR,
+                                              fontFamily: 'Inter'),
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.of(context).pop(true),
+                                            child: const Text('No',
+                                                style: TextStyle(
+                                                    color: WHITE_COLOR,
+                                                    fontFamily: 'Inter')),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              authController.logOut();
+                                              Get.offAllNamed('/Login');
+                                            },
+                                            child: const Text('Yes',
+                                                style: TextStyle(
+                                                    color: WHITE_COLOR,
+                                                    fontFamily: 'Inter')),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  icon: SvgPicture.asset(
+                                      height: 30,
+                                      width: 30,
+                                      colorFilter: const ColorFilter.mode(
+                                          Colors.white, BlendMode.srcIn),
+                                      'assets/icons/log-out.svg'))
+                            ],
+                          )),
+                      const Positioned(
+                          top: 200,
+                          child: ProfilePicture(
+                            name: 'Janees',
+                            radius: 60,
+                            fontsize: 40,
+                          ))
                     ],
                   ),
                 ),
@@ -103,6 +169,18 @@ class ProfileScreen extends StatelessWidget {
                     style: MoviexFontStyle.heading1(),
                   ),
                 ),
+                const SizedBox(height: 10),
+                const FavoriteTv(),
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    'Watchlist Tv',
+                    style: MoviexFontStyle.heading1(),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const WatchlistTv()
               ]),
         ),
       );

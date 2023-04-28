@@ -7,6 +7,14 @@ class SearchResult {
   bool? adult;
   @JsonKey(name: 'backdrop_path')
   String? backdropPath;
+  @JsonKey(name: 'name')
+  String? name;
+  @JsonKey(name: 'known_for_department')
+  String? knownfordepartment;
+  @JsonKey(name: 'profile_path')
+  String? profilePath;
+  @JsonKey(name: 'first_air_date')
+  String? firstAirDate;
   @JsonKey(name: 'genre_ids')
   List<int>? genreIds;
   @JsonKey(name: 'id')
@@ -21,6 +29,10 @@ class SearchResult {
   double? voteAverage;
 
   SearchResult({
+    this.name,
+    this.firstAirDate,
+    this.knownfordepartment,
+    this.profilePath,
     this.adult,
     this.backdropPath,
     this.genreIds,

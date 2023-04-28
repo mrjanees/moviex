@@ -1,12 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mspot/controllers/tv_info/season_info_controller.dart';
 import '../../../const/api_key.dart';
+import '../../../controllers/network/network_connectivity.dart';
 import '../../../core/Font_style.dart';
 import '../../../core/colors/app_color.dart';
+import '../../../utils/dioerror_message.dart';
 import '../../dialogs/loding_circle.dart';
+import '../../pages/base_screen.dart';
 
 class SeasonCard extends StatelessWidget {
+  int seasonNumber;
   int episodeCount;
   int id;
   String? image;
@@ -14,6 +20,7 @@ class SeasonCard extends StatelessWidget {
   String? releasDate;
   SeasonCard(
       {super.key,
+      required this.seasonNumber,
       required this.episodeCount,
       required this.id,
       required this.image,
@@ -29,8 +36,13 @@ class SeasonCard extends StatelessWidget {
 
       return GestureDetector(
         onTap: () async {
-          loadingCircle();
-          Get.back();
+          if (network == 'Online') {
+            print(id);
+            loadingCircle();
+            Get.put(SeasonInfoController.instance.seasonInfo(id, seasonNumber));
+          } else {
+            DioErrorTypeMessage.toShowErrorMessage(DioErrorType.unknown);
+          }
         },
         child: Container(
           height: 150,

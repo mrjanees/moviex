@@ -1,7 +1,5 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mspot/core/colors/app_color.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -45,7 +43,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               )),
               CustomNavigationBarItem(
                   icon: SvgPicture.asset(
-                'assets/icons/tv.svg',
+                'assets/icons/film.svg',
                 height: 25,
                 width: 25,
                 fit: BoxFit.scaleDown,

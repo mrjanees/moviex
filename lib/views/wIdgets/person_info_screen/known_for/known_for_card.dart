@@ -1,15 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
+import 'package:mspot/utils/dioerror_message.dart';
+import 'package:mspot/views/pages/base_screen.dart';
 import 'package:mspot/views/pages/movie_info_screen.dart';
 import 'package:mspot/views/pages/person_info_screen.dart';
 
-import '../../../const/api_key.dart';
-import '../../../controllers/movie_info/movie_info_controller.dart';
-import '../../../core/colors/app_color.dart';
-import '../../dialogs/loding_circle.dart';
+import '../../../../const/api_key.dart';
+import '../../../../controllers/movie_info/movie_info_controller.dart';
+import '../../../../controllers/network/network_connectivity.dart';
+import '../../../../core/colors/app_color.dart';
+import '../../../dialogs/loding_circle.dart';
 
 class KnownForCard extends StatelessWidget {
   int id;
@@ -22,9 +26,13 @@ class KnownForCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.close(2);
-        loadingCircle();
-        Get.put(MovieInfoController.instance.movieInfo(id));
+        if (network == 'Online') {
+          Get.close(pagesCloseNumber.value);
+          loadingCircle();
+          Get.put(MovieInfoController.instance.movieInfo(id));
+        } else {
+          DioErrorTypeMessage.toShowErrorMessage(DioErrorType.unknown);
+        }
       },
       child: SizedBox(
         height: 180,
@@ -48,7 +56,7 @@ class KnownForCard extends StatelessWidget {
                     ),
                   ),
                   imageUrl: image == null
-                      ? 'https://mir-s3-cdn-cf.behance.net/projects/808/446036167599083.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg'
+                      ? 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/79aca3169296177.644a1ddc03704.jpg'
                       : orgImage + image!,
                   placeholder: (context, url) => const Center(
                       child: CircularProgressIndicator(
@@ -67,7 +75,7 @@ class KnownForCard extends StatelessWidget {
             ),
             Text(
               title,
-              maxLines: 3,
+              maxLines: 2,
               style: const TextStyle(
                   color: WHITE_COLOR,
                   fontSize: 16,

@@ -15,7 +15,7 @@ class WatchlistMovie extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           itemBuilder: ((context, index) {
-            final watchList = accountController.watchMovieList[index];
+            final watchList = accountController.movieWatchList[index];
             return ProfileCard(
                 movieId: watchList.id!,
                 heading: watchList.title!,
@@ -28,7 +28,7 @@ class WatchlistMovie extends StatelessWidget {
               width: 10,
             );
           }),
-          itemCount: accountController.watchMovieList.length)),
+          itemCount: accountController.movieWatchList.length)),
     );
   }
 }

@@ -14,10 +14,13 @@ class Result {
   String? releaseDate;
   @JsonKey(name: 'title')
   String? title;
+  @JsonKey(name: 'name')
+  String? name;
   @JsonKey(name: 'vote_average')
   double? voteAverage;
 
   Result({
+    this.name,
     this.id,
     this.originalTitle,
     this.posterPath,

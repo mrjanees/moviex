@@ -8,6 +8,8 @@ class Crew {
   String? name;
   @JsonKey(name: 'original_name')
   String? originalName;
+  @JsonKey(name: 'id')
+  int? id;
   double? popularity;
   @JsonKey(name: 'profile_path')
   String? profilePath;
@@ -19,6 +21,7 @@ class Crew {
   String? job;
 
   Crew({
+    this.id,
     this.name,
     this.originalName,
     this.popularity,

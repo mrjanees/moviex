@@ -46,4 +46,43 @@ class AccountApiImple extends AccountApiRemote {
       return Left(e.type);
     }
   }
+  
+  @override
+  Future<Either<DioErrorType, List<Result>?>> getFavoriteTv() async{
+    try {
+      final response = await dio.get(
+        AccountUrls.getFavoriteTv,
+      );
+
+      if (response.statusCode == 200 && response.data != null) {
+        final dataAsjson = response.data;
+        final data = GetFavorite.fromJson(dataAsjson);
+        final result = data.results;
+        return Right(result);
+      } else {
+        return const Right(null);
+      }
+    } on DioError catch (e) {
+      return Left(e.type);
+    }
+  }
+  
+  @override
+  Future<Either<DioErrorType, List<Result>?>> getTvWatchList()async {
+   try {
+      final response = await dio.get(
+        AccountUrls.getTvWatchList,
+      );
+      if (response.statusCode == 200 && response.data != null) {
+        final dataAsjson = response.data;
+        final data = GetFavorite.fromJson(dataAsjson);
+        final result = data.results;
+        return Right(result);
+      } else {
+        return const Right(null);
+      }
+    } on DioError catch (e) {
+      return Left(e.type);
+    }
+  }
 }

@@ -83,7 +83,7 @@ class PersonInfoMainCard extends StatelessWidget {
                     Text(
                       name,
                       maxLines: 2,
-                      style: MoviexFontStyle.heading2(),
+                      style: MoviexFontStyle.personInfoName(),
                     ),
                     const SizedBox(height: 8),
                     RichText(
@@ -101,7 +101,7 @@ class PersonInfoMainCard extends StatelessWidget {
                                     color: WHITE_COLOR,
                                     fontWeight: FontWeight.bold))
                           ]),
-                      maxLines: 4,
+                      maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 8),
@@ -158,7 +158,7 @@ class PersonInfoMainCard extends StatelessWidget {
                                     color: WHITE_COLOR,
                                     fontWeight: FontWeight.bold))
                           ]),
-                      maxLines: 3,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
