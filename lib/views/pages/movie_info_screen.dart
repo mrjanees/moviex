@@ -68,7 +68,7 @@ class MovieInfoScreen extends StatelessWidget {
                     Padding(
                         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                         child: MainCard(
-                          maxHeight:maxHeight ,
+                          maxHeight: maxHeight,
                           mediatype: Mediatype.movie,
                           maxwidth: maxWidth,
                           genres: movie.genres!
@@ -105,11 +105,11 @@ class MovieInfoScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text('Crew', style: MoviexFontStyle.heading1()),
                     ),
-                    SizedBox(
-                      height: h10p * .3,
+                   const  SizedBox(
+                      height: 15,
                     ),
                     SizedBox(
-                        height: h10p * 0.8,
+                        height: 50,
                         child: Obx(
                           () => ListView.separated(
                               separatorBuilder: (context, index) {
@@ -126,22 +126,26 @@ class MovieInfoScreen extends StatelessWidget {
 
                                 return GestureDetector(
                                   onTap: () {
-                                     if (network == 'Online') {
-          Get.put(PersonInfoController.instance.personInfo(movieCrew.id!));
-        } else {
-          DioErrorTypeMessage.toShowErrorMessage(DioErrorType.unknown);
-        }
+                                    if (network == 'Online') {
+                                      Get.put(PersonInfoController.instance
+                                          .personInfo(movieCrew.id!));
+                                    } else {
+                                      DioErrorTypeMessage.toShowErrorMessage(
+                                          DioErrorType.unknown);
+                                    }
                                   },
                                   child: Container(
                                     width: w10p * 5,
                                     decoration: BoxDecoration(
                                         color: ELEMENT_COLOR,
-                                        borderRadius: BorderRadius.circular(20)),
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
                                     child: Center(
                                         child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         SizedBox(
                                           width: w10p * 0.5,
@@ -174,8 +178,8 @@ class MovieInfoScreen extends StatelessWidget {
                                 );
                               }),
                         )),
-                    SizedBox(
-                      height: h10p * .3,
+                   const  SizedBox(
+                      height: 15,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -192,11 +196,11 @@ class MovieInfoScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: h10p * .3,
+                    const SizedBox(
+                      height: 15,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
+                      padding: const EdgeInsets.only(left: 8, right: 8),
                       child: Text(
                         'Top Billed',
                         style: MoviexFontStyle.heading1(),

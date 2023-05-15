@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../../controllers/person_info/person_info_controller.dart';
 import '../../../../pages/person_info_screen.dart';
 import '../../department_card.dart';
 
@@ -10,6 +11,7 @@ class WritingDepartment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
     return Obx(() => personInfoController.writingList.isEmpty
         ? const SizedBox(
             height: 100,

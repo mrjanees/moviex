@@ -53,7 +53,7 @@ class ContentTemp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                height: h10p * 0.6,
+                height: 35,
                 width: status!.length > 9 ? w10p * 5 : w10p * 4,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
@@ -95,7 +95,7 @@ class ContentTemp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                height: h10p * 0.6,
+                height: 35,
                 width: budget!.length >= 6 ? w10p * 5.2 : w10p * 3.5,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
@@ -130,8 +130,8 @@ class ContentTemp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                height: h10p * 0.6,
-                width: revenue!.length >= 9 ? w10p * 5 : w10p * 3.5,
+                height: 35,
+                width: revenue!.length >= 9 ? w10p * 6 : w10p * 5.6,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(width: 2, color: ELEMENT_COLOR)),
@@ -165,7 +165,7 @@ class ContentTemp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                height: h10p * 0.6,
+                height: 35,
                 width: orginalLanguage!.length > 7 ? w10p * 8.5 : w10p * 6,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),

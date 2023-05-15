@@ -46,9 +46,9 @@ class AccountApiImple extends AccountApiRemote {
       return Left(e.type);
     }
   }
-  
+
   @override
-  Future<Either<DioErrorType, List<Result>?>> getFavoriteTv() async{
+  Future<Either<DioErrorType, List<Result>?>> getFavoriteTv() async {
     try {
       final response = await dio.get(
         AccountUrls.getFavoriteTv,
@@ -66,10 +66,10 @@ class AccountApiImple extends AccountApiRemote {
       return Left(e.type);
     }
   }
-  
+
   @override
-  Future<Either<DioErrorType, List<Result>?>> getTvWatchList()async {
-   try {
+  Future<Either<DioErrorType, List<Result>?>> getTvWatchList() async {
+    try {
       final response = await dio.get(
         AccountUrls.getTvWatchList,
       );

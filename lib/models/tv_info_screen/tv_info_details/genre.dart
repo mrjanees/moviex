@@ -5,16 +5,16 @@ part 'genre.g.dart';
 @JsonSerializable()
 class Genre {
   @JsonKey(name: 'id')
-	int? id;
+  int? id;
   @JsonKey(name: 'name')
-	String? name;
+  String? name;
 
-	Genre({this.id, this.name});
+  Genre({this.id, this.name});
 
-	@override
-	String toString() => 'Genre(id: $id, name: $name)';
+  @override
+  String toString() => 'Genre(id: $id, name: $name)';
 
-	factory Genre.fromJson(Map<String, dynamic> json) => _$GenreFromJson(json);
+  factory Genre.fromJson(Map<String, dynamic> json) => _$GenreFromJson(json);
 
-	Map<String, dynamic> toJson() => _$GenreToJson(this);
+  Map<String, dynamic> toJson() => _$GenreToJson(this);
 }

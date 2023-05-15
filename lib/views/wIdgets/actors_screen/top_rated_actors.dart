@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mspot/controllers/actor/actor_controllers.dart';
 
 import 'package:mspot/views/wIdgets/common/actor_card_template.dart';
+
+import '../../../controllers/actor/actor_controllers.dart';
 
 class TopRatedActorsTemplate extends StatelessWidget {
   final actorControllers = Get.put(ActorsControllers());

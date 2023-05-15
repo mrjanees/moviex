@@ -1,5 +1,3 @@
-
-
 import 'dart:developer';
 
 import 'package:get/get.dart';
@@ -11,8 +9,7 @@ import 'package:mspot/services/home_screen_api/trending/implementation.dart';
 import '../../../utils/dioerror_message.dart';
 
 class TrendingController extends GetxController {
-  
-   TrendingController.internal();
+  TrendingController.internal();
   static TrendingController instance = TrendingController.internal();
   TrendingController factory() {
     return instance;
@@ -27,6 +24,7 @@ class TrendingController extends GetxController {
 
   @override
   void onInit() async {
+    print(network);
     log('initcalled');
     await all();
     if (network == true) {
@@ -39,7 +37,6 @@ class TrendingController extends GetxController {
   }
 
   Future<void> all() async {
-    print('network$network');
     final response = await TrendingImplement().allTrending();
     response.fold((l) {
       _network = false;
@@ -48,6 +45,7 @@ class TrendingController extends GetxController {
       if (r == null) {
         print('All trendings is null');
       } else {
+        allList.clear();
         _network = true;
         allList.addAll(r);
       }
@@ -60,6 +58,7 @@ class TrendingController extends GetxController {
       if (r == null) {
         print('movie trendings is null');
       } else {
+        movieList.clear();
         movieList.addAll(r);
       }
     });
@@ -71,6 +70,7 @@ class TrendingController extends GetxController {
       if (r == null) {
         print('movie trendings is null');
       } else {
+        tvList.clear();
         tvList.addAll(r);
       }
     });
@@ -82,6 +82,7 @@ class TrendingController extends GetxController {
       if (r == null) {
         print('movie trendings is null');
       } else {
+        personList.clear();
         personList.addAll(r);
       }
     });

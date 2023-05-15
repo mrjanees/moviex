@@ -4,6 +4,7 @@ import 'package:mspot/core/Font_style.dart';
 import 'package:mspot/core/colors/app_color.dart';
 import 'package:mspot/views/wIdgets/person_info_screen/department_card.dart';
 
+import '../../../../../controllers/person_info/person_info_controller.dart';
 import '../../../../pages/person_info_screen.dart';
 
 class ActingDepartment extends StatelessWidget {
@@ -13,6 +14,7 @@ class ActingDepartment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
     return Obx(() => personInfoController.actingList.isEmpty
         ? const SizedBox(
             height: 100,

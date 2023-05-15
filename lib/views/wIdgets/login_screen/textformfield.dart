@@ -84,6 +84,7 @@ class LoginTextFormField extends StatelessWidget {
               } else if (type == Type.password && value!.isEmpty) {
                 return 'Enter the password';
               }
+              return null;
             },
           );
         });

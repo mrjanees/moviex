@@ -21,6 +21,7 @@ class PersonInfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
+        
         personInfoController.departmentCategoryIndex.value = 0;
       },
     );
@@ -82,7 +83,7 @@ class PersonInfoScreen extends StatelessWidget {
                           birthDate: personInfodata.birthday ?? '',
                           birthPlace: personInfodata.placeOfBirth ?? '',
                           image: personInfodata.profilePath,
-                          knownFor: personInfodata.knownForDepartment!,
+                          knownFor: personInfodata.knownForDepartment??'',
                           name: personInfodata.name!,
                         )),
                     const SizedBox(height: 15),

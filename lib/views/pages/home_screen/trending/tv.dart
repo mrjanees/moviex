@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mspot/controllers/home/trending/trending.dart';
+import 'package:mspot/views/pages/home_screen/home_screen.dart';
 import 'package:mspot/views/pages/home_screen/trending/all.dart';
 
 import '../../../wIdgets/common/movie_card_template.dart';
 
 class Tv extends StatelessWidget {
+  
   const Tv({super.key});
 
   @override
@@ -35,6 +37,7 @@ class Tv extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           final data = trendingController.tvList[index];
           return MovieCardTemplate(
+            maxWidth: maxWidthDevice,
             mediaType: data.mediaType,
             id: data.id!,
             heading: data.name!,

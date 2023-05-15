@@ -6,14 +6,15 @@ import 'package:mspot/services/season_info_screen_api/remote.dart';
 
 import '../../core/urls/dio.dart';
 
-class SeasonInfoImple extends SeasonInfoApiRemote{
+class SeasonInfoImple extends SeasonInfoApiRemote {
   @override
-  Future<Either<DioErrorType, SeasonInfo?>> seasonInfo(int id,int season) async{
-   try {
+  Future<Either<DioErrorType, SeasonInfo?>> seasonInfo(
+      int id, int season) async {
+    try {
       final response = await dio.get(
         'https://api.themoviedb.org/3/tv/$id/season/$season?api_key=$apiKey',
       );
-      if (response.statusCode == 200 &&response.data != null) {
+      if (response.statusCode == 200 && response.data != null) {
         final dataAsjson = response.data;
         final data = SeasonInfo.fromJson(dataAsjson);
         return Right(data);

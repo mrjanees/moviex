@@ -5,6 +5,8 @@ import 'package:mspot/core/colors/app_color.dart';
 import '../../../const/api_key.dart';
 
 class CollectionMainCard extends StatelessWidget {
+  double maxWidth;
+  double maxHeight;
   String? backgroundImg;
   int movieId;
   String title;
@@ -14,6 +16,8 @@ class CollectionMainCard extends StatelessWidget {
   double h10p;
   CollectionMainCard({
     super.key,
+    required this.maxWidth,
+    required this.maxHeight,
     required this.backgroundImg,
     required this.overview,
     required this.movieId,
@@ -25,8 +29,8 @@ class CollectionMainCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 345,
-      height: 230,
+      width: maxWidth - 16,
+      height: maxHeight / 2.2,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

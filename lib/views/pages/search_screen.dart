@@ -41,7 +41,9 @@ class SearchScreen extends StatelessWidget {
             body: GestureDetector(
               onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
               child: RefreshIndicator(
-                onRefresh: () async{ SearchControllers.instance.onInit(); },
+                onRefresh: () async {
+                  SearchControllers.instance.onInit();
+                },
                 child: NestedScrollView(
                   headerSliverBuilder: (context, innerBoxIsScrolled) => [
                     SliverAppBar(

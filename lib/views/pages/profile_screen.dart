@@ -97,7 +97,7 @@ class ProfileScreen extends StatelessWidget {
                                           TextButton(
                                             onPressed: () {
                                               authController.logOut();
-                                              Get.offAllNamed('/Login');
+                                              Get.offAndToNamed('/Login');
                                             },
                                             child: const Text('Yes',
                                                 style: TextStyle(

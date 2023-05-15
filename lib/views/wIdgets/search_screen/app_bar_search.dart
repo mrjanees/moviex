@@ -18,9 +18,8 @@ import '../../../utils/dioerror_message.dart';
 
 TextEditingController searchTextController = TextEditingController();
 final searchController = Get.put(SearchControllers.instance);
-class AppbarSearch extends StatelessWidget {
-  
 
+class AppbarSearch extends StatelessWidget {
   AppbarSearch({
     super.key,
   });

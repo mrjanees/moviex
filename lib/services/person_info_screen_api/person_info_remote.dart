@@ -8,5 +8,5 @@ import '../../models/person_Info_screen/person_movie_credits/person_movie_credit
 abstract class PersonInfoApiRemote {
   Future<Either<DioErrorType, PersonInfoModel?>> personInfo(int id);
   Future<Either<DioErrorType, List<Cast>?>> personMovieCredit(int id);
-  Future<Either<DioErrorType,PersonMovieCredits?>> departments(int id);
+  Future<Either<DioErrorType, PersonMovieCredits?>> departments(int id);
 }

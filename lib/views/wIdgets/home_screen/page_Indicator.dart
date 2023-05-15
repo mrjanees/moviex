@@ -15,6 +15,6 @@ Widget buildIndicator() => Obx(() => AnimatedSmoothIndicator(
         dotColor: WHITE_COLOR,
       ),
       activeIndex: homecontrollers.activeIndex.value,
-      count:MoviexImage.upComoingMovieImage.length,
+      count: MoviexImage.upComoingMovieImage.length,
     ));
 void animateToSlide(int index) => controller.animateToPage(index);

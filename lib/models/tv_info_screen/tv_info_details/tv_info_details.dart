@@ -79,7 +79,7 @@ class TvInfoDetails {
   String? trailerkey;
 
   TvInfoDetails({
-  this.trailerkey,
+    this.trailerkey,
     this.adult,
     this.backdropPath,
     this.createdBy,

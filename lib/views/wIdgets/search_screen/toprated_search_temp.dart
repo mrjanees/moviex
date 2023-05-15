@@ -17,14 +17,13 @@ class TopRatedSearchTemplate extends StatelessWidget {
       Get.put(SearchControllers.instance);
     });
     return Obx(() {
-      if(searchControllers.topRatedList.isEmpty){
-        return  Center(
+      if (searchControllers.topRatedList.isEmpty) {
+        return Center(
             child: Text(
-          network=='Offline'?'No Internet':'',
-          style:const  TextStyle(color: Colors.grey),
+          network == 'Offline' ? 'No Internet' : '',
+          style: const TextStyle(color: Colors.grey),
         ));
-      }
-      else{
+      } else {
         return Expanded(
           child: ListView.separated(
               physics: const NeverScrollableScrollPhysics(),

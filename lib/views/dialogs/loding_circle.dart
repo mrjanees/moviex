@@ -8,11 +8,12 @@ void loadingCircle() {
   Get.dialog(LayoutBuilder(
     builder: (context, constraints) {
       double maxWidth = constraints.maxWidth;
+      double maxHeight = constraints.maxHeight;
       double h10p = maxWidth * 0.1;
       return Padding(
         padding: EdgeInsets.only(
-          top: h10p * 6,
-          bottom: h10p * 6,
+          top: maxHeight / 2.8,
+          bottom: maxHeight / 2.8,
           left: h10p * 1.5,
           right: h10p * 1.5,
         ),

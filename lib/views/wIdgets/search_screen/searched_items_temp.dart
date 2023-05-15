@@ -22,8 +22,7 @@ class SearchedItemTemplate extends StatelessWidget {
                   knownOfDepart: data.knownfordepartment,
                   id: data.id!,
                   image: data.backdropPath ?? data.profilePath,
-                  releasDate:
-                      data.releaseDate ?? data.firstAirDate ,
+                  releasDate: data.releaseDate ?? data.firstAirDate,
                   title: data.title ?? data.name!,
                   vote: data.voteAverage ?? 0.0,
                 );

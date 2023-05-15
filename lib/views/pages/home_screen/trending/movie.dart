@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mspot/core/trending_category.dart';
+import 'package:mspot/views/pages/home_screen/home_screen.dart';
 import 'package:mspot/views/pages/home_screen/trending/all.dart';
 
 import '../../../../controllers/home/trending/trending.dart';
@@ -37,6 +38,7 @@ class Movie extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             final data = trendingController.movieList[index];
             return MovieCardTemplate(
+              maxWidth: maxWidthDevice,
               mediaType: data.mediaType,
               id: data.id!,
               heading: data.title!,

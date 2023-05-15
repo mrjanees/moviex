@@ -41,15 +41,13 @@ class SearchCard extends StatelessWidget {
       return GestureDetector(
         onTap: () async {
           if (network == 'Online') {
-            if(searchController.dropDownvalue.value==0){
-               loadingCircle();
-            await Get.put(MovieInfoController.instance.movieInfo(id));
-            }
-            else if(searchController.dropDownvalue.value==1){
-               loadingCircle();
+            if (searchController.dropDownvalue.value == 0) {
+              loadingCircle();
+              await Get.put(MovieInfoController.instance.movieInfo(id));
+            } else if (searchController.dropDownvalue.value == 1) {
+              loadingCircle();
               Get.put(TvInfoController.instance.tvInfo(id));
-            }
-            else if(searchController.dropDownvalue.value==2){
+            } else if (searchController.dropDownvalue.value == 2) {
               Get.put(PersonInfoController.instance.personInfo(id));
             }
           } else {
@@ -121,11 +119,17 @@ class SearchCard extends StatelessWidget {
                         height: 5,
                       ),
                       Visibility(
-                        visible: releasDate == "" ? false : releasDate == null?false:true,
+                        visible: releasDate == ""
+                            ? false
+                            : releasDate == null
+                                ? false
+                                : true,
                         child: Text(
-                          releasDate==""
+                          releasDate == ""
                               ? 'N/A'
-                              :releasDate==null?'N/A': searchCardDate(releasDate!),
+                              : releasDate == null
+                                  ? 'N/A'
+                                  : searchCardDate(releasDate!),
                           style: const TextStyle(
                               overflow: TextOverflow.ellipsis,
                               color: WHITE_COLOR,

@@ -40,8 +40,8 @@ class LoginScreen extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(
-                    top: h10p * 4,
-                    bottom: h1p * 1.5,
+                    top: maxHeight / 4,
+                    bottom: maxHeight / 4,
                     left: w1p * 5,
                     right: w1p * 5),
                 child: SingleChildScrollView(
@@ -93,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                                 passwordController.clear();
                                 if (sessionId != null) {
                                   Get.put(AuthController.instance.login());
-                                  Get.offAllNamed('/');
+                                  Get.offAndToNamed('/');
                                   successSnackbar(
                                       'Login Success!',
                                       'you have successfully logged in...',

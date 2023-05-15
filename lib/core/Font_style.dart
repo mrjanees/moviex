@@ -82,4 +82,12 @@ class MoviexFontStyle {
         fontWeight: FontWeight.w200,
         color: WHITE_COLOR);
   }
+
+  static TextStyle homeScreenAnimH3() {
+    return const TextStyle(
+        fontFamily: 'inter',
+        fontSize: 20,
+        fontWeight: FontWeight.w300,
+        color: WHITE_COLOR);
+  }
 }

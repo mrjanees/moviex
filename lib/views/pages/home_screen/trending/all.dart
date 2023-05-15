@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mspot/views/pages/base_screen.dart';
+import 'package:mspot/views/pages/home_screen/home_screen.dart';
 import '../../../../controllers/home/trending/trending.dart';
 import '../../../wIdgets/common/movie_card_template.dart';
 
@@ -18,8 +18,7 @@ class All extends StatelessWidget {
       if (trendingController.allList.isEmpty) {
         return const SizedBox(
           height: 100,
-
-          child:  Center(
+          child: Center(
               child: Text(
             'No Internet',
             style: TextStyle(color: Colors.grey),
@@ -38,6 +37,7 @@ class All extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               final data = trendingController.allList[index];
               return MovieCardTemplate(
+                maxWidth: maxWidthDevice,
                 mediaType: data.mediaType,
                 id: data.id!,
                 heading: data.title ?? data.name!,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mspot/core/colors/app_color.dart';
+import 'package:mspot/core/colors/primary_scwatch.dart';
 import 'package:mspot/views/pages/base_screen.dart';
 import 'package:mspot/views/pages/collection_screen.dart';
 import 'package:mspot/views/pages/login_screen.dart';
@@ -11,6 +12,7 @@ import 'package:mspot/views/pages/profile_screen.dart';
 import 'package:mspot/views/pages/season_info_screen.dart';
 import 'package:mspot/views/pages/seasons_screen.dart';
 import 'package:mspot/views/pages/tv_info_screen.dart';
+import 'package:mspot/views/wIdgets/movie_info/trailer_video_widg.dart';
 import 'controllers/authentication/auth_controller.dart';
 
 void main() async {
@@ -18,16 +20,14 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: BACKGROUND_COLOR));
   await Get.put(AuthController.instance.isLloggedIn());
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
-  runApp(MyApp());
+ 
+  runApp(const MyApp());
 }
 
 final authController = Get.put(AuthController.instance);
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
           child: GetMaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
+              primarySwatch: moviexPrimaryColor,
               scaffoldBackgroundColor: BACKGROUND_COLOR,
             ),
             initialRoute: authController.isLoggedIn == false ? '/login' : '/',
@@ -56,19 +57,10 @@ class MyApp extends StatelessWidget {
                   name: '/SeasonsScreen', page: () => const SeasonsScreen()),
               GetPage(
                   name: '/SeasonInfoScreen',
-                  page: () => const SeasonInfoScreen())
+                  page: () => const SeasonInfoScreen()),
+                  
             ],
           ),
         ));
   }
 }
-
-// final navigakey = GlobalKey<NavigatorState>();
-// navi.cuj
-
-// var mama = MaterialApp(
-//   navigatorKey: navigakey,
-// );
-
-// foor() {
-// }

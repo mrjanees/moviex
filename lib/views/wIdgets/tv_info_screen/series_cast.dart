@@ -11,7 +11,7 @@ class SeriesCast extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      itemCount:tvInfoController.seriesCastList.length ,
+      itemCount: tvInfoController.seriesCastList.length,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

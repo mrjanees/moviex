@@ -8,11 +8,10 @@ import 'deaprtments/directing/directing_department.dart';
 import 'deaprtments/writing/writing_department.dart';
 
 List departmentPages = [
-   ActingDepartment(),
-   CrewDepartment(),
-   DirectingDepartment(),
-   WritingDepartment()
-  
+  ActingDepartment(),
+  CrewDepartment(),
+  DirectingDepartment(),
+  WritingDepartment()
 ];
 
 class Departments extends StatelessWidget {
@@ -20,6 +19,7 @@ class Departments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => departmentPages[personInfoController.departmentCategoryIndex.value]);
+    return Obx(() =>
+        departmentPages[personInfoController.departmentCategoryIndex.value]);
   }
 }

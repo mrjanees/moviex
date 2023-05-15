@@ -26,7 +26,6 @@ class HomeControllers extends GetxController {
         for (var upMovie in r) {
           if (upcomingList.length <= 10) {
             upcomingList.add(upMovie);
-        
           }
         }
       }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,7 +43,7 @@ class PersonInfoController extends GetxController {
   }
 
   Future<void> personMovieInfo(int id) async {
-    await departMents(id);
+    await actingdepartMents(id);
     final response = await PersonInfoApiImple().personMovieCredit(id);
     response.fold((l) => DioErrorTypeMessage.toShowErrorMessage(l), (r) {
       if (r == null) {
@@ -53,10 +55,8 @@ class PersonInfoController extends GetxController {
     });
   }
 
-  Future<void> departMents(int id) async {
-    writingList.clear();
-          directingList.clear();
-          crewList.clear();
+  Future<void> actingdepartMents(int id) async {
+    await crewDepartment(id);
     final response = await PersonInfoApiImple().departments(id);
     response.fold((l) => DioErrorTypeMessage.toShowErrorMessage(l), (r) {
       if (r == null) {
@@ -80,79 +80,122 @@ class PersonInfoController extends GetxController {
           }
         });
         actingList.addAll(r.cast!);
-
-        // Crew Deaprtment
-        if (r.crew == null) {
-          print('Crew is null ');
-        } else {
-          
-          r.crew!.forEach((crew) {
-            if (crew.department == 'Crew') {
-              r.crew!.sort((a, b) {
-                DateTime? aDate =
-                    a.releaseDate == '' ? null : parseDate(a.releaseDate!);
-                DateTime? bDate =
-                    b.releaseDate == '' ? null : parseDate(b.releaseDate!);
-                if (aDate == null && bDate == null) {
-                  return 0;
-                } else if (aDate == null) {
-                  return -1;
-                } else if (bDate == null) {
-                  return 1;
-                } else {
-                  return bDate.compareTo(aDate);
-                }
-              });
-              crewList.addAll(r.crew!);
-            }
-          });
-
-          r.crew!.forEach((crew) {
-            if (crew.department == 'Directing') {
-              r.crew!.sort((a, b) {
-                DateTime? aDate =
-                    a.releaseDate == '' ? null : parseDate(a.releaseDate!);
-                DateTime? bDate =
-                    b.releaseDate == '' ? null : parseDate(b.releaseDate!);
-                if (aDate == null && bDate == null) {
-                  return 0;
-                } else if (aDate == null) {
-                  return -1;
-                } else if (bDate == null) {
-                  return 1;
-                } else {
-                  return bDate.compareTo(aDate);
-                }
-              });
-              directingList.addAll(r.crew!);
-            }
-          });
-
-          r.crew!.forEach((crew) {
-            if (crew.department == 'Writing') {
-              r.crew!.sort((a, b) {
-                DateTime? aDate =
-                    a.releaseDate == '' ? null : parseDate(a.releaseDate!);
-                DateTime? bDate =
-                    b.releaseDate == '' ? null : parseDate(b.releaseDate!);
-                if (aDate == null && bDate == null) {
-                  return 0;
-                } else if (aDate == null) {
-                  return -1;
-                } else if (bDate == null) {
-                  return 1;
-                } else {
-                  return bDate.compareTo(aDate);
-                }
-              });
-              writingList.addAll(r.crew!);
-            }
-          });
-        }
-
-        //Department Directing
       }
     });
+  }
+
+  Future<void> crewDepartment(int id) async {
+    await directingDepartment(id);
+    final response = await PersonInfoApiImple().departments(id);
+    response.fold(
+      (l) => DioErrorTypeMessage.toShowErrorMessage(l),
+      (r) {
+        if (r == null) {
+          log('CrewDepartment is null');
+        } else {
+          if (r.crew != null) {
+            crewList.clear();
+            r.crew!.forEach(
+              (crew) {
+                if (crew.department == 'Crew') {
+                  crewList.add(crew);
+                }
+              },
+            );
+
+            crewList.sort((a, b) {
+              DateTime? aDate =
+                  a.releaseDate == '' ? null : parseDate(a.releaseDate!);
+              DateTime? bDate =
+                  b.releaseDate == '' ? null : parseDate(b.releaseDate!);
+              if (aDate == null && bDate == null) {
+                return 0;
+              } else if (aDate == null) {
+                return -1;
+              } else if (bDate == null) {
+                return 1;
+              } else {
+                return bDate.compareTo(aDate);
+              }
+            });
+          }
+        }
+      },
+    );
+  }
+
+  Future<void> directingDepartment(int id) async {
+    await writingDepartment(id);
+    final response = await PersonInfoApiImple().departments(id);
+    response.fold(
+      (l) => DioErrorTypeMessage.toShowErrorMessage(l),
+      (r) {
+        if (r == null) {
+          log('DirectingDepartment is null');
+        } else {
+          if (r.crew != null) {
+            directingList.clear();
+            for (var crew in r.crew!) {
+              if (crew.department == 'Directing') {
+                directingList.add(crew);
+              }
+            }
+
+            directingList.sort((a, b) {
+              DateTime? aDate =
+                  a.releaseDate == '' ? null : parseDate(a.releaseDate!);
+              DateTime? bDate =
+                  b.releaseDate == '' ? null : parseDate(b.releaseDate!);
+              if (aDate == null && bDate == null) {
+                return 0;
+              } else if (aDate == null) {
+                return -1;
+              } else if (bDate == null) {
+                return 1;
+              } else {
+                return bDate.compareTo(aDate);
+              }
+            });
+          }
+        }
+      },
+    );
+  }
+
+  Future<void> writingDepartment(int id) async {
+    final response = await PersonInfoApiImple().departments(id);
+    response.fold(
+      (l) => DioErrorTypeMessage.toShowErrorMessage(l),
+      (r) {
+        if (r == null) {
+          log('WritingDepartment is null');
+        } else {
+          if (r.crew != null) {
+            writingList.clear();
+            for (var crew in r.crew!) {
+              if (crew.department == 'Writing') {
+                writingList.add(crew);
+              }
+            }
+            writingList.sort((a, b) {
+              DateTime? aDate =
+                  a.releaseDate == '' ? null : parseDate(a.releaseDate!);
+              DateTime? bDate =
+                  b.releaseDate == '' ? null : parseDate(b.releaseDate!);
+              if (aDate == null && bDate == null) {
+                return 0;
+              } else if (aDate == null) {
+                return -1;
+              } else if (bDate == null) {
+                return 1;
+              } else {
+                return bDate.compareTo(aDate);
+              }
+            });
+          }
+        }
+      },
+    );
   }
 
   void departmentCategoryChange(int index) {

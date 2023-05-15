@@ -5,6 +5,7 @@ import 'package:mspot/views/wIdgets/common/actor_card_template.dart';
 import '../../../../controllers/home/trending/trending.dart';
 
 class Person extends StatelessWidget {
+  
   const Person({super.key});
 
   @override

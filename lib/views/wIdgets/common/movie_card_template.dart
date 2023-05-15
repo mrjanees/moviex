@@ -17,6 +17,7 @@ import '../../dialogs/loding_circle.dart';
 import '../home_screen/percent_indicator.dart';
 
 class MovieCardTemplate extends StatelessWidget {
+  double maxWidth;
   String? mediaType;
   int id;
   String heading;
@@ -25,6 +26,7 @@ class MovieCardTemplate extends StatelessWidget {
   double vote;
   MovieCardTemplate(
       {super.key,
+      required this.maxWidth,
       this.mediaType,
       required this.id,
       required this.heading,
@@ -43,6 +45,9 @@ class MovieCardTemplate extends StatelessWidget {
             } else if (mediaType == 'tv') {
               loadingCircle();
               Get.put(TvInfoController.instance.tvInfo(id));
+            } else if (mediaType == 'GeneratedMovie') {
+              loadingCircle();
+              Get.put(MovieInfoController.instance.movieInfo(id));
             }
           } else {
             DioErrorTypeMessage.toShowErrorMessage(DioErrorType.unknown);
@@ -50,7 +55,7 @@ class MovieCardTemplate extends StatelessWidget {
         },
         child: SizedBox(
           height: 250,
-          width: 160,
+          width: maxWidth / 2,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -58,7 +63,7 @@ class MovieCardTemplate extends StatelessWidget {
                 children: [
                   Container(
                     height: 200,
-                    width: 160,
+                    width: maxWidth / 2,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -114,7 +119,11 @@ class MovieCardTemplate extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                relDate == null ? 'N/A' : dateFormater(relDate!),
+                relDate == null
+                    ? 'N/A'
+                    : mediaType == 'GeneratedMovie'
+                        ? searchCardDate(relDate!)
+                        : dateFormater(relDate!),
                 style: const TextStyle(
                     overflow: TextOverflow.clip,
                     color: WHITE_COLOR,

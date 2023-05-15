@@ -18,7 +18,7 @@ class WatchlistTv extends StatelessWidget {
             final watchList = accountController.tvWatchList[index];
             return ProfileCard(
                 movieId: watchList.id!,
-                heading: watchList.title!,
+                heading: watchList.name!,
                 image: watchList.posterPath,
                 relDate: watchList.releaseDate,
                 vote: watchList.voteAverage!);

@@ -1,17 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:mspot/views/pages/movie_info_screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-videoTrailer(
-    {required YoutubePlayerController controller, required double maxwidth}) {
-  Get.dialog(
-      Column(
-        children: [
-          Container(
-              width: maxwidth == 360 ? maxwidth - 20 : 500,
-              child: YoutubePlayer(controller: controller))
-        ],
-      ),
-      barrierDismissible: false);
+
+
+class YoutubeTrailerPlayer extends StatelessWidget {
+  YoutubePlayerController controller;
+  String name;
+  YoutubeTrailerPlayer({super.key, required this.controller,required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        if (orientation == Orientation.landscape) {
+          return Scaffold(
+            body: Align(
+              alignment: Alignment.center,
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: YoutubePlayer(
+                  controller: controller,
+                ),
+              ),
+            ),
+          );
+        } else {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(name),
+            ),
+            body:  Align(
+              alignment: Alignment.center,
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: YoutubePlayer(
+                  controller: controller,
+                ),
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
 }
+

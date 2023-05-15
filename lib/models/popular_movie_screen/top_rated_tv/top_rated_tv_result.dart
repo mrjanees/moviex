@@ -4,7 +4,6 @@ part 'top_rated_tv_result.g.dart';
 
 @JsonSerializable()
 class TopRatedTvResult {
-  
   @JsonKey(name: 'first_air_date')
   String? firstAirDate;
   @JsonKey(name: 'id')

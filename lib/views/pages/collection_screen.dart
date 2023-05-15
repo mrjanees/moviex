@@ -62,6 +62,8 @@ class CollectionScreen extends StatelessWidget {
                               padding:
                                   const EdgeInsets.only(left: 8.0, right: 8.0),
                               child: CollectionMainCard(
+                                maxHeight: maxheight,
+                                maxWidth: maxWidth,
                                 backgroundImg: mainMovie.backdropPath,
                                 movieId: mainMovie.id!,
                                 h10p: h10p,

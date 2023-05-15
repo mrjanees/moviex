@@ -34,19 +34,18 @@ class AllResult {
   @JsonKey(name: 'media_type')
   String? mediaType;
 
-  AllResult({
-    this.firstAirDate,
-    this.name,
-    this.backdropPath,
-    this.id,
-    this.title,
-    this.overview,
-    this.posterPath,
-    this.genreIds,
-    this.releaseDate,
-    this.voteAverage,
-    this.mediaType
-  });
+  AllResult(
+      {this.firstAirDate,
+      this.name,
+      this.backdropPath,
+      this.id,
+      this.title,
+      this.overview,
+      this.posterPath,
+      this.genreIds,
+      this.releaseDate,
+      this.voteAverage,
+      this.mediaType});
 
   @override
   String toString() {

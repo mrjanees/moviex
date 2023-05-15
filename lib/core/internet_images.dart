@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class MoviexImage {
   static List<Map<dynamic, dynamic>> upComoingMovieImage = [
     {
-      "id":720557,
+      "id": 720557,
       'title': 'Tiger 3',
       "release": "10 Nev",
       'poster':
           'https://www.mixindia.com/wp-content/uploads/2022/03/BeFunky-collage-4-1.jpg'
     },
     {
-      "id":569094,
+      "id": 569094,
       "title": "Spider-Man: Across the Spider-Verse",
       "release": "2 June",
       "poster":
@@ -24,14 +24,14 @@ class MoviexImage {
           'https://filmfare.wwmindia.com/content/2022/jun/jawaan21654408130.jpg'
     },
     {
-      "id":447365 ,
+      "id": 447365,
       "title": "Guardians of the Galaxy Vol. 3",
       "release": "5 May",
       "poster":
           'https://static1.colliderimages.com/wordpress/wp-content/uploads/2021/04/Guardians-of-the-Galaxy-Vol.-3-min-1.jpg'
     },
     {
-      "id":  385687,
+      "id": 385687,
       "title": "Fast-X",
       "release": "19 May",
       "poster":
@@ -52,7 +52,7 @@ class MoviexImage {
           'https://telugucinema.com/wp-content/uploads/2022/04/salaarglimpse.jpg',
     },
     {
-      "id":298618,
+      "id": 298618,
       "title": "The Flash",
       "release": "16 june",
       "poster":
@@ -69,8 +69,7 @@ class MoviexImage {
       "id": 609681,
       "title": "The Marvels",
       "release": "10 Nev",
-      "poster":
-          'https://assets-prd.ignimgs.com/2023/02/17/2-1676653874043.png',
+      "poster": 'https://assets-prd.ignimgs.com/2023/02/17/2-1676653874043.png',
     },
   ];
 }
